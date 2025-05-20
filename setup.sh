@@ -42,6 +42,9 @@ pip3 install --no-cache-dir \
     pytest==7.* \
     clang==17.*
 
+# Optional local OpenBLAS archive
+dpkg -i ./vendor/libopenblas*.deb || true
+
 # curl for protoc installer
 apt-get install -y curl=7.*
 

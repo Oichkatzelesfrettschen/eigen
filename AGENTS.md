@@ -43,6 +43,12 @@ Produce `eigenc/` \u2013 a header-only C23 linear-algebra library that:
 * `tools/porter/` \u2013 the Clang-AST\u2013driven translator
 * GitHub CI workflow that builds both C++ and C versions and runs tests
 
+**Phases**
+1. Scan templates
+2. Emit ec_core with basics
+3. GEMM + OpenBLAS
+4. LU and QR with tests
+5. CI workflow
 ---
 
 ## 2  setup.sh \u2014 give Codex its toolbox
