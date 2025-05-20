@@ -1,0 +1,4 @@
+# Automatically generated mapping from Eigen C++ templates to C types
+# Format: <template> : <C type or family>
+# This file will be populated by porter/scan_templates.py
+mappings: {}
