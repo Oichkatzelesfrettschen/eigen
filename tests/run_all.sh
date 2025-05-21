@@ -50,3 +50,11 @@ mv /tmp/c_out.txt /tmp/c_out_ppc.txt
 diff -u /tmp/c_out_host.txt /tmp/c_out_ppc.txt
 
 echo "\xE2\x9C\x93  cross-compiled EigenC checks passed (powerpc)"
+
+# Run Go tests if Go is available
+if command -v go >/dev/null; then
+  (cd "${ROOT_DIR}/go" && go test ./...)
+  echo "\xE2\x9C\x93  Go bindings tests passed"
+else
+  echo "Skipping Go tests: go not found" >&2
+fi
