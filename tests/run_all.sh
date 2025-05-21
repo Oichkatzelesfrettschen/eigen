@@ -31,3 +31,22 @@ if command -v powerpc-linux-gnu-gcc >/dev/null && command -v qemu-ppc-static >/d
 else
   echo "Skipping PowerPC cross-compile test: toolchain or QEMU not found" >&2
 fi
+# Cross-compile for PowerPC and run via qemu
+if ! command -v powerpc-linux-gnu-gcc >/dev/null; then
+  echo "powerpc-linux-gnu-gcc not found" >&2
+  exit 1
+fi
+if ! command -v qemu-ppc-static >/dev/null; then
+  echo "qemu-ppc-static not found" >&2
+  exit 1
+fi
+
+powerpc-linux-gnu-gcc -static -std=c23 -I"${ROOT_DIR}/eigenc/include" "${ROOT_DIR}/tests/core/test_core.c" -o /tmp/ec_test_ppc \
+  || powerpc-linux-gnu-gcc -static -std=c2x -I"${ROOT_DIR}/eigenc/include" "${ROOT_DIR}/tests/core/test_core.c" -o /tmp/ec_test_ppc
+
+qemu-ppc-static /tmp/ec_test_ppc
+mv /tmp/c_out.txt /tmp/c_out_ppc.txt
+
+diff -u /tmp/c_out_host.txt /tmp/c_out_ppc.txt
+
+echo "\xE2\x9C\x93  cross-compiled EigenC checks passed (powerpc)"
