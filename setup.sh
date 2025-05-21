@@ -18,7 +18,12 @@ apt-get install -y --no-install-recommends \
     curl=7.*
 
 # Python packages
-python3 -m pip install --no-cache-dir numpy==1.26.* pytest==7.* pycparser==2.* clang==17.*
+python3 -m pip install --no-cache-dir \
+    numpy==1.26.* \
+    pytest==7.* \
+    pycparser==2.* \
+    clang==17.* \
+    pyyaml==6.*
 
 # Optional local OpenBLAS debs if provided
 if ls ./vendor/libopenblas*.deb >/dev/null 2>&1; then
