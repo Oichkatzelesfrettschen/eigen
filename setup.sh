@@ -3,7 +3,7 @@ set -euo pipefail
 
 apt-get update -qq
 
-# Core build tools and compilers
+# Core build tools, native compilers and cross-compilers
 apt-get install -y --no-install-recommends \
     build-essential=12.* gcc-14=14.* g++-14=14.* \
     clang-17=1:17.* clang-tools-17=1:17.* libclang-17-dev=1:17.* llvm-17-dev=1:17.* \
@@ -11,7 +11,12 @@ apt-get install -y --no-install-recommends \
     git ca-certificates \
     nasm=2.15.* yasm=1.3.* \
     golang=1.20.* \
+    # QEMU user-mode emulation so cross-compiled tests can run
     qemu-user-static=1:8.* qemu-system-x86=1:8.* \
+    # Cross-compilers for PowerPC, AArch64 and i686
+    gcc-powerpc-linux-gnu g++-powerpc-linux-gnu \
+    gcc-aarch64-linux-gnu g++-aarch64-linux-gnu \
+    gcc-i686-linux-gnu g++-i686-linux-gnu \
     nodejs=18.* npm=9.* \
     rustc=1.70.* cargo=1.70.* \
     python3=3.11.* python3-pip=23.* python3-yaml=6.* \
