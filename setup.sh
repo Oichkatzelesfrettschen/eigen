@@ -14,7 +14,7 @@ apt-get install -y --no-install-recommends \
     qemu-user-static=1:8.* qemu-system-x86=1:8.* \
     nodejs=18.* npm=9.* \
     rustc=1.70.* cargo=1.70.* \
-    python3=3.11.* python3-pip=23.* \
+    python3=3.11.* python3-pip=23.* python3-yaml=6.* \
     curl=7.*
 
 # Python packages
