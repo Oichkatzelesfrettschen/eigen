@@ -11,6 +11,7 @@ families which can be filled in later.
 
 import os
 import sys
+import re
 
 try:
     import yaml
@@ -43,6 +44,37 @@ os.makedirs(AST_DIR, exist_ok=True)
 index = Index.create()
 
 
+MATRIX_RE = re.compile(r"\bMatrix<[^>]+>")
+
+
+def _collect_matrix_instantiations(cursor, out):
+    """Recursively collect `Eigen::Matrix<...>` specializations."""
+    try:
+        tspell = cursor.type.spelling
+    except Exception:
+        tspell = ""
+    if tspell:
+        m = MATRIX_RE.search(tspell)
+        if m:
+            out.add(m.group(0).replace("Eigen::", ""))
+    for c in cursor.get_children():
+        _collect_matrix_instantiations(c, out)
+
+
+def _placeholder_name(spec: str) -> str:
+    """Convert a Matrix<...> instantiation to a placeholder C family name."""
+    m = re.match(r"Matrix<\s*([^,>]+)\s*,\s*([^,>]+)\s*,\s*([^,>]+)", spec)
+    if not m:
+        return "EC_Matrix"
+    dtype, rows, _cols = m.groups()
+    base = {
+        "float": "f",
+        "double": "d",
+        "int": "i",
+    }.get(dtype.split("::")[-1], "t")
+    return f"EC_Matrix{rows}{base}"
+
+
 def cursor_to_dict(cursor):
     """Recursively convert a clang cursor to a serialisable dictionary."""
     return {
@@ -54,15 +86,27 @@ def cursor_to_dict(cursor):
 
 def process_header(path: str, tu):
     mapping = {}
+    instantiations = set()
     for cursor in tu.cursor.get_children():
         if cursor.kind in (CursorKind.CLASS_TEMPLATE, CursorKind.FUNCTION_TEMPLATE):
             mapping[cursor.spelling] = "TODO"
+        _collect_matrix_instantiations(cursor, instantiations)
+    for spec in sorted(instantiations):
+        mapping.setdefault(spec, _placeholder_name(spec))
     return mapping
 
 
 def main():
     compile_args = ["-std=c++17", f"-I{EIGEN_DIR}"]
-    mapping = {}
+    if os.path.exists(MAPPING_PATH):
+        with open(MAPPING_PATH, "r", encoding="utf-8") as f:
+            if HAVE_YAML:
+                mapping = yaml.safe_load(f) or {}
+            else:
+                mapping = json.load(f)
+            mapping = mapping.get("mappings", mapping)
+    else:
+        mapping = {}
     for root, _, files in os.walk(EIGEN_DIR):
         for name in files:
             if not name.endswith((".h", ".hpp")):
@@ -84,6 +128,12 @@ def main():
                 else:
                     json.dump(data, f, indent=2)
             mapping.update(process_header(path, tu))
+            # Persist after each file so the mapping grows incrementally
+            with open(MAPPING_PATH, "w", encoding="utf-8") as mf:
+                if HAVE_YAML:
+                    yaml.dump({"mappings": mapping}, mf)
+                else:
+                    json.dump({"mappings": mapping}, mf, indent=2)
 
     with open(MAPPING_PATH, "w", encoding="utf-8") as f:
         if HAVE_YAML:
