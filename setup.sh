@@ -20,6 +20,7 @@ apt-get update -y
 
 for pkg in \
   build-essential gcc g++ clang lld llvm \
+  clang-17 clang-tools-17 libclang-17-dev \
   clang-format uncrustify astyle editorconfig pre-commit \
   make bmake ninja-build cmake meson \
   autoconf automake libtool m4 gawk flex bison byacc \
@@ -36,9 +37,11 @@ for pkg in \
   python3-numpy python3-scipy python3-pandas \
   python3-matplotlib python3-scikit-learn \
   python3-torch python3-torchvision python3-torchaudio \
-  python3-onnx python3-onnxruntime; do
+  python3-onnx python3-onnxruntime python3-yaml; do
   apt_pin_install "$pkg"
 done
+
+pip3 install clang==17.*
 
 pip3 install --no-cache-dir \
   tensorflow-cpu jax jaxlib \
