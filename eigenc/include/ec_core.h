@@ -2,6 +2,7 @@
 #define EC_CORE_H
 #include <stddef.h>
 #include <assert.h>
+#include "ec_generated.h"
 
 typedef struct {
     size_t rows;
