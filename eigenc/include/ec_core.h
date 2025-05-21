@@ -16,15 +16,13 @@ typedef struct {
 } ec_Matrixf64;
 
 static inline void ec_addf32(const ec_Matrixf32 *a, const ec_Matrixf32 *b, ec_Matrixf32 *out) {
-    assert(a->rows == b->rows && a->cols == b->cols &&
-           a->rows == out->rows && a->cols == out->cols);
+    assert(a->rows == b->rows && a->cols == b->cols && a->rows == out->rows && a->cols == out->cols);
     for (size_t i = 0; i < a->rows * a->cols; ++i)
         out->data[i] = a->data[i] + b->data[i];
 }
 
 static inline void ec_addf64(const ec_Matrixf64 *a, const ec_Matrixf64 *b, ec_Matrixf64 *out) {
-    assert(a->rows == b->rows && a->cols == b->cols &&
-           a->rows == out->rows && a->cols == out->cols);
+    assert(a->rows == b->rows && a->cols == b->cols && a->rows == out->rows && a->cols == out->cols);
     for (size_t i = 0; i < a->rows * a->cols; ++i)
         out->data[i] = a->data[i] + b->data[i];
 }
