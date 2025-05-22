@@ -238,7 +238,7 @@ struct TensorEvaluator<const TensorPatchOp<PatchDim, ArgType>, Device>
       return rslt;
     }
     else {
-      EIGEN_ALIGN_MAX CoeffReturnType values[PacketSize];
+      alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) CoeffReturnType values[PacketSize];
       values[0] = m_impl.coeff(inputIndices[0]);
       values[PacketSize-1] = m_impl.coeff(inputIndices[1]);
       for (int i = 1; i < PacketSize-1; ++i) {

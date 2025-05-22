@@ -135,7 +135,7 @@ template<> EIGEN_STRONG_INLINE std::complex<float>  pfirst<Packet2cf>(const Pack
   #if EIGEN_GNUC_AT_MOST(4,3)
   // Workaround gcc 4.2 ICE - this is not performance wise ideal, but who cares...
   // This workaround also fix invalid code generation with gcc 4.3
-  EIGEN_ALIGN16 std::complex<float> res[2];
+  alignas(16) std::complex<float> res[2];
   _mm_store_ps((float*)res, a.v);
   return res[0];
   #else
@@ -328,7 +328,7 @@ template<> EIGEN_STRONG_INLINE void prefetch<std::complex<double> >(const std::c
 
 template<> EIGEN_STRONG_INLINE std::complex<double>  pfirst<Packet1cd>(const Packet1cd& a)
 {
-  EIGEN_ALIGN16 double res[2];
+  alignas(16) double res[2];
   _mm_store_pd(res, a.v);
   return std::complex<double>(res[0],res[1]);
 }

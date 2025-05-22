@@ -191,7 +191,7 @@ struct type_casting_traits<float, Eigen::half> {
 };
 
 template<> EIGEN_STRONG_INLINE Packet4h pcast<Packet4f, Packet4h>(const Packet4f& a) {
-  EIGEN_ALIGN16 float aux[4];
+  alignas(16) float aux[4];
   pstore(aux, a);
   Eigen::half h0(aux[0]);
   Eigen::half h1(aux[1]);

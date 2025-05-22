@@ -93,9 +93,9 @@ template<typename Scalar> void parametrizedline_alignment()
   typedef ParametrizedLine<Scalar,4,AutoAlign> Line4a;
   typedef ParametrizedLine<Scalar,4,DontAlign> Line4u;
 
-  EIGEN_ALIGN_MAX Scalar array1[16];
-  EIGEN_ALIGN_MAX Scalar array2[16];
-  EIGEN_ALIGN_MAX Scalar array3[16+1];
+  alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar array1[16];
+  alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar array2[16];
+  alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar array3[16+1];
   Scalar* array3u = array3+1;
 
   Line4a *p1 = ::new(reinterpret_cast<void*>(array1)) Line4a;

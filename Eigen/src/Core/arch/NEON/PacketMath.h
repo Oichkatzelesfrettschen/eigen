@@ -308,8 +308,8 @@ template<> EIGEN_STRONG_INLINE void prefetch<float>  (const float*    addr) { EI
 template<> EIGEN_STRONG_INLINE void prefetch<int32_t>(const int32_t*  addr) { EIGEN_ARM_PREFETCH(addr); }
 
 // FIXME only store the 2 first elements ?
-template<> EIGEN_STRONG_INLINE float   pfirst<Packet4f>(const Packet4f& a) { float   EIGEN_ALIGN16 x[4]; vst1q_f32(x, a); return x[0]; }
-template<> EIGEN_STRONG_INLINE int32_t pfirst<Packet4i>(const Packet4i& a) { int32_t EIGEN_ALIGN16 x[4]; vst1q_s32(x, a); return x[0]; }
+template<> EIGEN_STRONG_INLINE float   pfirst<Packet4f>(const Packet4f& a) { float   alignas(16) x[4]; vst1q_f32(x, a); return x[0]; }
+template<> EIGEN_STRONG_INLINE int32_t pfirst<Packet4i>(const Packet4i& a) { int32_t alignas(16) x[4]; vst1q_s32(x, a); return x[0]; }
 
 template<> EIGEN_STRONG_INLINE Packet4f preverse(const Packet4f& a) {
   float32x2_t a_lo, a_hi;

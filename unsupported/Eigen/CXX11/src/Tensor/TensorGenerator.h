@@ -141,7 +141,7 @@ struct TensorEvaluator<const TensorGeneratorOp<Generator, ArgType>, Device>
     EIGEN_STATIC_ASSERT((packetSize > 1), YOU_MADE_A_PROGRAMMING_MISTAKE)
     eigen_assert(index+packetSize-1 < dimensions().TotalSize());
 
-    EIGEN_ALIGN_MAX typename internal::remove_const<CoeffReturnType>::type values[packetSize];
+    alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) typename internal::remove_const<CoeffReturnType>::type values[packetSize];
     for (int i = 0; i < packetSize; ++i) {
       values[i] = coeff(index+i);
     }

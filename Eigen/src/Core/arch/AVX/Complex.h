@@ -311,7 +311,7 @@ template<> EIGEN_DEVICE_FUNC inline void pscatter<std::complex<double>, Packet2c
 template<> EIGEN_STRONG_INLINE std::complex<double> pfirst<Packet2cd>(const Packet2cd& a)
 {
   __m128d low = _mm256_extractf128_pd(a.v, 0);
-  EIGEN_ALIGN16 double res[2];
+  alignas(16) double res[2];
   _mm_store_pd(res, low);
   return std::complex<double>(res[0],res[1]);
 }

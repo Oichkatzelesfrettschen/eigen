@@ -158,9 +158,9 @@ template<typename Scalar> void hyperplane_alignment()
   typedef Hyperplane<Scalar,3,AutoAlign> Plane3a;
   typedef Hyperplane<Scalar,3,DontAlign> Plane3u;
 
-  EIGEN_ALIGN_MAX Scalar array1[4];
-  EIGEN_ALIGN_MAX Scalar array2[4];
-  EIGEN_ALIGN_MAX Scalar array3[4+1];
+  alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar array1[4];
+  alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar array2[4];
+  alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar array3[4+1];
   Scalar* array3u = array3+1;
 
   Plane3a *p1 = ::new(reinterpret_cast<void*>(array1)) Plane3a;
