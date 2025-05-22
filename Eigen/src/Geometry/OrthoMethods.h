@@ -27,9 +27,9 @@ namespace Eigen {
 template<typename Derived>
 template<typename OtherDerived>
 #ifndef EIGEN_PARSED_BY_DOXYGEN
-EIGEN_DEVICE_FUNC inline typename MatrixBase<Derived>::template cross_product_return_type<OtherDerived>::type
+EIGEN_NODISCARD EIGEN_DEVICE_FUNC inline typename MatrixBase<Derived>::template cross_product_return_type<OtherDerived>::type
 #else
-inline typename MatrixBase<Derived>::PlainObject
+EIGEN_NODISCARD inline typename MatrixBase<Derived>::PlainObject
 #endif
 MatrixBase<Derived>::cross(const MatrixBase<OtherDerived>& other) const
 {
@@ -78,7 +78,7 @@ struct cross3_impl {
   */
 template<typename Derived>
 template<typename OtherDerived>
-EIGEN_DEVICE_FUNC inline typename MatrixBase<Derived>::PlainObject
+EIGEN_NODISCARD EIGEN_DEVICE_FUNC inline typename MatrixBase<Derived>::PlainObject
 MatrixBase<Derived>::cross3(const MatrixBase<OtherDerived>& other) const
 {
   EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived,4)
@@ -222,7 +222,7 @@ struct unitOrthogonal_selector<Derived,2>
   * \sa cross()
   */
 template<typename Derived>
-EIGEN_DEVICE_FUNC typename MatrixBase<Derived>::PlainObject
+EIGEN_NODISCARD EIGEN_DEVICE_FUNC typename MatrixBase<Derived>::PlainObject
 MatrixBase<Derived>::unitOrthogonal() const
 {
   EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived)

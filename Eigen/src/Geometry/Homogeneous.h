@@ -168,7 +168,7 @@ VectorwiseOp<ExpressionType,Direction>::homogeneous() const
   *
   * \sa VectorwiseOp::hnormalized() */
 template<typename Derived>
-EIGEN_DEVICE_FUNC inline const typename MatrixBase<Derived>::HNormalizedReturnType
+EIGEN_NODISCARD EIGEN_DEVICE_FUNC inline const typename MatrixBase<Derived>::HNormalizedReturnType
 MatrixBase<Derived>::hnormalized() const
 {
   EIGEN_STATIC_ASSERT_VECTOR_ONLY(Derived);

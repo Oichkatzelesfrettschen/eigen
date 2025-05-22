@@ -658,6 +658,16 @@ namespace Eigen {
 }
 #define EIGEN_UNUSED_VARIABLE(var) Eigen::internal::ignore_unused_variable(var);
 
+// Mark return values that must not be discarded when C++17 attributes are
+// available. Fall back to nothing on older standards.
+#if (EIGEN_MAX_CPP_VER>=17) && \
+    ((defined(__cplusplus) && __cplusplus >= 201703L) || \
+     (defined(_MSVC_LANG) && _MSVC_LANG >= 201703L))
+#define EIGEN_NODISCARD [[nodiscard]]
+#else
+#define EIGEN_NODISCARD
+#endif
+
 #if !defined(EIGEN_ASM_COMMENT)
   #if EIGEN_COMP_GNUC && (EIGEN_ARCH_i386_OR_x86_64 || EIGEN_ARCH_ARM_OR_ARM64)
     #define EIGEN_ASM_COMMENT(X)  __asm__("#" X)

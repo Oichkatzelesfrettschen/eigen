@@ -194,7 +194,7 @@ template<typename _MatrixType> class PartialPivLU
       *
       * \sa MatrixBase::inverse(), LU::inverse()
       */
-    inline const Inverse<PartialPivLU> inverse() const
+    EIGEN_NODISCARD inline const Inverse<PartialPivLU> inverse() const
     {
       eigen_assert(m_isInitialized && "PartialPivLU is not initialized.");
       return Inverse<PartialPivLU>(*this);
