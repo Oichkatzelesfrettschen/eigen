@@ -24,14 +24,16 @@ except Exception:  # pragma: no cover - optional dependency
 
 try:
     from clang.cindex import Index, Config, CursorKind
-except Exception as exc:  # pragma: no cover - better error message
-    raise SystemExit(
-        "clang Python bindings not found; run setup.sh to install them"
-    ) from exc
+    HAVE_CLANG = True
+except Exception:  # pragma: no cover - optional fallback
+    Index = None
+    Config = None
+    CursorKind = None
+    HAVE_CLANG = False
 
 # Allow overriding libclang path via env var
 LIBCLANG_PATH = os.environ.get("LIBCLANG_PATH")
-if LIBCLANG_PATH:
+if HAVE_CLANG and LIBCLANG_PATH:
     Config.set_library_file(LIBCLANG_PATH)
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,7 +43,10 @@ MAPPING_PATH = os.path.join(REPO_ROOT, "porter", "mapping.yaml")
 
 os.makedirs(AST_DIR, exist_ok=True)
 
-index = Index.create()
+if HAVE_CLANG:
+    index = Index.create()
+else:
+    index = None
 
 
 MATRIX_RE = re.compile(r"\bMatrix<[^>]+>")
@@ -84,13 +89,23 @@ def cursor_to_dict(cursor):
     }
 
 
-def process_header(path: str, tu):
+def process_header(path: str, tu=None):
+    """Extract template info from a header."""
     mapping = {}
     instantiations = set()
-    for cursor in tu.cursor.get_children():
-        if cursor.kind in (CursorKind.CLASS_TEMPLATE, CursorKind.FUNCTION_TEMPLATE):
-            mapping[cursor.spelling] = "TODO"
-        _collect_matrix_instantiations(cursor, instantiations)
+    if HAVE_CLANG and tu is not None:
+        for cursor in tu.cursor.get_children():
+            if cursor.kind in (
+                CursorKind.CLASS_TEMPLATE,
+                CursorKind.FUNCTION_TEMPLATE,
+            ):
+                mapping[cursor.spelling] = "TODO"
+            _collect_matrix_instantiations(cursor, instantiations)
+    else:  # text based fallback
+        with open(path, "r", encoding="utf-8", errors="ignore") as f:
+            text = f.read()
+        for m in MATRIX_RE.finditer(text):
+            instantiations.add(m.group(0).replace("Eigen::", ""))
     for spec in sorted(instantiations):
         mapping.setdefault(spec, _placeholder_name(spec))
     return mapping
@@ -102,9 +117,16 @@ def main():
         with open(MAPPING_PATH, "r", encoding="utf-8") as f:
             if HAVE_YAML:
                 mapping = yaml.safe_load(f) or {}
+                mapping = mapping.get("mappings", mapping)
             else:
-                mapping = json.load(f)
-            mapping = mapping.get("mappings", mapping)
+                mapping = {}
+                for line in f:
+                    line = line.strip()
+                    if not line or line.startswith("#") or line == "mappings:":
+                        continue
+                    if ":" in line:
+                        k, v = line.split(":", 1)
+                        mapping[k.strip()] = v.strip()
     else:
         mapping = {}
     for root, _, files in os.walk(EIGEN_DIR):
@@ -114,15 +136,21 @@ def main():
             path = os.path.join(root, name)
             rel_path = os.path.relpath(path, EIGEN_DIR)
             print(f"Parsing {rel_path}...", file=sys.stderr)
-            try:
-                tu = index.parse(path, args=compile_args)
-            except Exception as exc:
-                print(f"Failed to parse {path}: {exc}", file=sys.stderr)
-                continue
+            if HAVE_CLANG:
+                try:
+                    tu = index.parse(path, args=compile_args)
+                except Exception as exc:
+                    print(f"Failed to parse {path}: {exc}", file=sys.stderr)
+                    tu = None
+            else:
+                tu = None
             ext = ".yaml" if HAVE_YAML else ".json"
             ast_path = os.path.join(AST_DIR, rel_path.replace(os.sep, "_") + ext)
             with open(ast_path, "w", encoding="utf-8") as f:
-                data = cursor_to_dict(tu.cursor)
+                if HAVE_CLANG and tu is not None:
+                    data = cursor_to_dict(tu.cursor)
+                else:
+                    data = {"parsed": False}
                 if HAVE_YAML:
                     yaml.dump(data, f)
                 else:
