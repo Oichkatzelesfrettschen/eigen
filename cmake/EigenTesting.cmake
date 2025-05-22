@@ -468,9 +468,9 @@ macro(ei_testing_print_summary)
     endif()
 
     if(EIGEN_TEST_CXX11)
-      message(STATUS "C++11:             ON")
+      message(STATUS "C++14:             ON")
     else()
-      message(STATUS "C++11:             OFF")
+      message(STATUS "C++14:             OFF")
     endif()
 
     if(EIGEN_TEST_SYCL)
@@ -687,7 +687,7 @@ macro(ei_set_build_string)
   endif()
 
   if(EIGEN_TEST_CXX11)
-    set(TMP_BUILD_STRING ${TMP_BUILD_STRING}-cxx11)
+    set(TMP_BUILD_STRING ${TMP_BUILD_STRING}-cxx14)
   endif()
 
   if(EIGEN_BUILD_STRING_SUFFIX)

@@ -78,7 +78,7 @@ if(MPFR_FOUND AND EIGEN_COMPILER_SUPPORT_CXX11)
   include_directories(${MPFR_INCLUDES} ./mpreal)
   ei_add_property(EIGEN_TESTED_BACKENDS "MPFR C++, ")
   set(EIGEN_MPFR_TEST_LIBRARIES ${MPFR_LIBRARIES} ${GMP_LIBRARIES})
- ei_add_test(mpreal_support "-std=c++11" "${EIGEN_MPFR_TEST_LIBRARIES}" )
+ ei_add_test(mpreal_support "-std=c++14" "${EIGEN_MPFR_TEST_LIBRARIES}" )
 else()
   ei_add_property(EIGEN_MISSING_BACKENDS "MPFR C++, ")
 endif()
@@ -158,8 +158,8 @@ if(EIGEN_TEST_CXX11)
     else(EIGEN_SYCL_TRISYCL)
       # It should be safe to always run these tests as there is some fallback code for
       # older compiler that don't support cxx11.
-      set(CMAKE_CXX_STANDARD 11)
-      set(STD_CXX_FLAG "-std=c++11")
+      set(CMAKE_CXX_STANDARD 14)
+      set(STD_CXX_FLAG "-std=c++14")
     endif(EIGEN_SYCL_TRISYCL)
 
     ei_add_test_sycl(cxx11_tensor_sycl ${STD_CXX_FLAG})
@@ -237,7 +237,7 @@ if(CUDA_FOUND AND EIGEN_TEST_CUDA)
   # Make sure to compile without the -pedantic, -Wundef, -Wnon-virtual-dtor
   # and -fno-check-new flags since they trigger thousands of compilation warnings
   # in the CUDA runtime
-  # Also remove -ansi that is incompatible with std=c++11.
+  # Also remove -ansi that is incompatible with std=c++14.
   string(REPLACE "-pedantic" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
   string(REPLACE "-Wundef" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
   string(REPLACE "-Wnon-virtual-dtor" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
@@ -250,7 +250,7 @@ if(CUDA_FOUND AND EIGEN_TEST_CUDA)
     set(CUDA_NVCC_FLAGS "-ccbin ${CMAKE_C_COMPILER}" CACHE STRING "nvcc flags" FORCE)
   endif()
   if(EIGEN_TEST_CUDA_CLANG)
-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 --cuda-gpu-arch=sm_${EIGEN_CUDA_COMPUTE_ARCH}")
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 --cuda-gpu-arch=sm_${EIGEN_CUDA_COMPUTE_ARCH}")
   endif()
 
   set(EIGEN_CUDA_RELAXED_CONSTEXPR "--expt-relaxed-constexpr")
@@ -259,9 +259,9 @@ if(CUDA_FOUND AND EIGEN_TEST_CUDA)
   endif()
 
   if( (NOT EIGEN_TEST_CXX11) OR (CMAKE_VERSION VERSION_LESS 3.3))
-    set(EIGEN_CUDA_CXX11_FLAG "-std=c++11")
+    set(EIGEN_CUDA_CXX11_FLAG "-std=c++14")
   else()
-    # otherwise the flag has already been added because of the above set(CMAKE_CXX_STANDARD 11)
+    # otherwise the flag has already been added because of the above set(CMAKE_CXX_STANDARD 14)
     set(EIGEN_CUDA_CXX11_FLAG "")
   endif()
 
