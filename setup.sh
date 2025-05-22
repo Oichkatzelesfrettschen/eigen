@@ -18,7 +18,7 @@ done
 
 apt-get update -y
 
-export CXXFLAGS="-std=c++17"
+export CXXFLAGS="-std=c++23"
 
 for pkg in \
   build-essential gcc g++ clang lld llvm \

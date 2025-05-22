@@ -227,8 +227,8 @@ function(__build_spir targetName sourceFile binaryDir fileCounter)
   # Add a dependency on the integration header
   add_dependencies(${targetName} ${targetName}_integration_header)
 
-  # Set the host compiler C++ standard to C++14
-  set_property(TARGET ${targetName} PROPERTY CXX_STANDARD 14)
+  # Set the host compiler C++ standard to C++23
+  set_property(TARGET ${targetName} PROPERTY CXX_STANDARD 23)
 
   # Disable GCC dual ABI on GCC 5.1 and higher
   if(COMPUTECPP_DISABLE_GCC_DUAL_ABI)

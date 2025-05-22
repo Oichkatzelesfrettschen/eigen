@@ -112,7 +112,7 @@ def process_header(path: str, tu=None):
 
 
 def main():
-    compile_args = ["-std=c++17", f"-I{EIGEN_DIR}"]
+    compile_args = ["-std=c++23", f"-I{EIGEN_DIR}"]
     if os.path.exists(MAPPING_PATH):
         with open(MAPPING_PATH, "r", encoding="utf-8") as f:
             if HAVE_YAML:

@@ -7,18 +7,10 @@ ROOT_DIR="$(cd "$(dirname "$0")/.."; pwd)"
 gcc -std=c23 -I"${ROOT_DIR}/eigenc/include" "${ROOT_DIR}/tests/core/test_core.c" -o /tmp/ec_test \
   || gcc -std=c2x -I"${ROOT_DIR}/eigenc/include" "${ROOT_DIR}/tests/core/test_core.c" -o /tmp/ec_test
 
-g++ -std=c++17 -I"${ROOT_DIR}" "${ROOT_DIR}/tests/core/test_core.cpp" -o /tmp/eigen_test17
-g++ -std=c++23 -I"${ROOT_DIR}" "${ROOT_DIR}/tests/core/test_core.cpp" -o /tmp/eigen_test23 || true
+g++ -std=c++23 -I"${ROOT_DIR}" "${ROOT_DIR}/tests/core/test_core.cpp" -o /tmp/eigen_test23
 
 /tmp/ec_test
-/tmp/eigen_test17
-# Save output for C++17 run
-cp /tmp/cpp_out.txt /tmp/cpp_out_cxx17.txt
-if [ -x /tmp/eigen_test23 ]; then
-  /tmp/eigen_test23
-  mv /tmp/cpp_out.txt /tmp/cpp_out_cxx23.txt
-  cp /tmp/cpp_out_cxx17.txt /tmp/cpp_out.txt
-fi
+/tmp/eigen_test23
 
 python3 "${ROOT_DIR}/tests/compare_eigen_cpp_vs_c.py"
 cp /tmp/c_out.txt /tmp/c_out_host.txt

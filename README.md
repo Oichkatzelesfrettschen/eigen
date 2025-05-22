@@ -81,7 +81,7 @@ pre-commit install
 pre-commit run --all-files
 ```
 
-Clang-Tidy configurations for both C23 and C++17 live in `.clang-tidy-c23` and
+Clang-Tidy configurations for both C23 and C++23 live in `.clang-tidy-c23` and
 `.clang-tidy`.  The project builds with either GCC or Clang; the test scripts
 use whichever compiler is available.
 
