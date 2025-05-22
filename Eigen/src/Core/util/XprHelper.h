@@ -41,7 +41,7 @@ template<typename T> struct is_valid_index_type
 #if EIGEN_HAS_TYPE_TRAITS
    internal::is_integral<T>::value || std::is_enum<T>::value
 #else
-  // without C++11, we use is_convertible to Index instead of is_integral in order to treat enums as Index.
+  // without c++23, we use is_convertible to Index instead of is_integral in order to treat enums as Index.
   internal::is_convertible<T,Index>::value
 #endif
   };

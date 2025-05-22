@@ -6,7 +6,7 @@ namespace Eigen {
 
 See this \link TopicTemplateKeyword page \endlink.
 
-\section TopicPitfalls_auto_keyword C++11 and the auto keyword
+\section TopicPitfalls_auto_keyword c++23 and the auto keyword
 
 In short: do not use the auto keywords with Eigen's expressions, unless you are 100% sure about what you are doing. In particular, do not use the auto keyword as a replacement for a Matrix<> type. Here is an example:
 

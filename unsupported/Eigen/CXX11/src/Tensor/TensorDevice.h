@@ -7,13 +7,13 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_DEVICE_H
-#define EIGEN_CXX11_TENSOR_TENSOR_DEVICE_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_DEVICE_H
+#define EIGEN_CXX23_TENSOR_TENSOR_DEVICE_H
 
 namespace Eigen {
 
 /** \class TensorDevice
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Pseudo expression providing an operator = that will evaluate its argument
   * on the specified computing 'device' (GPU, thread pool, ...)
@@ -65,4 +65,4 @@ template <typename ExpressionType, typename DeviceType> class TensorDevice {
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_DEVICE_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_DEVICE_H

@@ -8,13 +8,13 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_TRACE_H
-#define EIGEN_CXX11_TENSOR_TENSOR_TRACE_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_TRACE_H
+#define EIGEN_CXX23_TENSOR_TENSOR_TRACE_H
 
 namespace Eigen {
 
 /** \class TensorTrace
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Tensor Trace class.
   *
@@ -285,4 +285,4 @@ struct TensorEvaluator<const TensorTraceOp<Dims, ArgType>, Device>
 
 } // End namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_TRACE_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_TRACE_H

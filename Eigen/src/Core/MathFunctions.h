@@ -406,7 +406,7 @@ inline NewType cast(const OldType& x)
 * Implementation of round                                                   *
 ****************************************************************************/
 
-#if EIGEN_HAS_CXX11_MATH
+#if EIGEN_HAS_CXX23_MATH
   template<typename Scalar>
   struct round_impl {
     static inline Scalar run(const Scalar& x)
@@ -440,7 +440,7 @@ struct round_retval
 * Implementation of arg                                                     *
 ****************************************************************************/
 
-#if EIGEN_HAS_CXX11_MATH
+#if EIGEN_HAS_CXX23_MATH
   template<typename Scalar>
   struct arg_impl {
     static inline Scalar run(const Scalar& x)
@@ -515,7 +515,7 @@ struct expm1_impl {
   EIGEN_DEVICE_FUNC static inline Scalar run(const Scalar& x)
   {
     EIGEN_STATIC_ASSERT_NON_INTEGER(Scalar)
-    #if EIGEN_HAS_CXX11_MATH
+    #if EIGEN_HAS_CXX23_MATH
     using std::expm1;
     #endif
     using std_fallback::expm1;
@@ -552,7 +552,7 @@ struct log1p_impl {
   EIGEN_DEVICE_FUNC static inline Scalar run(const Scalar& x)
   {
     EIGEN_STATIC_ASSERT_NON_INTEGER(Scalar)
-    #if EIGEN_HAS_CXX11_MATH
+    #if EIGEN_HAS_CXX23_MATH
     using std::log1p;
     #endif
     using std_fallback::log1p;
@@ -752,7 +752,7 @@ inline EIGEN_MATHFUNC_RETVAL(random, Scalar) random()
 // Implementatin of is* functions
 
 // std::is* do not work with fast-math and gcc, std::is* are available on MSVC 2013 and newer, as well as in clang.
-#if (EIGEN_HAS_CXX11_MATH && !(EIGEN_COMP_GNUC_STRICT && __FINITE_MATH_ONLY__)) || (EIGEN_COMP_MSVC>=1800) || (EIGEN_COMP_CLANG)
+#if (EIGEN_HAS_CXX23_MATH && !(EIGEN_COMP_GNUC_STRICT && __FINITE_MATH_ONLY__)) || (EIGEN_COMP_MSVC>=1800) || (EIGEN_COMP_CLANG)
 #define EIGEN_USE_STD_FPCLASSIFY 1
 #else
 #define EIGEN_USE_STD_FPCLASSIFY 0
@@ -1378,7 +1378,7 @@ T acos(const T &x) {
   return acos(x);
 }
 
-#if EIGEN_HAS_CXX11_MATH
+#if EIGEN_HAS_CXX23_MATH
 template<typename T>
 EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE
 T acosh(const T &x) {
@@ -1409,7 +1409,7 @@ T asin(const T &x) {
   return asin(x);
 }
 
-#if EIGEN_HAS_CXX11_MATH
+#if EIGEN_HAS_CXX23_MATH
 template<typename T>
 EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE
 T asinh(const T &x) {
@@ -1440,7 +1440,7 @@ T atan(const T &x) {
   return atan(x);
 }
 
-#if EIGEN_HAS_CXX11_MATH
+#if EIGEN_HAS_CXX23_MATH
 template<typename T>
 EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE
 T atanh(const T &x) {

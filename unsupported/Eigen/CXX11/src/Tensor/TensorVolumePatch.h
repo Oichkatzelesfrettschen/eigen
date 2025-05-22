@@ -1,13 +1,13 @@
 // This file is part of Eigen, a lightweight C++ template library
 // for linear algebra.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_VOLUME_PATCH_H
-#define EIGEN_CXX11_TENSOR_TENSOR_VOLUME_PATCH_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_VOLUME_PATCH_H
+#define EIGEN_CXX23_TENSOR_TENSOR_VOLUME_PATCH_H
 
 namespace Eigen {
 
 /** \class TensorVolumePatch
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Patch extraction specialized for processing of volumetric data.
   * This assumes that the input has a least 4 dimensions ordered as follows:
@@ -91,7 +91,7 @@ class TensorVolumePatchOp : public TensorBase<TensorVolumePatchOp<Planes, Rows, 
                                                            m_padding_left(padding_left), m_padding_right(padding_right),
                                                            m_padding_type(PADDING_VALID), m_padding_value(padding_value) {}
 
-#ifdef EIGEN_USE_SYCL // this is work around for sycl as Eigen could not use c++11 deligate constructor feature
+#ifdef EIGEN_USE_SYCL // this is work around for sycl as Eigen could not use c++23 deligate constructor feature
 EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorVolumePatchOp(const XprType& expr, DenseIndex patch_planes, DenseIndex patch_rows, DenseIndex patch_cols,
                                                          DenseIndex plane_strides, DenseIndex row_strides, DenseIndex col_strides,
                                                          DenseIndex in_plane_strides, DenseIndex in_row_strides, DenseIndex in_col_strides,
@@ -644,4 +644,4 @@ struct TensorEvaluator<const TensorVolumePatchOp<Planes, Rows, Cols, ArgType>, D
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_VOLUME_PATCH_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_VOLUME_PATCH_H

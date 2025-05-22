@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_INDEX_LIST_H
-#define EIGEN_CXX11_TENSOR_TENSOR_INDEX_LIST_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_INDEX_LIST_H
+#define EIGEN_CXX23_TENSOR_TENSOR_INDEX_LIST_H
 
 
 #if EIGEN_HAS_CONSTEXPR && EIGEN_HAS_VARIADIC_TEMPLATES
@@ -20,7 +20,7 @@ namespace Eigen {
 /** \internal
   *
   * \class TensorIndexList
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Set of classes used to encode a set of Tensor dimensions/indices.
   *
@@ -29,7 +29,7 @@ namespace Eigen {
   * code will attempt to take advantage of the indices that are known at
   * compile time to optimize the code it generates.
   *
-  * This functionality requires a c++11 compliant compiler. If your compiler
+  * This functionality requires a c++23 compliant compiler. If your compiler
   * is older you need to use arrays of indices instead.
   *
   * Several examples are provided in the cxx11_tensor_index_list.cpp file.
@@ -722,4 +722,4 @@ static EIGEN_DEVICE_FUNC constexpr bool index_pair_second_statically_eq(DenseInd
 }  // end namespace Eigen
 
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_INDEX_LIST_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_INDEX_LIST_H

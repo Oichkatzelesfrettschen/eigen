@@ -11,8 +11,8 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 // General include header of SYCL target for Tensor Module
-#ifndef UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_H
-#define UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_H
+#ifndef UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSORSYCL_H
+#define UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSORSYCL_H
 
 #ifdef EIGEN_USE_SYCL
 
@@ -117,4 +117,4 @@ template<size_t X, size_t Y> struct ValueCondition<false, X, Y> {
 #include "TensorContractionSycl.h"
 
 #endif  // end of EIGEN_USE_SYCL
-#endif  // UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_H
+#endif  // UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSORSYCL_H

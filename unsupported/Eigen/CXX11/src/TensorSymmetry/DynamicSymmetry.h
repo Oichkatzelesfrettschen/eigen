@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSORSYMMETRY_DYNAMICSYMMETRY_H
-#define EIGEN_CXX11_TENSORSYMMETRY_DYNAMICSYMMETRY_H
+#ifndef EIGEN_CXX23_TENSORSYMMETRY_DYNAMICSYMMETRY_H
+#define EIGEN_CXX23_TENSORSYMMETRY_DYNAMICSYMMETRY_H
 
 namespace Eigen {
 
@@ -286,7 +286,7 @@ inline void DynamicSGroup::updateGlobalFlags(int flagDiffOfSameGenerator)
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSORSYMMETRY_DYNAMICSYMMETRY_H
+#endif // EIGEN_CXX23_TENSORSYMMETRY_DYNAMICSYMMETRY_H
 
 /*
  * kate: space-indent on; indent-width 2; mixedindent off; indent-mode cstyle;

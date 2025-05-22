@@ -18,8 +18,8 @@
  *
 *****************************************************************/
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_SYCL_H
-#define EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_SYCL_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_CONTRACTION_SYCL_H
+#define EIGEN_CXX23_TENSOR_TENSOR_CONTRACTION_SYCL_H
 namespace Eigen {
 
 template <typename Index, typename LhsScalar, typename RhsScalar,bool lhs_inner_dim_contiguous, bool rhs_inner_dim_contiguous, bool rhs_inner_dim_reordered> struct LaunchSyclKernels;
@@ -398,4 +398,4 @@ template< typename Self, typename OutScalar, typename ContractT, typename LeftNo
 };
 
 } // end namespace Eigen
-#endif // EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_SYCL_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_CONTRACTION_SYCL_H

@@ -7,13 +7,13 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_IMAGE_PATCH_H
-#define EIGEN_CXX11_TENSOR_TENSOR_IMAGE_PATCH_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_IMAGE_PATCH_H
+#define EIGEN_CXX23_TENSOR_TENSOR_IMAGE_PATCH_H
 
 namespace Eigen {
 
 /** \class TensorImagePatch
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Patch extraction specialized for image processing.
   * This assumes that the input has a least 3 dimensions ordered as follow:
@@ -94,7 +94,7 @@ class TensorImagePatchOp : public TensorBase<TensorImagePatchOp<Rows, Cols, XprT
                                                            m_padding_left(padding_left), m_padding_right(padding_right),
                                                            m_padding_type(PADDING_VALID), m_padding_value(padding_value) {}
 
-#ifdef EIGEN_USE_SYCL // this is work around for sycl as Eigen could not use c++11 deligate constructor feature
+#ifdef EIGEN_USE_SYCL // this is work around for sycl as Eigen could not use c++23 deligate constructor feature
 EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorImagePatchOp(const XprType& expr, DenseIndex patch_rows, DenseIndex patch_cols,
                                                          DenseIndex row_strides, DenseIndex col_strides,
                                                          DenseIndex in_row_strides, DenseIndex in_col_strides,
@@ -548,4 +548,4 @@ struct TensorEvaluator<const TensorImagePatchOp<Rows, Cols, ArgType>, Device>
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_IMAGE_PATCH_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_IMAGE_PATCH_H

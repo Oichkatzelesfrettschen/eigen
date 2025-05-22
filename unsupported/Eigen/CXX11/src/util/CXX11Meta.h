@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11META_H
-#define EIGEN_CXX11META_H
+#ifndef EIGEN_CXX23META_H
+#define EIGEN_CXX23META_H
 
 #include <vector>
 #include "EmulateArray.h"
@@ -18,16 +18,16 @@
 // supports enough of the standard for our needs
 #if __cplusplus > 199711L || EIGEN_COMP_MSVC >= 1900
 
-#include "CXX11Workarounds.h"
+#include "CXX23Workarounds.h"
 
 namespace Eigen {
 
 namespace internal {
 
 /** \internal
-  * \file CXX11/util/CXX11Meta.h
+  * \file CXX23/util/CXX23Meta.h
   * This file contains generic metaprogramming classes which are not specifically related to Eigen.
-  * This file expands upon Core/util/Meta.h and adds support for C++11 specific features.
+  * This file expands upon Core/util/Meta.h and adds support for c++23 specific features.
   */
 
 template<typename... tt>
@@ -537,10 +537,10 @@ InstType instantiate_by_c_array(ArrType* arr)
 
 } // end namespace Eigen
 
-#else // Non C++11, fallback to emulation mode
+#else // Non c++23, fallback to emulation mode
 
-#include "EmulateCXX11Meta.h"
+#include "EmulateCXX23Meta.h"
 
 #endif
 
-#endif // EIGEN_CXX11META_H
+#endif // EIGEN_CXX23META_H

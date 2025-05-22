@@ -999,7 +999,7 @@ void SparseMatrix<Scalar,_Options,_StorageIndex>::setFromTriplets(const InputIte
   * \code
   * value = dup_func(OldValue, NewValue)
   * \endcode 
-  * Here is a C++11 example keeping the latest entry only:
+  * Here is a c++23 example keeping the latest entry only:
   * \code
   * mat.setFromTriplets(triplets.begin(), triplets.end(), [] (const Scalar&,const Scalar &b) { return b; });
   * \endcode

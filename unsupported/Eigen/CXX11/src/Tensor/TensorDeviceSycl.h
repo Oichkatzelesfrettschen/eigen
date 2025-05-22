@@ -12,8 +12,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#if defined(EIGEN_USE_SYCL) && !defined(EIGEN_CXX11_TENSOR_TENSOR_DEVICE_SYCL_H)
-#define EIGEN_CXX11_TENSOR_TENSOR_DEVICE_SYCL_H
+#if defined(EIGEN_USE_SYCL) && !defined(EIGEN_CXX23_TENSOR_TENSOR_DEVICE_SYCL_H)
+#define EIGEN_CXX23_TENSOR_TENSOR_DEVICE_SYCL_H
 template<size_t Align> struct CheckAlignStatically {
   static const bool Val= (((Align&(Align-1))==0) && (Align >= sizeof(void *)));
 };
@@ -549,4 +549,4 @@ struct SyclKernelDevice:DefaultDevice{};
 
 }  // end namespace Eigen
 
-#endif  // EIGEN_CXX11_TENSOR_TENSOR_DEVICE_SYCL_H
+#endif  // EIGEN_CXX23_TENSOR_TENSOR_DEVICE_SYCL_H

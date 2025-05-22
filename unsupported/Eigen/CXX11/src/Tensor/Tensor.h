@@ -8,13 +8,13 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_H
-#define EIGEN_CXX11_TENSOR_TENSOR_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_H
+#define EIGEN_CXX23_TENSOR_TENSOR_H
 
 namespace Eigen {
 
 /** \class Tensor
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief The tensor class.
   *
@@ -473,7 +473,7 @@ class Tensor : public TensorBase<Tensor<Scalar_, NumIndices_, Options_, IndexTyp
     }
 #endif
 
-#ifndef EIGEN_EMULATE_CXX11_META_H
+#ifndef EIGEN_EMULATE_CXX23_META_H
     template <typename std::ptrdiff_t... Indices>
     EIGEN_DEVICE_FUNC
     void resize(const Sizes<Indices...>& dimensions) {
@@ -524,4 +524,4 @@ class Tensor : public TensorBase<Tensor<Scalar_, NumIndices_, Options_, IndexTyp
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_H

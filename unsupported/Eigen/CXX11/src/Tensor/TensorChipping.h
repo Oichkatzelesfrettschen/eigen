@@ -7,13 +7,13 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_CHIPPING_H
-#define EIGEN_CXX11_TENSOR_TENSOR_CHIPPING_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_CHIPPING_H
+#define EIGEN_CXX23_TENSOR_TENSOR_CHIPPING_H
 
 namespace Eigen {
 
 /** \class TensorKChippingReshaping
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief A chip is a thin slice, corresponding to a column or a row in a 2-d tensor.
   *
@@ -398,4 +398,4 @@ struct TensorEvaluator<TensorChippingOp<DimId, ArgType>, Device>
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_CHIPPING_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_CHIPPING_H

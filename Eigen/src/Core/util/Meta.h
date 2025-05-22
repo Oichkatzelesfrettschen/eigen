@@ -97,7 +97,7 @@ template<> struct is_arithmetic<unsigned int>  { enum { value = true }; };
 template<> struct is_arithmetic<signed long>   { enum { value = true }; };
 template<> struct is_arithmetic<unsigned long> { enum { value = true }; };
 
-#if EIGEN_HAS_CXX11
+#if EIGEN_HAS_CXX23
 using std::is_integral;
 #else
 template<typename T> struct is_integral               { enum { value = false }; };
@@ -292,7 +292,7 @@ protected:
   * It currently supports:
   *  - any types T defining T::SizeAtCompileTime
   *  - plain C arrays as T[N]
-  *  - std::array (c++11)
+  *  - std::array (c++23)
   *  - some internal types such as SingleRange and AllRange
   *
   * The second template parameter eases SFINAE-based specializations.
@@ -312,7 +312,7 @@ template<typename T, int N> struct array_size<T (&)[N]> {
   enum { value = N };
 };
 
-#if EIGEN_HAS_CXX11
+#if EIGEN_HAS_CXX23
 template<typename T, std::size_t N> struct array_size<const std::array<T,N> > {
   enum { value = N };
 };

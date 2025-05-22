@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_RANDOM_H
-#define EIGEN_CXX11_TENSOR_TENSOR_RANDOM_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_RANDOM_H
+#define EIGEN_CXX23_TENSOR_TENSOR_RANDOM_H
 
 namespace Eigen {
 namespace internal {
@@ -265,4 +265,4 @@ struct functor_traits<NormalRandomGenerator<Scalar> > {
 } // end namespace internal
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_RANDOM_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_RANDOM_H

@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_REF_H
-#define EIGEN_CXX11_TENSOR_TENSOR_REF_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_REF_H
+#define EIGEN_CXX23_TENSOR_TENSOR_REF_H
 
 namespace Eigen {
 
@@ -110,7 +110,7 @@ class TensorLazyEvaluator : public internal::conditional<bool(internal::is_lvalu
 
 
 /** \class TensorRef
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief A reference to a tensor expression
   * The expression will be evaluated lazily (as much as possible).
@@ -426,4 +426,4 @@ struct TensorEvaluator<TensorRef<Derived>, Device> : public TensorEvaluator<cons
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_REF_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_REF_H

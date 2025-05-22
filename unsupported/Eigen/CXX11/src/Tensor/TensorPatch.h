@@ -7,13 +7,13 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_PATCH_H
-#define EIGEN_CXX11_TENSOR_TENSOR_PATCH_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_PATCH_H
+#define EIGEN_CXX23_TENSOR_TENSOR_PATCH_H
 
 namespace Eigen {
 
 /** \class TensorPatch
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Tensor patch class.
   *
@@ -279,4 +279,4 @@ struct TensorEvaluator<const TensorPatchOp<PatchDim, ArgType>, Device>
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_PATCH_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_PATCH_H

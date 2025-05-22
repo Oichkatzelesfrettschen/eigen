@@ -7,13 +7,13 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_CONVERSION_H
-#define EIGEN_CXX11_TENSOR_TENSOR_CONVERSION_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_CONVERSION_H
+#define EIGEN_CXX23_TENSOR_TENSOR_CONVERSION_H
 
 namespace Eigen {
 
 /** \class TensorConversionOp
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Tensor conversion class. This class makes it possible to vectorize
   * type casting operations when the number of scalars per packet in the source
@@ -280,4 +280,4 @@ struct TensorEvaluator<const TensorConversionOp<TargetType, ArgType>, Device>
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_CONVERSION_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_CONVERSION_H

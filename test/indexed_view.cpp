@@ -8,7 +8,7 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #ifdef EIGEN_TEST_PART_2
-// Make sure we also check c++11 max implementation
+// Make sure we also check c++23 max implementation
 #define EIGEN_MAX_CPP_VER 11
 #endif
 
@@ -21,7 +21,7 @@
 #include <vector>
 #include "main.h"
 
-#if EIGEN_HAS_CXX11
+#if EIGEN_HAS_CXX23
 #include <array>
 #endif
 
@@ -202,7 +202,7 @@ void check_indexed_view()
   VERIFY( is_same_seq_type( seqN(2,fix<5>(5),fix<-2>), seqN(2,fix<5>,fix<-2>()) ) );
 
   VERIFY( is_same_seq_type( seq(2,fix<5>), seqN(2,4) ) );
-#if EIGEN_HAS_CXX11
+#if EIGEN_HAS_CXX23
   VERIFY( is_same_seq_type( seq(fix<2>,fix<5>), seqN(fix<2>,fix<4>) ) );
   VERIFY( is_same_seq( seqN(2,std::integral_constant<int,5>(),std::integral_constant<int,-2>()), seqN(2,fix<5>,fix<-2>()) ) );
   VERIFY( is_same_seq( seq(std::integral_constant<int,1>(),std::integral_constant<int,5>(),std::integral_constant<int,2>()),
@@ -292,7 +292,7 @@ void check_indexed_view()
                       A(seq(last-5,last-1,2), seqN(last-3,3,fix<-2>)).reverse() );
   }
 
-#if EIGEN_HAS_CXX11
+#if EIGEN_HAS_CXX23
   VERIFY( (A(all, std::array<int,4>{{1,3,2,4}})).ColsAtCompileTime == 4);
 
   VERIFY_IS_APPROX( (A(std::array<int,3>{{1,3,5}}, std::array<int,4>{{9,6,3,0}})), A(seqN(1,3,2), seqN(9,4,-3)) );

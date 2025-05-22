@@ -8,8 +8,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSORSTORAGE_H
-#define EIGEN_CXX11_TENSOR_TENSORSTORAGE_H
+#ifndef EIGEN_CXX23_TENSOR_TENSORSTORAGE_H
+#define EIGEN_CXX23_TENSOR_TENSORSTORAGE_H
 
 #ifdef EIGEN_TENSOR_STORAGE_CTOR_PLUGIN
   #define EIGEN_INTERNAL_TENSOR_STORAGE_CTOR_PLUGIN EIGEN_TENSOR_STORAGE_CTOR_PLUGIN;
@@ -22,7 +22,7 @@ namespace Eigen {
 /** \internal
   *
   * \class TensorStorage
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Stores the data of a tensor
   *
@@ -143,4 +143,4 @@ class TensorStorage<T, DSizes<IndexType, NumIndices_>, Options_>
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSORSTORAGE_H
+#endif // EIGEN_CXX23_TENSOR_TENSORSTORAGE_H

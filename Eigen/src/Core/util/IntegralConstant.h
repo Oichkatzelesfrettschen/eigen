@@ -23,7 +23,7 @@ template<int N> class VariableAndFixedInt;
   *
   * This class embeds a compile-time integer \c N.
   *
-  * It is similar to c++11 std::integral_constant<int,N> but with some additional features
+  * It is similar to c++23 std::integral_constant<int,N> but with some additional features
   * such as:
   *  - implicit conversion to int
   *  - arithmetic and some bitwise operators: -, +, *, /, %, &, |
@@ -84,7 +84,7 @@ public:
   FixedInt ( FixedInt<N> (*)() ) {}
 #endif
 
-#if EIGEN_HAS_CXX11
+#if EIGEN_HAS_CXX23
   FixedInt(std::integral_constant<int,N>) {}
 #endif
 };
@@ -165,7 +165,7 @@ template<typename T, int DynamicKey=Dynamic, typename EnableIf=void> struct clea
 template<typename T, int DynamicKey> struct cleanup_index_type<T,DynamicKey,typename internal::enable_if<internal::is_integral<T>::value>::type> { typedef Index type; };
 
 #if !EIGEN_HAS_CXX14
-// In c++98/c++11, fix<N> is a pointer to function that we better cleanup to a true FixedInt<N>:
+// In c++98/c++23, fix<N> is a pointer to function that we better cleanup to a true FixedInt<N>:
 template<int N, int DynamicKey> struct cleanup_index_type<FixedInt<N> (*)(), DynamicKey> { typedef FixedInt<N> type; };
 #endif
 
@@ -174,7 +174,7 @@ template<int N, int DynamicKey> struct cleanup_index_type<VariableAndFixedInt<N>
 // If VariableAndFixedInt matches DynamicKey, then we turn it to a pure runtime-value (aka Index):
 template<int DynamicKey> struct cleanup_index_type<VariableAndFixedInt<DynamicKey>, DynamicKey> { typedef Index type; };
 
-#if EIGEN_HAS_CXX11
+#if EIGEN_HAS_CXX23
 template<int N, int DynamicKey> struct cleanup_index_type<std::integral_constant<int,N>, DynamicKey> { typedef FixedInt<N> type; };
 #endif
 

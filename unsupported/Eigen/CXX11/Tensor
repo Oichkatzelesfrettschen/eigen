@@ -8,8 +8,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-//#ifndef EIGEN_CXX11_TENSOR_MODULE
-//#define EIGEN_CXX11_TENSOR_MODULE
+//#ifndef EIGEN_CXX23_TENSOR_MODULE
+//#define EIGEN_CXX23_TENSOR_MODULE
 
 #include "../../../Eigen/Core"
 
@@ -29,16 +29,16 @@
 #include <Eigen/src/Core/util/DisableStupidWarnings.h>
 
 #include "../SpecialFunctions"
-#include "src/util/CXX11Meta.h"
+#include "src/util/CXX23Meta.h"
 #include "src/util/MaxSizeVector.h"
 
-/** \defgroup CXX11_Tensor_Module Tensor Module
+/** \defgroup CXX23_Tensor_Module Tensor Module
   *
   * This module provides a Tensor class for storing arbitrarily indexed
   * objects.
   *
   * \code
-  * #include <Eigen/CXX11/Tensor>
+  * #include <Eigen/CXX23/Tensor>
   * \endcode
   */
 
@@ -157,4 +157,4 @@ typedef unsigned __int64 uint64_t;
 
 #include <Eigen/src/Core/util/ReenableStupidWarnings.h>
 
-//#endif // EIGEN_CXX11_TENSOR_MODULE
+//#endif // EIGEN_CXX23_TENSOR_MODULE

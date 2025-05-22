@@ -7,13 +7,13 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_EVALUATOR_H
-#define EIGEN_CXX11_TENSOR_TENSOR_EVALUATOR_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_EVALUATOR_H
+#define EIGEN_CXX23_TENSOR_TENSOR_EVALUATOR_H
 
 namespace Eigen {
 
 /** \class TensorEvaluator
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief The tensor evaluator classes.
   *
@@ -642,4 +642,4 @@ struct TensorEvaluator<const TensorSelectOp<IfArgType, ThenArgType, ElseArgType>
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_EVALUATOR_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_EVALUATOR_H

@@ -17,8 +17,8 @@
  *
 *****************************************************************/
 
-#ifndef UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSOR_ARGMAX_SYCL_HPP
-#define UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSOR_ARGMAX_SYCL_HPP
+#ifndef UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSOR_ARGMAX_SYCL_HPP
+#define UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSOR_ARGMAX_SYCL_HPP
 namespace Eigen {
 namespace internal {
   template<typename Dims, typename XprType>
@@ -144,4 +144,4 @@ protected:
  const Index m_stride_div;
 };
 } // end namespace Eigen
-#endif //UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSOR_ARGMAX_SYCL_HPP
+#endif //UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSOR_ARGMAX_SYCL_HPP

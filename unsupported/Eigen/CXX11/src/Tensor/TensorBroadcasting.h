@@ -7,13 +7,13 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_BROADCASTING_H
-#define EIGEN_CXX11_TENSOR_TENSOR_BROADCASTING_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_BROADCASTING_H
+#define EIGEN_CXX23_TENSOR_TENSOR_BROADCASTING_H
 
 namespace Eigen {
 
 /** \class TensorBroadcasting
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Tensor broadcasting class.
   *
@@ -54,7 +54,7 @@ template <>
 struct is_input_scalar<Sizes<> > {
   static const bool value = true;
 };
-#ifndef EIGEN_EMULATE_CXX11_META_H
+#ifndef EIGEN_EMULATE_CXX23_META_H
 template <typename std::ptrdiff_t... Indices>
 struct is_input_scalar<Sizes<Indices...> > {
   static const bool value = (Sizes<Indices...>::total_size == 1);
@@ -390,4 +390,4 @@ struct TensorEvaluator<const TensorBroadcastingOp<Broadcast, ArgType>, Device>
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_BROADCASTING_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_BROADCASTING_H

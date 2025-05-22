@@ -74,7 +74,7 @@ ei_add_test(EulerAngles)
 
 find_package(MPFR 2.3.0)
 find_package(GMP)
-if(MPFR_FOUND AND EIGEN_COMPILER_SUPPORT_CXX11)
+if(MPFR_FOUND AND EIGEN_COMPILER_SUPPORT_CXX23)
   include_directories(${MPFR_INCLUDES} ./mpreal)
   ei_add_property(EIGEN_TESTED_BACKENDS "MPFR C++, ")
   set(EIGEN_MPFR_TEST_LIBRARIES ${MPFR_LIBRARIES} ${GMP_LIBRARIES})
@@ -125,7 +125,7 @@ ei_add_test(kronecker_product)
 ei_add_test(special_functions)
 
 # TODO: The following test names are prefixed with the cxx11 string, since historically
-# the tests depended on c++11. This isn't the case anymore so we ought to rename them.
+# the tests depended on c++23. This isn't the case anymore so we ought to rename them.
 # FIXME: Old versions of MSVC fail to compile this code, so we just disable these tests
 # when using visual studio. We should make the check more strict to enable the tests for
 # newer versions of MSVC.
@@ -150,7 +150,7 @@ if("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
 endif()
 endif()
 
-if(EIGEN_TEST_CXX11)
+if(EIGEN_TEST_CXX23)
   if(EIGEN_TEST_SYCL)
     if(EIGEN_SYCL_TRISYCL)
       set(CMAKE_CXX_STANDARD 23)
@@ -258,14 +258,14 @@ if(CUDA_FOUND AND EIGEN_TEST_CUDA)
     set(EIGEN_CUDA_RELAXED_CONSTEXPR "--relaxed-constexpr")
   endif()
 
-  if( (NOT EIGEN_TEST_CXX11) OR (CMAKE_VERSION VERSION_LESS 3.3))
-    set(EIGEN_CUDA_CXX11_FLAG "-std=c++23")
+  if( (NOT EIGEN_TEST_CXX23) OR (CMAKE_VERSION VERSION_LESS 3.3))
+    set(EIGEN_CUDA_CXX23_FLAG "-std=c++23")
   else()
     # otherwise the flag has already been added because of the above set(CMAKE_CXX_STANDARD 23)
-    set(EIGEN_CUDA_CXX11_FLAG "")
+    set(EIGEN_CUDA_CXX23_FLAG "")
   endif()
 
-  set(CUDA_NVCC_FLAGS  "${EIGEN_CUDA_CXX11_FLAG} ${EIGEN_CUDA_RELAXED_CONSTEXPR} -arch compute_${EIGEN_CUDA_COMPUTE_ARCH} -Xcudafe \"--display_error_number\" ${CUDA_NVCC_FLAGS}")
+  set(CUDA_NVCC_FLAGS  "${EIGEN_CUDA_CXX23_FLAG} ${EIGEN_CUDA_RELAXED_CONSTEXPR} -arch compute_${EIGEN_CUDA_COMPUTE_ARCH} -Xcudafe \"--display_error_number\" ${CUDA_NVCC_FLAGS}")
   cuda_include_directories("${CMAKE_CURRENT_BINARY_DIR}" "${CUDA_TOOLKIT_ROOT_DIR}/include")
   set(EIGEN_ADD_TEST_FILENAME_EXTENSION "cu")
 

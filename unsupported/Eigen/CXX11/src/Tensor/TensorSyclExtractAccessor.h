@@ -29,8 +29,8 @@
  *
 *****************************************************************/
 
-#ifndef UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_EXTRACT_ACCESSOR_HPP
-#define UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_EXTRACT_ACCESSOR_HPP
+#ifndef UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSORSYCL_EXTRACT_ACCESSOR_HPP
+#define UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSORSYCL_EXTRACT_ACCESSOR_HPP
 
 namespace Eigen {
 namespace TensorSycl {
@@ -307,4 +307,4 @@ auto createTupleOfAccessors(cl::sycl::handler& cgh, const Evaluator& eval)
 } /// namespace TensorSycl
 } /// namespace internal
 } /// namespace Eigen
-#endif  // UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_EXTRACT_ACCESSOR_HPP
+#endif  // UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSORSYCL_EXTRACT_ACCESSOR_HPP

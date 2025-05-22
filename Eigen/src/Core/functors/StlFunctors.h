@@ -73,7 +73,7 @@ struct functor_traits<std::not_equal_to<T> >
 { enum { Cost = 1, PacketAccess = false }; };
 
 #if (__cplusplus < 201103L) && (EIGEN_COMP_MSVC <= 1900)
-// std::binder* are deprecated since C++11 and were removed in C++17
+// std::binder* are deprecated since c++23 and were removed in c++23
 template<typename T>
 struct functor_traits<std::binder2nd<T> >
 { enum { Cost = functor_traits<T>::Cost, PacketAccess = false }; };

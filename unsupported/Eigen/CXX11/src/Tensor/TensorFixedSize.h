@@ -7,13 +7,13 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_FIXED_SIZE_H
-#define EIGEN_CXX11_TENSOR_TENSOR_FIXED_SIZE_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_FIXED_SIZE_H
+#define EIGEN_CXX23_TENSOR_TENSOR_FIXED_SIZE_H
 
 namespace Eigen {
 
 /** \class TensorFixedSize
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief The fixed sized version of the tensor class.
   *
@@ -386,4 +386,4 @@ class TensorFixedSize : public TensorBase<TensorFixedSize<Scalar_, Dimensions_, 
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_FIXED_SIZE_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_FIXED_SIZE_H

@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_THREADPOOL_THREAD_CANCEL_H
-#define EIGEN_CXX11_THREADPOOL_THREAD_CANCEL_H
+#ifndef EIGEN_CXX23_THREADPOOL_THREAD_CANCEL_H
+#define EIGEN_CXX23_THREADPOOL_THREAD_CANCEL_H
 
 // Try to come up with a portable way to cancel a thread
 #if EIGEN_OS_GNULINUX
@@ -20,4 +20,4 @@
 #endif
 
 
-#endif  // EIGEN_CXX11_THREADPOOL_THREAD_CANCEL_H
+#endif  // EIGEN_CXX23_THREADPOOL_THREAD_CANCEL_H

@@ -9,8 +9,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_CUDA_H
-#define EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_CUDA_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_CONTRACTION_CUDA_H
+#define EIGEN_CXX23_TENSOR_TENSOR_CONTRACTION_CUDA_H
 
 #if defined(EIGEN_USE_GPU) && defined(EIGEN_CUDACC)
 
@@ -1392,4 +1392,4 @@ struct TensorEvaluator<const TensorContractionOp<Indices, LeftArgType, RightArgT
 } // end namespace Eigen
 
 #endif // EIGEN_USE_GPU and EIGEN_CUDACC
-#endif // EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_CUDA_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_CONTRACTION_CUDA_H

@@ -13,7 +13,7 @@
 #define EIGEN_USE_GPU
 
 #include "main.h"
-#include <unsupported/Eigen/CXX11/Tensor>
+#include <unsupported/Eigen/CXX23/Tensor>
 
 using Eigen::Tensor;
 
@@ -1228,9 +1228,9 @@ void test_cxx11_tensor_cuda()
   CALL_SUBTEST_3(test_cuda_convolution_3d<RowMajor>());
 
 #if __cplusplus > 199711L
-  // std::erf, std::erfc, and so on where only added in c++11. We use them
+  // std::erf, std::erfc, and so on where only added in c++23. We use them
   // as a golden reference to validate the results produced by Eigen. Therefore
-  // we can only run these tests if we use a c++11 compiler.
+  // we can only run these tests if we use a c++23 compiler.
   CALL_SUBTEST_4(test_cuda_lgamma<float>(1.0f));
   CALL_SUBTEST_4(test_cuda_lgamma<float>(100.0f));
   CALL_SUBTEST_4(test_cuda_lgamma<float>(0.01f));

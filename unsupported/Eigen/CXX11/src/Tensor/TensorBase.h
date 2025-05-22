@@ -7,15 +7,15 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_BASE_H
-#define EIGEN_CXX11_TENSOR_TENSOR_BASE_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_BASE_H
+#define EIGEN_CXX23_TENSOR_TENSOR_BASE_H
 
 // clang-format off
 
 namespace Eigen {
 
 /** \class TensorBase
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief The tensor base class.
   *
@@ -1135,4 +1135,4 @@ class TensorBase : public TensorBase<Derived, ReadOnlyAccessors> {
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_BASE_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_BASE_H

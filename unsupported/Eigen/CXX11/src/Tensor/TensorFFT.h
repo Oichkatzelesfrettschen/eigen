@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_FFT_H
-#define EIGEN_CXX11_TENSOR_TENSOR_FFT_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_FFT_H
+#define EIGEN_CXX23_TENSOR_TENSOR_FFT_H
 
 // This code requires the ability to initialize arrays of constant
 // values directly inside a class.
@@ -17,7 +17,7 @@
 namespace Eigen {
 
 /** \class TensorFFT
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Tensor FFT class.
   *
@@ -661,4 +661,4 @@ struct TensorEvaluator<const TensorFFTOp<FFT, ArgType, FFTResultType, FFTDir>, D
 #endif  // EIGEN_HAS_CONSTEXPR
 
 
-#endif  // EIGEN_CXX11_TENSOR_TENSOR_FFT_H
+#endif  // EIGEN_CXX23_TENSOR_TENSOR_FFT_H

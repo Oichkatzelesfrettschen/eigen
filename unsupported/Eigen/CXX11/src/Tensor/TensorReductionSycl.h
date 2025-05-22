@@ -19,8 +19,8 @@
  *
 *****************************************************************/
 
-#ifndef UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSOR_REDUCTION_SYCL_HPP
-#define UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSOR_REDUCTION_SYCL_HPP
+#ifndef UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSOR_REDUCTION_SYCL_HPP
+#define UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSOR_REDUCTION_SYCL_HPP
 
 namespace Eigen {
 namespace internal {
@@ -174,4 +174,4 @@ struct InnerReducer<Self, Op, const Eigen::SyclDevice> {
 }  // end namespace internal
 }  // namespace Eigen
 
-#endif  // UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSOR_REDUCTION_SYCL_HPP
+#endif  // UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSOR_REDUCTION_SYCL_HPP

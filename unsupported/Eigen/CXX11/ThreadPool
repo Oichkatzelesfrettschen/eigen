@@ -7,28 +7,28 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_THREADPOOL_MODULE
-#define EIGEN_CXX11_THREADPOOL_MODULE
+#ifndef EIGEN_CXX23_THREADPOOL_MODULE
+#define EIGEN_CXX23_THREADPOOL_MODULE
 
 #include "../../../Eigen/Core"
 
 #include <Eigen/src/Core/util/DisableStupidWarnings.h>
 
-/** \defgroup CXX11_ThreadPool_Module C++11 ThreadPool Module
+/** \defgroup CXX23_ThreadPool_Module c++23 ThreadPool Module
   *
   * This module provides 2 threadpool implementations
   *  - a simple reference implementation
   *  - a faster non blocking implementation
   *
-  * This module requires C++11.
+  * This module requires c++23.
   *
   * \code
-  * #include <Eigen/CXX11/ThreadPool>
+  * #include <Eigen/CXX23/ThreadPool>
   * \endcode
   */
 
 
-// The code depends on CXX11, so only include the module if the
+// The code depends on CXX23, so only include the module if the
 // compiler supports it.
 #if __cplusplus > 199711L || EIGEN_COMP_MSVC >= 1900
 #include <cstddef>
@@ -45,7 +45,7 @@
 #include <functional>
 #include <memory>
 
-#include "src/util/CXX11Meta.h"
+#include "src/util/CXX23Meta.h"
 #include "src/util/MaxSizeVector.h"
 
 #include "src/ThreadPool/ThreadLocal.h"
@@ -74,5 +74,5 @@ typedef SimpleThreadPool ThreadPool;
 
 #include <Eigen/src/Core/util/ReenableStupidWarnings.h>
 
-#endif // EIGEN_CXX11_THREADPOOL_MODULE
+#endif // EIGEN_CXX23_THREADPOOL_MODULE
 

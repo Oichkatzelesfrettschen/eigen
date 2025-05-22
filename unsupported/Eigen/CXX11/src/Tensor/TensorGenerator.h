@@ -7,13 +7,13 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_GENERATOR_H
-#define EIGEN_CXX11_TENSOR_TENSOR_GENERATOR_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_GENERATOR_H
+#define EIGEN_CXX23_TENSOR_TENSOR_GENERATOR_H
 
 namespace Eigen {
 
 /** \class TensorGenerator
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Tensor generator class.
   *
@@ -194,4 +194,4 @@ struct TensorEvaluator<const TensorGeneratorOp<Generator, ArgType>, Device>
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_GENERATOR_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_GENERATOR_H

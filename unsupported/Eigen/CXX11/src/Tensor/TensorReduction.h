@@ -8,8 +8,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_REDUCTION_H
-#define EIGEN_CXX11_TENSOR_TENSOR_REDUCTION_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_REDUCTION_H
+#define EIGEN_CXX23_TENSOR_TENSOR_REDUCTION_H
 
 // clang is incompatible with the CUDA syntax wrt making a kernel a class friend,
 // so we'll use a macro to make clang happy.
@@ -26,7 +26,7 @@ namespace Eigen {
 
 
 /** \class TensorReduction
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Tensor reduction class.
   *
@@ -802,4 +802,4 @@ static const bool RunningOnGPU = false;
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_REDUCTION_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_REDUCTION_H

@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_THREAD_POOL_H
-#define EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_THREAD_POOL_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_CONTRACTION_THREAD_POOL_H
+#define EIGEN_CXX23_TENSOR_TENSOR_CONTRACTION_THREAD_POOL_H
 
 // evaluator for thread pool device
 #ifdef EIGEN_USE_THREADS
@@ -1249,4 +1249,4 @@ struct TensorEvaluator<const TensorContractionOp<Indices, LeftArgType, RightArgT
 } // end namespace Eigen
 
 #endif  // EIGEN_USE_THREADS
-#endif // EIGEN_CXX11_TENSOR_TENSOR_CONTRACTION_THREAD_POOL_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_CONTRACTION_THREAD_POOL_H

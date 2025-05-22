@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_EMULATE_CXX11_META_H
-#define EIGEN_EMULATE_CXX11_META_H
+#ifndef EIGEN_EMULATE_CXX23_META_H
+#define EIGEN_EMULATE_CXX23_META_H
 
 
 
@@ -17,7 +17,7 @@ namespace Eigen {
 namespace internal {
 
 /** \internal
-  * \file CXX11/util/EmulateCXX11Meta.h
+  * \file CXX23/util/EmulateCXX23Meta.h
   * This file emulates a subset of the functionality provided by CXXMeta.h for
   * compilers that don't yet support cxx11 such as nvcc.
   */
@@ -308,4 +308,4 @@ inline bool array_zip_and_reduce(const array<A, N>& a, const array<B, N>& b) {
 
 
 
-#endif  // EIGEN_EMULATE_CXX11_META_H
+#endif  // EIGEN_EMULATE_CXX23_META_H

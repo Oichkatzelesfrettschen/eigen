@@ -7,13 +7,13 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_CUSTOM_OP_H
-#define EIGEN_CXX11_TENSOR_TENSOR_CUSTOM_OP_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_CUSTOM_OP_H
+#define EIGEN_CXX23_TENSOR_TENSOR_CUSTOM_OP_H
 
 namespace Eigen {
 
 /** \class TensorCustomUnaryOp
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Tensor custom class.
   *
@@ -161,7 +161,7 @@ struct TensorEvaluator<const TensorCustomUnaryOp<CustomUnaryFunc, XprType>, Devi
 
 
 /** \class TensorCustomBinaryOp
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Tensor custom class.
   *
@@ -321,4 +321,4 @@ struct TensorEvaluator<const TensorCustomBinaryOp<CustomBinaryFunc, LhsXprType, 
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_CUSTOM_OP_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_CUSTOM_OP_H

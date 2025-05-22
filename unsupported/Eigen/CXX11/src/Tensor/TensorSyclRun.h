@@ -20,8 +20,8 @@
  *
 *****************************************************************/
 
-#ifndef UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_SYCLRUN_HPP
-#define UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_SYCLRUN_HPP
+#ifndef UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSORSYCL_SYCLRUN_HPP
+#define UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSORSYCL_SYCLRUN_HPP
 
 namespace Eigen {
 namespace TensorSycl {
@@ -93,4 +93,4 @@ void run(Expr &expr, Dev &dev) {
 }  // namespace TensorSycl
 }  // namespace Eigen
 
-#endif  // UNSUPPORTED_EIGEN_CXX11_SRC_TENSOR_TENSORSYCL_SYCLRUN_HPP
+#endif  // UNSUPPORTED_EIGEN_CXX23_SRC_TENSOR_TENSORSYCL_SYCLRUN_HPP

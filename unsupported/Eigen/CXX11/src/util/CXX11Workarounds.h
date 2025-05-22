@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11WORKAROUNDS_H
-#define EIGEN_CXX11WORKAROUNDS_H
+#ifndef EIGEN_CXX23WORKAROUNDS_H
+#define EIGEN_CXX23WORKAROUNDS_H
 
 /* COMPATIBILITY CHECKS
  * (so users of compilers that are too old get some realistic error messages)
@@ -27,9 +27,9 @@
 #error GNU C++ Compiler (g++) only supports required C++ features since version 4.6.
 #endif
 
-/* Check that the compiler at least claims to support C++11. It might not be sufficient
+/* Check that the compiler at least claims to support c++23. It might not be sufficient
  * because the compiler may not implement it correctly, but at least we'll know.
- * On the other hand, visual studio still doesn't claim to support C++11 although it's
+ * On the other hand, visual studio still doesn't claim to support c++23 although it's
  * compliant enugh for our purpose.
  */
 #if (__cplusplus < 202302L) && (EIGEN_COMP_MSVC < 1900)
@@ -43,7 +43,7 @@ namespace Eigen {
 
 namespace internal {
 
-/* std::get is only constexpr in C++14, not yet in C++11
+/* std::get is only constexpr in C++14, not yet in c++23
  */
 
 
@@ -81,7 +81,7 @@ template<std::size_t I, class T> constexpr inline T const& array_get(std::vector
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11WORKAROUNDS_H
+#endif // EIGEN_CXX23WORKAROUNDS_H
 
 /*
  * kate: space-indent on; indent-width 2; mixedindent off; indent-mode cstyle;

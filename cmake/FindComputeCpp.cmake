@@ -233,7 +233,7 @@ function(__build_spir targetName sourceFile binaryDir fileCounter)
   # Disable GCC dual ABI on GCC 5.1 and higher
   if(COMPUTECPP_DISABLE_GCC_DUAL_ABI)
     set_property(TARGET ${targetName} APPEND PROPERTY COMPILE_DEFINITIONS
-      "_GLIBCXX_USE_CXX11_ABI=0")
+      "_GLIBCXX_USE_CXX23_ABI=0")
   endif()
 
 endfunction()

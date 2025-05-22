@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_FORWARD_DECLARATIONS_H
-#define EIGEN_CXX11_TENSOR_TENSOR_FORWARD_DECLARATIONS_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_FORWARD_DECLARATIONS_H
+#define EIGEN_CXX23_TENSOR_TENSOR_FORWARD_DECLARATIONS_H
 
 namespace Eigen {
 
@@ -135,4 +135,4 @@ class TensorExecutor;
 
 }  // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_FORWARD_DECLARATIONS_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_FORWARD_DECLARATIONS_H

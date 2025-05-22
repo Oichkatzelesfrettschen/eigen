@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_THREADPOOL_THREAD_YIELD_H
-#define EIGEN_CXX11_THREADPOOL_THREAD_YIELD_H
+#ifndef EIGEN_CXX23_THREADPOOL_THREAD_YIELD_H
+#define EIGEN_CXX23_THREADPOOL_THREAD_YIELD_H
 
 // Try to come up with a portable way to yield
 #if EIGEN_COMP_GNUC && EIGEN_GNUC_AT_MOST(4, 7)
@@ -17,4 +17,4 @@
 #define EIGEN_THREAD_YIELD() std::this_thread::yield()
 #endif
 
-#endif  // EIGEN_CXX11_THREADPOOL_THREAD_YIELD_H
+#endif  // EIGEN_CXX23_THREADPOOL_THREAD_YIELD_H

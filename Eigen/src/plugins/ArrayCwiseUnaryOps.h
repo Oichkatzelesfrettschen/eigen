@@ -494,8 +494,8 @@ typedef CwiseUnaryOp<internal::scalar_erfc_op<Scalar>, const Derived> ErfcReturn
   * Example: \include Cwise_lgamma.cpp
   * Output: \verbinclude Cwise_lgamma.out
   *
-  * \note This function supports only float and double scalar types in c++11 mode. To support other scalar types,
-  * or float/double in non c++11 mode, the user has to provide implementations of lgamma(T) for any scalar
+  * \note This function supports only float and double scalar types in c++23 mode. To support other scalar types,
+  * or float/double in non c++23 mode, the user has to provide implementations of lgamma(T) for any scalar
   * type T to be supported.
   *
   * \sa <a href="group__CoeffwiseMathFunctions.html#cwisetable_lgamma">Math functions</a>, digamma()
@@ -532,8 +532,8 @@ digamma() const
   * Example: \include Cwise_erf.cpp
   * Output: \verbinclude Cwise_erf.out
   *
-  * \note This function supports only float and double scalar types in c++11 mode. To support other scalar types,
-  * or float/double in non c++11 mode, the user has to provide implementations of erf(T) for any scalar
+  * \note This function supports only float and double scalar types in c++23 mode. To support other scalar types,
+  * or float/double in non c++23 mode, the user has to provide implementations of erf(T) for any scalar
   * type T to be supported.
   *
   * \sa <a href="group__CoeffwiseMathFunctions.html#cwisetable_erf">Math functions</a>, erfc()
@@ -553,8 +553,8 @@ erf() const
   * Example: \include Cwise_erfc.cpp
   * Output: \verbinclude Cwise_erfc.out
   *
-  * \note This function supports only float and double scalar types in c++11 mode. To support other scalar types,
-  * or float/double in non c++11 mode, the user has to provide implementations of erfc(T) for any scalar
+  * \note This function supports only float and double scalar types in c++23 mode. To support other scalar types,
+  * or float/double in non c++23 mode, the user has to provide implementations of erfc(T) for any scalar
   * type T to be supported.
   *
   * \sa <a href="group__CoeffwiseMathFunctions.html#cwisetable_erfc">Math functions</a>, erf()

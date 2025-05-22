@@ -7,13 +7,13 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_STRIDING_H
-#define EIGEN_CXX11_TENSOR_TENSOR_STRIDING_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_STRIDING_H
+#define EIGEN_CXX23_TENSOR_TENSOR_STRIDING_H
 
 namespace Eigen {
 
 /** \class TensorStriding
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Tensor striding class.
   *
@@ -346,4 +346,4 @@ struct TensorEvaluator<TensorStridingOp<Strides, ArgType>, Device>
 
 } // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_STRIDING_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_STRIDING_H

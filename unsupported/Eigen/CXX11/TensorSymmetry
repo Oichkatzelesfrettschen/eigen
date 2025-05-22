@@ -7,16 +7,16 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSORSYMMETRY_MODULE
-#define EIGEN_CXX11_TENSORSYMMETRY_MODULE
+#ifndef EIGEN_CXX23_TENSORSYMMETRY_MODULE
+#define EIGEN_CXX23_TENSORSYMMETRY_MODULE
 
-#include <unsupported/Eigen/CXX11/Tensor>
+#include <unsupported/Eigen/CXX23/Tensor>
 
 #include <Eigen/src/Core/util/DisableStupidWarnings.h>
 
-#include "src/util/CXX11Meta.h"
+#include "src/util/CXX23Meta.h"
 
-/** \defgroup CXX11_TensorSymmetry_Module Tensor Symmetry Module
+/** \defgroup CXX23_TensorSymmetry_Module Tensor Symmetry Module
   *
   * This module provides a classes that allow for the definition of
   * symmetries w.r.t. tensor indices.
@@ -35,7 +35,7 @@
 
 #include <Eigen/src/Core/util/ReenableStupidWarnings.h>
 
-#endif // EIGEN_CXX11_TENSORSYMMETRY_MODULE
+#endif // EIGEN_CXX23_TENSORSYMMETRY_MODULE
 
 /*
  * kate: space-indent on; indent-width 2; mixedindent off; indent-mode cstyle;

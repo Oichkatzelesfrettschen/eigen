@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef EIGEN_CXX11_TENSOR_TENSOR_SCAN_H
-#define EIGEN_CXX11_TENSOR_TENSOR_SCAN_H
+#ifndef EIGEN_CXX23_TENSOR_TENSOR_SCAN_H
+#define EIGEN_CXX23_TENSOR_TENSOR_SCAN_H
 
 namespace Eigen {
 
@@ -42,7 +42,7 @@ struct nested<TensorScanOp<Op, XprType>, 1,
 } // end namespace internal
 
 /** \class TensorScan
-  * \ingroup CXX11_Tensor_Module
+  * \ingroup CXX23_Tensor_Module
   *
   * \brief Tensor scan class.
   */
@@ -285,4 +285,4 @@ struct ScanLauncher<Self, Reducer, GpuDevice> {
 
 }  // end namespace Eigen
 
-#endif  // EIGEN_CXX11_TENSOR_TENSOR_SCAN_H
+#endif  // EIGEN_CXX23_TENSOR_TENSOR_SCAN_H

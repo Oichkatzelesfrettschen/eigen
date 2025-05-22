@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#if defined(EIGEN_USE_THREADS) && !defined(EIGEN_CXX11_TENSOR_TENSOR_DEVICE_THREAD_POOL_H)
-#define EIGEN_CXX11_TENSOR_TENSOR_DEVICE_THREAD_POOL_H
+#if defined(EIGEN_USE_THREADS) && !defined(EIGEN_CXX23_TENSOR_TENSOR_DEVICE_THREAD_POOL_H)
+#define EIGEN_CXX23_TENSOR_TENSOR_DEVICE_THREAD_POOL_H
 
 namespace Eigen {
 
@@ -269,4 +269,4 @@ struct ThreadPoolDevice {
 
 }  // end namespace Eigen
 
-#endif // EIGEN_CXX11_TENSOR_TENSOR_DEVICE_THREAD_POOL_H
+#endif // EIGEN_CXX23_TENSOR_TENSOR_DEVICE_THREAD_POOL_H
