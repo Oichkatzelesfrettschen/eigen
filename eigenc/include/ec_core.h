@@ -22,6 +22,18 @@ typedef struct {
     double *data;
 } ec_Matrixf64;
 
+#ifndef EC_RESTRICT
+#  ifdef __cplusplus
+#    define EC_RESTRICT
+#  else
+#    define EC_RESTRICT restrict
+#  endif
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 static inline void ec_addf32(const ec_Matrixf32 *a, const ec_Matrixf32 *b, ec_Matrixf32 *out) {
     assert(a->rows == b->rows && a->cols == b->cols && a->rows == out->rows && a->cols == out->cols);
     size_t n = a->rows * a->cols;
@@ -99,5 +111,9 @@ static inline void ec_addf64(const ec_Matrixf64 *a, const ec_Matrixf64 *b, ec_Ma
         out->data[i] = a->data[i] + b->data[i];
 #endif
 }
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif
 
 #endif /* EC_CORE_H */
