@@ -117,6 +117,7 @@ done
 for pkg in \
   docker.io podman buildah virt-manager libvirt-daemon-system qemu-kvm \
   gdb lldb perf gcovr lcov bcc-tools bpftrace \
+  afl afl++ honggfuzz \
   openmpi-bin libopenmpi-dev mpich; do
   apt_pin_install "$pkg"
 done
