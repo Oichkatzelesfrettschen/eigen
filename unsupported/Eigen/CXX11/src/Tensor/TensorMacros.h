@@ -39,17 +39,8 @@
   #endif
 #endif
 #endif
-
 #define EIGEN_SFINAE_ENABLE_IF( __condition__ ) \
     typename internal::enable_if< ( __condition__ ) , int >::type = 0
-
-
-#if EIGEN_HAS_CONSTEXPR
-#define EIGEN_CONSTEXPR constexpr
-#else
-#define EIGEN_CONSTEXPR
-#endif
-
 
 #if EIGEN_OS_WIN || EIGEN_OS_WIN64
 #define EIGEN_SLEEP(n) Sleep(n)
