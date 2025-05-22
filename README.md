@@ -71,4 +71,18 @@ cd go && go test ./...
 The convenience script `porter/build_all.sh` will regenerate headers and run the
 entire suite including the Go tests.
 
+## Development Environment
+
+Run `./setup.sh` to install the toolchain including GCC, Clang/LLVM, Meson and
+pre-commit.  After installation you can enable the git hooks with:
+
+```bash
+pre-commit install
+pre-commit run --all-files
+```
+
+Clang-Tidy configurations for both C23 and C++17 live in `.clang-tidy-c23` and
+`.clang-tidy`.  The project builds with either GCC or Clang; the test scripts
+use whichever compiler is available.
+
 

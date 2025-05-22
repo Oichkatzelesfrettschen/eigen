@@ -132,6 +132,8 @@ unzip -d /usr/local /tmp/protoc.zip
 rm /tmp/protoc.zip
 
 command -v gmake >/dev/null 2>&1 || ln -s "$(command -v make)" /usr/local/bin/gmake
+command -v clang-tidy >/dev/null 2>&1 || ln -s "$(command -v clang-tidy-17)" /usr/local/bin/clang-tidy
+command -v clang-format >/dev/null 2>&1 || ln -s "$(command -v clang-format-17)" /usr/local/bin/clang-format
 
 apt-get clean
 rm -rf /var/lib/apt/lists/*
