@@ -216,9 +216,21 @@ class TensorBase<Derived, ReadOnlyAccessors>
     }
 
     EIGEN_DEVICE_FUNC
-    EIGEN_STRONG_INLINE const TensorCwiseUnaryOp<internal::bind2nd_op<internal::scalar_pow_op<Scalar,Scalar> >, const Derived>
+    EIGEN_STRONG_INLINE const TensorCwiseUnaryOp<struct PowWithConst, const Derived>
     pow(Scalar exponent) const {
-      return unaryExpr(internal::bind2nd_op<internal::scalar_pow_op<Scalar,Scalar> >(exponent));
+      struct PowWithConst {
+        Scalar c;
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Scalar operator()(const Scalar& a) const {
+          auto f = [this](const Scalar& x) { return internal::scalar_pow_op<Scalar,Scalar>()(x, c); };
+          return f(a);
+        }
+        template<typename Packet>
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Packet packetOp(const Packet& a) const {
+          internal::scalar_pow_op<Scalar,Scalar> op;
+          return op.packetOp(a, internal::pset1<Packet>(c));
+        }
+      };
+      return unaryExpr(PowWithConst{exponent});
     }
 
     EIGEN_DEVICE_FUNC
@@ -234,56 +246,152 @@ class TensorBase<Derived, ReadOnlyAccessors>
     }
 
     EIGEN_DEVICE_FUNC
-    EIGEN_STRONG_INLINE const TensorCwiseUnaryOp<internal::bind2nd_op<internal::scalar_sum_op<Scalar,Scalar> >, const Derived>
+    EIGEN_STRONG_INLINE const TensorCwiseUnaryOp<struct PlusRight, const Derived>
     operator+ (Scalar rhs) const {
-      return unaryExpr(internal::bind2nd_op<internal::scalar_sum_op<Scalar,Scalar> >(rhs));
+      struct PlusRight {
+        Scalar c;
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Scalar operator()(const Scalar& a) const {
+          auto f = [this](const Scalar& x) { return internal::scalar_sum_op<Scalar,Scalar>()(x, c); };
+          return f(a);
+        }
+        template<typename Packet>
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Packet packetOp(const Packet& a) const {
+          internal::scalar_sum_op<Scalar,Scalar> op;
+          return op.packetOp(a, internal::pset1<Packet>(c));
+        }
+      };
+      return unaryExpr(PlusRight{rhs});
     }
 
     EIGEN_DEVICE_FUNC
     EIGEN_STRONG_INLINE friend
-    const TensorCwiseUnaryOp<internal::bind1st_op<internal::scalar_sum_op<Scalar> >, const Derived>
+    const TensorCwiseUnaryOp<struct PlusLeft, const Derived>
     operator+ (Scalar lhs, const Derived& rhs) {
-      return rhs.unaryExpr(internal::bind1st_op<internal::scalar_sum_op<Scalar> >(lhs));
+      struct PlusLeft {
+        Scalar c;
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Scalar operator()(const Scalar& b) const {
+          auto f = std::bind_front(internal::scalar_sum_op<Scalar>(), c);
+          return f(b);
+        }
+        template<typename Packet>
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Packet packetOp(const Packet& b) const {
+          internal::scalar_sum_op<Scalar> op;
+          return op.packetOp(internal::pset1<Packet>(c), b);
+        }
+      };
+      return rhs.unaryExpr(PlusLeft{lhs});
     }
 
     EIGEN_DEVICE_FUNC
-    EIGEN_STRONG_INLINE const TensorCwiseUnaryOp<internal::bind2nd_op<internal::scalar_difference_op<Scalar,Scalar> >, const Derived>
+    EIGEN_STRONG_INLINE const TensorCwiseUnaryOp<struct MinusRight, const Derived>
     operator- (Scalar rhs) const {
       EIGEN_STATIC_ASSERT((NumTraits<Scalar>::IsSigned || internal::is_same<Scalar, const std::complex<float> >::value), YOU_MADE_A_PROGRAMMING_MISTAKE);
-      return unaryExpr(internal::bind2nd_op<internal::scalar_difference_op<Scalar,Scalar> >(rhs));
+      struct MinusRight {
+        Scalar c;
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Scalar operator()(const Scalar& a) const {
+          auto f = [this](const Scalar& x) { return internal::scalar_difference_op<Scalar,Scalar>()(x, c); };
+          return f(a);
+        }
+        template<typename Packet>
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Packet packetOp(const Packet& a) const {
+          internal::scalar_difference_op<Scalar,Scalar> op;
+          return op.packetOp(a, internal::pset1<Packet>(c));
+        }
+      };
+      return unaryExpr(MinusRight{rhs});
     }
 
     EIGEN_DEVICE_FUNC
     EIGEN_STRONG_INLINE friend
-    const TensorCwiseUnaryOp<internal::bind1st_op<internal::scalar_difference_op<Scalar> >, const Derived>
+    const TensorCwiseUnaryOp<struct MinusLeft, const Derived>
     operator- (Scalar lhs, const Derived& rhs) {
-      return rhs.unaryExpr(internal::bind1st_op<internal::scalar_difference_op<Scalar> >(lhs));
+      struct MinusLeft {
+        Scalar c;
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Scalar operator()(const Scalar& b) const {
+          auto f = std::bind_front(internal::scalar_difference_op<Scalar>(), c);
+          return f(b);
+        }
+        template<typename Packet>
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Packet packetOp(const Packet& b) const {
+          internal::scalar_difference_op<Scalar> op;
+          return op.packetOp(internal::pset1<Packet>(c), b);
+        }
+      };
+      return rhs.unaryExpr(MinusLeft{lhs});
     }
 
     EIGEN_DEVICE_FUNC
-    EIGEN_STRONG_INLINE const TensorCwiseUnaryOp<internal::bind2nd_op<internal::scalar_product_op<Scalar,Scalar> >, const Derived>
+    EIGEN_STRONG_INLINE const TensorCwiseUnaryOp<struct TimesRight, const Derived>
     operator* (Scalar rhs) const {
-      return unaryExpr(internal::bind2nd_op<internal::scalar_product_op<Scalar,Scalar> >(rhs));
+      struct TimesRight {
+        Scalar c;
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Scalar operator()(const Scalar& a) const {
+          auto f = [this](const Scalar& x) { return internal::scalar_product_op<Scalar,Scalar>()(x, c); };
+          return f(a);
+        }
+        template<typename Packet>
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Packet packetOp(const Packet& a) const {
+          internal::scalar_product_op<Scalar,Scalar> op;
+          return op.packetOp(a, internal::pset1<Packet>(c));
+        }
+      };
+      return unaryExpr(TimesRight{rhs});
     }
 
     EIGEN_DEVICE_FUNC
     EIGEN_STRONG_INLINE friend
-    const TensorCwiseUnaryOp<internal::bind1st_op<internal::scalar_product_op<Scalar> >, const Derived>
+    const TensorCwiseUnaryOp<struct TimesLeft, const Derived>
     operator* (Scalar lhs, const Derived& rhs) {
-      return rhs.unaryExpr(internal::bind1st_op<internal::scalar_product_op<Scalar> >(lhs));
+      struct TimesLeft {
+        Scalar c;
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Scalar operator()(const Scalar& b) const {
+          auto f = std::bind_front(internal::scalar_product_op<Scalar>(), c);
+          return f(b);
+        }
+        template<typename Packet>
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Packet packetOp(const Packet& b) const {
+          internal::scalar_product_op<Scalar> op;
+          return op.packetOp(internal::pset1<Packet>(c), b);
+        }
+      };
+      return rhs.unaryExpr(TimesLeft{lhs});
     }
 
     EIGEN_DEVICE_FUNC
-    EIGEN_STRONG_INLINE const TensorCwiseUnaryOp<internal::bind2nd_op<internal::scalar_quotient_op<Scalar,Scalar> >, const Derived>
+    EIGEN_STRONG_INLINE const TensorCwiseUnaryOp<struct DivRight, const Derived>
     operator/ (Scalar rhs) const {
-      return unaryExpr(internal::bind2nd_op<internal::scalar_quotient_op<Scalar,Scalar> >(rhs));
+      struct DivRight {
+        Scalar c;
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Scalar operator()(const Scalar& a) const {
+          auto f = [this](const Scalar& x) { return internal::scalar_quotient_op<Scalar,Scalar>()(x, c); };
+          return f(a);
+        }
+        template<typename Packet>
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Packet packetOp(const Packet& a) const {
+          internal::scalar_quotient_op<Scalar,Scalar> op;
+          return op.packetOp(a, internal::pset1<Packet>(c));
+        }
+      };
+      return unaryExpr(DivRight{rhs});
     }
 
     EIGEN_DEVICE_FUNC
     EIGEN_STRONG_INLINE friend
-    const TensorCwiseUnaryOp<internal::bind1st_op<internal::scalar_quotient_op<Scalar> >, const Derived>
+    const TensorCwiseUnaryOp<struct DivLeft, const Derived>
     operator/ (Scalar lhs, const Derived& rhs) {
-      return rhs.unaryExpr(internal::bind1st_op<internal::scalar_quotient_op<Scalar> >(lhs));
+      struct DivLeft {
+        Scalar c;
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Scalar operator()(const Scalar& b) const {
+          auto f = std::bind_front(internal::scalar_quotient_op<Scalar>(), c);
+          return f(b);
+        }
+        template<typename Packet>
+        EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Packet packetOp(const Packet& b) const {
+          internal::scalar_quotient_op<Scalar> op;
+          return op.packetOp(internal::pset1<Packet>(c), b);
+        }
+      };
+      return rhs.unaryExpr(DivLeft{lhs});
     }
 
     EIGEN_DEVICE_FUNC
