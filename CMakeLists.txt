@@ -1,4 +1,6 @@
 project(Eigen3)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 cmake_minimum_required(VERSION 2.8.5)
 
@@ -149,7 +151,7 @@ if(NOT MSVC)
   ei_add_cxx_compiler_flag("-Wshorten-64-to-32")
   ei_add_cxx_compiler_flag("-Wlogical-op")
   ei_add_cxx_compiler_flag("-Wenum-conversion")
-  ei_add_cxx_compiler_flag("-Wc++11-extensions")
+  ei_add_cxx_compiler_flag("-Wc++14-extensions")
   ei_add_cxx_compiler_flag("-Wdouble-promotion")
 #  ei_add_cxx_compiler_flag("-Wconversion")
   
@@ -368,7 +370,7 @@ if(EIGEN_TEST_NO_EXCEPTIONS)
   message(STATUS "Disabling exceptions in tests/examples")
 endif()
 
-option(EIGEN_TEST_CXX11 "Enable testing with C++11 and C++11 features (e.g. Tensor module)." OFF)
+option(EIGEN_TEST_CXX11 "Enable testing with C++14 and C++14 features (e.g. Tensor module)." OFF)
 
 set(EIGEN_CUDA_COMPUTE_ARCH 30 CACHE STRING "The CUDA compute architecture level to target when compiling CUDA code")
 

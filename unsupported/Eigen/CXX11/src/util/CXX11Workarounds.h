@@ -32,11 +32,11 @@
  * On the other hand, visual studio still doesn't claim to support C++11 although it's
  * compliant enugh for our purpose.
  */
-#if (__cplusplus <= 199711L) && (EIGEN_COMP_MSVC < 1900)
+#if (__cplusplus < 201402L) && (EIGEN_COMP_MSVC < 1900)
 #if defined(__GNUC__) && !defined(__clang__) && !defined(__INTEL_COMPILER)
 #pragma GCC diagnostic error "-Wfatal-errors"
 #endif
-#error This library needs at least a C++11 compliant compiler. If you use g++/clang, please enable the -std=c++11 compiler flag. (-std=c++0x on older versions.)
+#error This library needs at least a C++14 compliant compiler. If you use g++/clang, please enable the -std=c++14 compiler flag. (-std=c++0x on older versions.)
 #endif
 
 namespace Eigen {
