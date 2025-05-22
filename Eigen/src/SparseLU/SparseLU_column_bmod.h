@@ -121,7 +121,7 @@ Index SparseLUImpl<Scalar,StorageIndex>::column_bmod(const Index jcol, const Ind
     new_next += offset;
   while (new_next > glu.nzlumax )
   {
-    mem = memXpand<ScalarVector>(glu.lusup, glu.nzlumax, nextlu, LUSUP, glu.num_expansions);  
+    mem = memXpand<ScalarVector>(glu.lusup, glu.nzlumax, nextlu, MemType::LUSUP, glu.num_expansions);
     if (mem) return mem; 
   }
   

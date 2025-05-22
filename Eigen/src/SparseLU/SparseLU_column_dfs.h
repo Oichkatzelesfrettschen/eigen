@@ -50,7 +50,7 @@ struct column_dfs_traits : no_assignment_operator
   void mem_expand(IndexVector& lsub, Index& nextl, Index chmark)
   {
     if (nextl >= m_glu.nzlmax)
-      m_luImpl.memXpand(lsub, m_glu.nzlmax, nextl, LSUB, m_glu.num_expansions); 
+      m_luImpl.memXpand(lsub, m_glu.nzlmax, nextl, MemType::LSUB, m_glu.num_expansions);
     if (chmark != (m_jcol-1)) m_jsuper_ref = emptyIdxLU;
   }
   enum { ExpandMem = true };

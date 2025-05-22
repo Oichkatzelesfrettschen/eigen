@@ -209,7 +209,7 @@ template <typename VectorType>
 Index SparseLUImpl<Scalar,StorageIndex>::memXpand(VectorType& vec, Index& maxlen, Index nbElts, MemType memtype, Index& num_expansions)
 {
   Index failed_size; 
-  if (memtype == USUB)
+  if (memtype == MemType::USUB)
      failed_size = this->expand<VectorType>(vec, maxlen, nbElts, 1, num_expansions);
   else
     failed_size = this->expand<VectorType>(vec, maxlen, nbElts, 0, num_expansions);
