@@ -17,6 +17,19 @@ cp /tmp/c_out.txt /tmp/c_out_host.txt
 
 echo "\xE2\x9C\x93  native EigenC vs Eigen checks passed"
 
+# 32-bit x86 build using -m32 if available
+if echo 'int main(){}' | gcc -m32 -xc -o /tmp/ccheck32 - >/dev/null 2>&1; then
+  rm /tmp/ccheck32
+  gcc -m32 -std=c23 -I"${ROOT_DIR}/eigenc/include" "${ROOT_DIR}/tests/core/test_core.c" -o /tmp/ec_test_x86 \
+    || gcc -m32 -std=c2x -I"${ROOT_DIR}/eigenc/include" "${ROOT_DIR}/tests/core/test_core.c" -o /tmp/ec_test_x86
+  /tmp/ec_test_x86
+  mv /tmp/c_out.txt /tmp/c_out_x86.txt
+  diff -u /tmp/c_out_host.txt /tmp/c_out_x86.txt
+  echo "\xE2\x9C\x93  cross-compiled EigenC checks passed (x86-32)"
+else
+  echo "Skipping x86 32-bit cross-compile test: toolchain not found" >&2
+fi
+
 # Cross-compile for PowerPC and run via qemu if toolchain present
 if command -v powerpc-linux-gnu-gcc >/dev/null && command -v qemu-ppc-static >/dev/null; then
   powerpc-linux-gnu-gcc -static -std=c23 -I"${ROOT_DIR}/eigenc/include" "${ROOT_DIR}/tests/core/test_core.c" -o /tmp/ec_test_ppc \

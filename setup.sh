@@ -56,9 +56,16 @@ for pkg in \
   apt_pin_install "$pkg"
 done
 
+# libraries for 32-bit builds
+for pkg in \
+  gcc-multilib g++-multilib libc6-dev-i386 libstdc++6:i386; do
+  apt_pin_install "$pkg" || true
+done
+
 for pkg in \
   bcc bin86 elks-libc \
   gcc-ia64-linux-gnu g++-ia64-linux-gnu \
+  gcc-x86-64-linux-gnu g++-x86-64-linux-gnu \
   gcc-i686-linux-gnu g++-i686-linux-gnu \
   gcc-aarch64-linux-gnu g++-aarch64-linux-gnu \
   gcc-arm-linux-gnueabi g++-arm-linux-gnueabi \
