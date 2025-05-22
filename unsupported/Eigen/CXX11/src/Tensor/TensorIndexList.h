@@ -674,47 +674,47 @@ struct index_pair_second_statically_eq_impl {
 namespace Eigen {
 namespace internal {
 template <typename T>
-static EIGEN_DEVICE_FUNC EIGEN_CONSTEXPR bool index_known_statically(DenseIndex i) {
+static EIGEN_DEVICE_FUNC constexpr bool index_known_statically(DenseIndex i) {
   return index_known_statically_impl<T>::run(i);
 }
 
 template <typename T>
-static EIGEN_DEVICE_FUNC EIGEN_CONSTEXPR bool all_indices_known_statically() {
+static EIGEN_DEVICE_FUNC constexpr bool all_indices_known_statically() {
   return all_indices_known_statically_impl<T>::run();
 }
 
 template <typename T>
-static EIGEN_DEVICE_FUNC EIGEN_CONSTEXPR bool indices_statically_known_to_increase() {
+static EIGEN_DEVICE_FUNC constexpr bool indices_statically_known_to_increase() {
   return indices_statically_known_to_increase_impl<T>::run();
 }
 
 template <typename T>
-static EIGEN_DEVICE_FUNC EIGEN_CONSTEXPR bool index_statically_eq(DenseIndex i, DenseIndex value) {
+static EIGEN_DEVICE_FUNC constexpr bool index_statically_eq(DenseIndex i, DenseIndex value) {
   return index_statically_eq_impl<T>::run(i, value);
 }
 
 template <typename T>
-static EIGEN_DEVICE_FUNC EIGEN_CONSTEXPR bool index_statically_ne(DenseIndex i, DenseIndex value) {
+static EIGEN_DEVICE_FUNC constexpr bool index_statically_ne(DenseIndex i, DenseIndex value) {
   return index_statically_ne_impl<T>::run(i, value);
 }
 
 template <typename T>
-static EIGEN_DEVICE_FUNC EIGEN_CONSTEXPR bool index_statically_gt(DenseIndex i, DenseIndex value) {
+static EIGEN_DEVICE_FUNC constexpr bool index_statically_gt(DenseIndex i, DenseIndex value) {
   return index_statically_gt_impl<T>::run(i, value);
 }
 
 template <typename T>
-static EIGEN_DEVICE_FUNC EIGEN_CONSTEXPR bool index_statically_lt(DenseIndex i, DenseIndex value) {
+static EIGEN_DEVICE_FUNC constexpr bool index_statically_lt(DenseIndex i, DenseIndex value) {
   return index_statically_lt_impl<T>::run(i, value);
 }
 
 template <typename T>
-static EIGEN_DEVICE_FUNC EIGEN_CONSTEXPR bool index_pair_first_statically_eq(DenseIndex i, DenseIndex value) {
+static EIGEN_DEVICE_FUNC constexpr bool index_pair_first_statically_eq(DenseIndex i, DenseIndex value) {
   return index_pair_first_statically_eq_impl<T>::run(i, value);
 }
 
 template <typename T>
-static EIGEN_DEVICE_FUNC EIGEN_CONSTEXPR bool index_pair_second_statically_eq(DenseIndex i, DenseIndex value) {
+static EIGEN_DEVICE_FUNC constexpr bool index_pair_second_statically_eq(DenseIndex i, DenseIndex value) {
   return index_pair_second_statically_eq_impl<T>::run(i, value);
 }
 

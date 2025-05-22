@@ -116,10 +116,10 @@ template <typename U, typename V> struct Tuple {
   typedef U first_type;
   typedef V second_type;
 
-  EIGEN_CONSTEXPR EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
+  constexpr EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
   Tuple() : first(), second() {}
 
-  EIGEN_CONSTEXPR EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
+  constexpr EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
   Tuple(const U& f, const V& s) : first(f), second(s) {}
 
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
@@ -141,13 +141,13 @@ template <typename U, typename V> struct Tuple {
 };
 
 template <typename U, typename V>
-EIGEN_CONSTEXPR EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
+constexpr EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
 bool operator==(const Tuple<U, V>& x, const Tuple<U, V>& y) {
   return (x.first == y.first && x.second == y.second);
 }
 
 template <typename U, typename V>
-EIGEN_CONSTEXPR EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
+constexpr EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
 bool operator!=(const Tuple<U, V>& x, const Tuple<U, V>& y) {
   return !(x == y);
 }
@@ -155,8 +155,8 @@ bool operator!=(const Tuple<U, V>& x, const Tuple<U, V>& y) {
 
 // Can't use std::pairs on cuda devices
 template <typename Idx> struct IndexPair {
-  EIGEN_CONSTEXPR EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE IndexPair() : first(0), second(0) {}
-  EIGEN_CONSTEXPR EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE IndexPair(Idx f, Idx s) : first(f), second(s) {}
+  constexpr EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE IndexPair() : first(0), second(0) {}
+  constexpr EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE IndexPair(Idx f, Idx s) : first(f), second(s) {}
 
   EIGEN_DEVICE_FUNC void set(IndexPair<Idx> val) {
     first = val.first;
@@ -172,19 +172,19 @@ template <typename Idx> struct IndexPair {
 namespace internal {
 
   template<typename IndexType, typename Index, Index... Is>
-  EIGEN_CONSTEXPR EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
+  constexpr EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
   array<Index, sizeof...(Is)> customIndices2Array(IndexType& idx, numeric_list<Index, Is...>) {
     return { idx[Is]... };
   }
   template<typename IndexType, typename Index>
-  EIGEN_CONSTEXPR EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
+  constexpr EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
   array<Index, 0> customIndices2Array(IndexType&, numeric_list<Index>) {
     return array<Index, 0>();
   }
 
   /** Make an array (for index/dimensions) out of a custom index */
   template<typename Index, std::size_t NumIndices, typename IndexType>
-  EIGEN_CONSTEXPR EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
+  constexpr EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
   array<Index, NumIndices> customIndices2Array(IndexType& idx) {
     return customIndices2Array(idx, typename gen_numeric_list<Index, NumIndices>::type{});
   }

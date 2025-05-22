@@ -448,24 +448,9 @@
 #endif
 #endif
 
-// Does the compiler fully support const expressions? (as in c++14)
+// Constexpr support is required by Eigen's C++14 minimum baseline
 #ifndef EIGEN_HAS_CONSTEXPR
-
-#if defined(EIGEN_CUDACC)
-// Const expressions are supported provided that c++11 is enabled and we're using either clang or nvcc 7.5 or above
-#if EIGEN_MAX_CPP_VER>=14 && (__cplusplus > 199711L && (EIGEN_COMP_CLANG || EIGEN_CUDACC_VER >= 70500))
-  #define EIGEN_HAS_CONSTEXPR 1
-#endif
-#elif EIGEN_MAX_CPP_VER>=14 && (__has_feature(cxx_relaxed_constexpr) || (defined(__cplusplus) && __cplusplus >= 201402L) || \
-  (EIGEN_GNUC_AT_LEAST(4,8) && (__cplusplus > 199711L)) || \
-  (EIGEN_COMP_CLANG >= 306 && (__cplusplus > 199711L)))
 #define EIGEN_HAS_CONSTEXPR 1
-#endif
-
-#ifndef EIGEN_HAS_CONSTEXPR
-#define EIGEN_HAS_CONSTEXPR 0
-#endif
-
 #endif
 
 // Does the compiler support C++11 math?
