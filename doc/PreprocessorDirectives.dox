@@ -76,8 +76,6 @@ functions by defining EIGEN_HAS_C99_MATH=1.
    Automatic detection disabled if EIGEN_MAX_CPP_VER<14.
  - \b EIGEN_HAS_CXX11_CONTAINERS - defines whether STL's containers follows C++11 specifications
    Automatic detection disabled if EIGEN_MAX_CPP_VER<11.
- - \b EIGEN_HAS_CXX11_NOEXCEPT - defines whether noexcept is supported
-   Automatic detection disabled if EIGEN_MAX_CPP_VER<11.
 
 \section TopicPreprocessorDirectivesAssertions Assertions
 
