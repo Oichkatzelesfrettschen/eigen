@@ -128,7 +128,7 @@ struct PacketConverter<TensorEvaluator, SrcPacket, TgtPacket, 1, 2> {
       typedef typename internal::unpacket_traits<SrcPacket>::type SrcType;
       typedef typename internal::unpacket_traits<TgtPacket>::type TgtType;
       internal::scalar_cast_op<SrcType, TgtType> converter;
-      EIGEN_ALIGN_MAX typename internal::unpacket_traits<TgtPacket>::type values[TgtPacketSize];
+      alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) typename internal::unpacket_traits<TgtPacket>::type values[TgtPacketSize];
       for (int i = 0; i < TgtPacketSize; ++i) {
         values[i] = converter(m_impl.coeff(index+i));
       }
@@ -255,7 +255,7 @@ struct TensorEvaluator<const TensorConversionOp<TargetType, ArgType>, Device>
   struct PacketConv {
     static EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE PacketReturnType run(const TensorEvaluator<ArgType, Device>& impl, Index index) {
       internal::scalar_cast_op<SrcType, TargetType> converter;
-      EIGEN_ALIGN_MAX typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
+      alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
       for (int i = 0; i < PacketSize; ++i) {
         values[i] = converter(impl.coeff(index+i));
       }

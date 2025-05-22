@@ -162,7 +162,7 @@ template <typename T> class UniformRandomGenerator {
   template<typename Packet, typename Index> EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
   Packet packetOp(Index i) const {
     const int packetSize = internal::unpacket_traits<Packet>::size;
-    EIGEN_ALIGN_MAX T values[packetSize];
+    alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) T values[packetSize];
     for (int j = 0; j < packetSize; ++j) {
       values[j] = RandomToTypeUniform<T>(&m_state, i);
     }
@@ -237,7 +237,7 @@ template <typename T> class NormalRandomGenerator {
   template<typename Packet, typename Index> EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
   Packet packetOp(Index i) const {
     const int packetSize = internal::unpacket_traits<Packet>::size;
-    EIGEN_ALIGN_MAX T values[packetSize];
+    alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) T values[packetSize];
     for (int j = 0; j < packetSize; ++j) {
       values[j] = RandomToTypeNormal<T>(&m_state, i);
     }

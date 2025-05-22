@@ -212,7 +212,7 @@ struct TensorEvaluator<const TensorChippingOp<DimId, ArgType>, Device>
       // m_stride is equal to 1, so let's avoid the integer division.
       eigen_assert(m_stride == 1);
       Index inputIndex = index * m_inputStride + m_inputOffset;
-      EIGEN_ALIGN_MAX typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
+      alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
       for (int i = 0; i < PacketSize; ++i) {
         values[i] = m_impl.coeff(inputIndex);
         inputIndex += m_inputStride;
@@ -232,7 +232,7 @@ struct TensorEvaluator<const TensorChippingOp<DimId, ArgType>, Device>
         return m_impl.template packet<LoadMode>(inputIndex);
       } else {
         // Cross the stride boundary. Fallback to slow path.
-        EIGEN_ALIGN_MAX typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
+        alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
         for (int i = 0; i < PacketSize; ++i) {
           values[i] = coeff(index);
           ++index;
@@ -364,7 +364,7 @@ struct TensorEvaluator<TensorChippingOp<DimId, ArgType>, Device>
   (static_cast<int>(this->Layout) == static_cast<int>(RowMajor) && this->m_dim.actualDim() == NumInputDims-1)) {
       // m_stride is equal to 1, so let's avoid the integer division.
       eigen_assert(this->m_stride == 1);
-      EIGEN_ALIGN_MAX typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
+      alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
       internal::pstore<CoeffReturnType, PacketReturnType>(values, x);
       Index inputIndex = index * this->m_inputStride + this->m_inputOffset;
       for (int i = 0; i < PacketSize; ++i) {
@@ -384,7 +384,7 @@ struct TensorEvaluator<TensorChippingOp<DimId, ArgType>, Device>
         this->m_impl.template writePacket<StoreMode>(inputIndex, x);
       } else {
         // Cross stride boundary. Fallback to slow path.
-        EIGEN_ALIGN_MAX typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
+        alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
         internal::pstore<CoeffReturnType, PacketReturnType>(values, x);
         for (int i = 0; i < PacketSize; ++i) {
           this->coeffRef(index) = values[i];

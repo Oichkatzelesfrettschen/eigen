@@ -287,7 +287,7 @@ struct TensorEvaluator<const TensorBroadcastingOp<Broadcast, ArgType>, Device>
     if (innermostLoc + PacketSize <= m_impl.dimensions()[0]) {
       return m_impl.template packet<Unaligned>(inputIndex);
     } else {
-      EIGEN_ALIGN_MAX typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
+      alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
       values[0] = m_impl.coeff(inputIndex);
       for (int i = 1; i < PacketSize; ++i) {
         values[i] = coeffColMajor(originalIndex+i);
@@ -339,7 +339,7 @@ struct TensorEvaluator<const TensorBroadcastingOp<Broadcast, ArgType>, Device>
     if (innermostLoc + PacketSize <= m_impl.dimensions()[NumDims-1]) {
       return m_impl.template packet<Unaligned>(inputIndex);
     } else {
-      EIGEN_ALIGN_MAX typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
+      alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
       values[0] = m_impl.coeff(inputIndex);
       for (int i = 1; i < PacketSize; ++i) {
         values[i] = coeffRowMajor(originalIndex+i);

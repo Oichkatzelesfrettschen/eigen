@@ -186,9 +186,9 @@ template<typename Scalar> void mapQuaternion(void){
           v1 = Vector3::Random();
   Scalar  a = internal::random<Scalar>(-Scalar(EIGEN_PI), Scalar(EIGEN_PI));
 
-  EIGEN_ALIGN_MAX Scalar array1[4];
-  EIGEN_ALIGN_MAX Scalar array2[4];
-  EIGEN_ALIGN_MAX Scalar array3[4+1];
+  alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar array1[4];
+  alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar array2[4];
+  alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar array3[4+1];
   Scalar* array3unaligned = array3+1;
   
   MQuaternionA    mq1(array1);
@@ -250,9 +250,9 @@ template<typename Scalar> void quaternionAlignment(void){
   typedef Quaternion<Scalar,AutoAlign> QuaternionA;
   typedef Quaternion<Scalar,DontAlign> QuaternionUA;
 
-  EIGEN_ALIGN_MAX Scalar array1[4];
-  EIGEN_ALIGN_MAX Scalar array2[4];
-  EIGEN_ALIGN_MAX Scalar array3[4+1];
+  alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar array1[4];
+  alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar array2[4];
+  alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar array3[4+1];
   Scalar* arrayunaligned = array3+1;
 
   QuaternionA *q1 = ::new(reinterpret_cast<void*>(array1)) QuaternionA;

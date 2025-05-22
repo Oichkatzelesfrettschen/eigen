@@ -146,7 +146,7 @@ template<> EIGEN_STRONG_INLINE void prefetch<std::complex<float> >(const std::co
 
 template<> EIGEN_STRONG_INLINE std::complex<float>  pfirst<Packet2cf>(const Packet2cf& a)
 {
-  std::complex<float> EIGEN_ALIGN16 x[2];
+  std::complex<float> alignas(16) x[2];
   vst1q_f32((float *)x, a.v);
   return x[0];
 }
@@ -401,7 +401,7 @@ template<> EIGEN_DEVICE_FUNC inline void pscatter<std::complex<double>, Packet1c
 
 template<> EIGEN_STRONG_INLINE std::complex<double>  pfirst<Packet1cd>(const Packet1cd& a)
 {
-  std::complex<double> EIGEN_ALIGN16 res;
+  std::complex<double> alignas(16) res;
   pstore<std::complex<double> >(&res, a);
 
   return res;

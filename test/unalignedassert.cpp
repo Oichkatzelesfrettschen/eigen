@@ -62,7 +62,7 @@ struct TestNew4
 struct TestNew5
 {
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
-  float f; // try the f at first -- the EIGEN_ALIGN_MAX attribute of m should make that still work
+  float f; // try the f at first -- the alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) attribute of m should make that still work
   Matrix4f m;
 };
 

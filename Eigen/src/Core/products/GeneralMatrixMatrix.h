@@ -291,11 +291,11 @@ class gemm_blocking_space<StorageOrder,_LhsScalar,_RhsScalar,MaxRows, MaxCols, M
     };
 
 #if EIGEN_MAX_STATIC_ALIGN_BYTES >= EIGEN_DEFAULT_ALIGN_BYTES
-    EIGEN_ALIGN_MAX LhsScalar m_staticA[SizeA];
-    EIGEN_ALIGN_MAX RhsScalar m_staticB[SizeB];
+    alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) LhsScalar m_staticA[SizeA];
+    alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) RhsScalar m_staticB[SizeB];
 #else
-    EIGEN_ALIGN_MAX char m_staticA[SizeA * sizeof(LhsScalar) + EIGEN_DEFAULT_ALIGN_BYTES-1];
-    EIGEN_ALIGN_MAX char m_staticB[SizeB * sizeof(RhsScalar) + EIGEN_DEFAULT_ALIGN_BYTES-1];
+    alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) char m_staticA[SizeA * sizeof(LhsScalar) + EIGEN_DEFAULT_ALIGN_BYTES-1];
+    alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) char m_staticB[SizeB * sizeof(RhsScalar) + EIGEN_DEFAULT_ALIGN_BYTES-1];
 #endif
 
   public:

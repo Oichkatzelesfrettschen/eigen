@@ -198,7 +198,7 @@ struct TensorEvaluator<const TensorStridingOp<Strides, ArgType>, Device>
       return rslt;
     }
     else {
-      EIGEN_ALIGN_MAX typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
+      alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
       values[0] = m_impl.coeff(inputIndices[0]);
       values[PacketSize-1] = m_impl.coeff(inputIndices[1]);
       for (int i = 1; i < PacketSize-1; ++i) {
@@ -332,7 +332,7 @@ struct TensorEvaluator<TensorStridingOp<Strides, ArgType>, Device>
       this->m_impl.template writePacket<Unaligned>(inputIndices[0], x);
     }
     else {
-      EIGEN_ALIGN_MAX Scalar values[PacketSize];
+      alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar values[PacketSize];
       internal::pstore<Scalar, PacketReturnType>(values, x);
       this->m_impl.coeffRef(inputIndices[0]) = values[0];
       this->m_impl.coeffRef(inputIndices[1]) = values[PacketSize-1];

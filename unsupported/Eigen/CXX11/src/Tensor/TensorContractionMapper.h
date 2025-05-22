@@ -271,7 +271,7 @@ class BaseTensorContractionMapper : public SimpleTensorContractionMapper<Scalar,
       return this->m_tensor.template packet<AlignmentType>(first);
     }
 
-    EIGEN_ALIGN_MAX Scalar data[packet_size];
+    alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar data[packet_size];
 
     data[0] = this->m_tensor.coeff(first);
     for (Index k = 1; k < packet_size - 1; k += 2) {
@@ -300,7 +300,7 @@ class BaseTensorContractionMapper : public SimpleTensorContractionMapper<Scalar,
     if (half_packet_size == packet_size) {
       return loadPacket<AlignmentType>(i, j);
     }
-    EIGEN_ALIGN_MAX Scalar data[half_packet_size];
+    alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar data[half_packet_size];
     for (Index k = 0; k < half_packet_size; k++) {
       data[k] = operator()(i + k, j);
     }
@@ -330,13 +330,13 @@ class BaseTensorContractionMapper<Scalar, Index, side, Tensor, nocontract_t, con
   typedef typename Tensor::PacketReturnType Packet;
   template <int> EIGEN_DEVICE_FUNC
   EIGEN_STRONG_INLINE Packet loadPacket(Index i, Index j) const {
-    EIGEN_ALIGN_MAX Scalar data[1];
+    alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar data[1];
     data[0] = this->m_tensor.coeff(this->computeIndex(i, j));
     return pload<typename Tensor::PacketReturnType>(data);
   }
   template <typename PacketT,int> EIGEN_DEVICE_FUNC
   EIGEN_STRONG_INLINE PacketT load(Index i, Index j) const {
-    EIGEN_ALIGN_MAX Scalar data[1];
+    alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) Scalar data[1];
     data[0] = this->m_tensor.coeff(this->computeIndex(i, j));
     return pload<PacketT>(data);
   }

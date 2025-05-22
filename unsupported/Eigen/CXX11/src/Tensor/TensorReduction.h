@@ -633,7 +633,7 @@ struct TensorEvaluator<const TensorReductionOp<Op, Dims, ArgType, MakePointer_>,
       return internal::pload<PacketReturnType>(m_result + index);
     }
 
-    EIGEN_ALIGN_MAX typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
+    alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) typename internal::remove_const<CoeffReturnType>::type values[PacketSize];
     if (ReducingInnerMostDims) {
       const Index num_values_to_reduce =
         (static_cast<int>(Layout) == static_cast<int>(ColMajor)) ? m_preservedStrides[0] : m_preservedStrides[NumPreservedStrides - 1];

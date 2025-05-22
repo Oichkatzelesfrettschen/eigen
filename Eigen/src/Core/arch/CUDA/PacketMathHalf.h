@@ -429,7 +429,7 @@ EIGEN_STRONG_INLINE Packet16f half2float(const Packet16h& a) {
 #ifdef EIGEN_HAS_FP16_C
   return _mm512_cvtph_ps(a.x);
 #else
-  EIGEN_ALIGN64 half aux[16];
+  alignas(64) half aux[16];
   pstore(aux, a);
   float f0(aux[0]);
   float f1(aux[1]);
@@ -459,7 +459,7 @@ EIGEN_STRONG_INLINE Packet16h float2half(const Packet16f& a) {
   result.x = _mm512_cvtps_ph(a, _MM_FROUND_TO_NEAREST_INT|_MM_FROUND_NO_EXC);
   return result;
 #else
-  EIGEN_ALIGN64 float aux[16];
+  alignas(64) float aux[16];
   pstore(aux, a);
   half h0(aux[0]);
   half h1(aux[1]);
@@ -518,7 +518,7 @@ template<> EIGEN_STRONG_INLINE Packet16h pgather<Eigen::half, Packet16h>(const E
 
 template<> EIGEN_STRONG_INLINE void pscatter<half, Packet16h>(half* to, const Packet16h& from, Index stride)
 {
-  EIGEN_ALIGN64 half aux[16];
+  alignas(64) half aux[16];
   pstore(aux, from);
   to[stride*0].x = aux[0].x;
   to[stride*1].x = aux[1].x;
@@ -648,7 +648,7 @@ ptranspose(PacketBlock<Packet16h,16>& kernel) {
 
 EIGEN_STRONG_INLINE void
 ptranspose(PacketBlock<Packet16h,8>& kernel) {
-  EIGEN_ALIGN64 half in[8][16];
+  alignas(64) half in[8][16];
   pstore<half>(in[0], kernel.packet[0]);
   pstore<half>(in[1], kernel.packet[1]);
   pstore<half>(in[2], kernel.packet[2]);
@@ -658,7 +658,7 @@ ptranspose(PacketBlock<Packet16h,8>& kernel) {
   pstore<half>(in[6], kernel.packet[6]);
   pstore<half>(in[7], kernel.packet[7]);
 
-  EIGEN_ALIGN64 half out[8][16];
+  alignas(64) half out[8][16];
 
   for (int i = 0; i < 8; ++i) {
     for (int j = 0; j < 8; ++j) {
@@ -681,13 +681,13 @@ ptranspose(PacketBlock<Packet16h,8>& kernel) {
 
 EIGEN_STRONG_INLINE void
 ptranspose(PacketBlock<Packet16h,4>& kernel) {
-  EIGEN_ALIGN64 half in[4][16];
+  alignas(64) half in[4][16];
   pstore<half>(in[0], kernel.packet[0]);
   pstore<half>(in[1], kernel.packet[1]);
   pstore<half>(in[2], kernel.packet[2]);
   pstore<half>(in[3], kernel.packet[3]);
 
-  EIGEN_ALIGN64 half out[4][16];
+  alignas(64) half out[4][16];
 
   for (int i = 0; i < 4; ++i) {
     for (int j = 0; j < 4; ++j) {
@@ -795,7 +795,7 @@ EIGEN_STRONG_INLINE Packet8f half2float(const Packet8h& a) {
 #ifdef EIGEN_HAS_FP16_C
   return _mm256_cvtph_ps(a.x);
 #else
-  EIGEN_ALIGN32 Eigen::half aux[8];
+  alignas(32) Eigen::half aux[8];
   pstore(aux, a);
   float f0(aux[0]);
   float f1(aux[1]);
@@ -816,7 +816,7 @@ EIGEN_STRONG_INLINE Packet8h float2half(const Packet8f& a) {
   result.x = _mm256_cvtps_ph(a, _MM_FROUND_TO_NEAREST_INT|_MM_FROUND_NO_EXC);
   return result;
 #else
-  EIGEN_ALIGN32 float aux[8];
+  alignas(32) float aux[8];
   pstore(aux, a);
   Eigen::half h0(aux[0]);
   Eigen::half h1(aux[1]);
@@ -858,7 +858,7 @@ template<> EIGEN_STRONG_INLINE Packet8h pgather<Eigen::half, Packet8h>(const Eig
 
 template<> EIGEN_STRONG_INLINE void pscatter<Eigen::half, Packet8h>(Eigen::half* to, const Packet8h& from, Index stride)
 {
-  EIGEN_ALIGN32 Eigen::half aux[8];
+  alignas(32) Eigen::half aux[8];
   pstore(aux, from);
   to[stride*0].x = aux[0].x;
   to[stride*1].x = aux[1].x;
@@ -944,13 +944,13 @@ ptranspose(PacketBlock<Packet8h,8>& kernel) {
 
 EIGEN_STRONG_INLINE void
 ptranspose(PacketBlock<Packet8h,4>& kernel) {
-  EIGEN_ALIGN32 Eigen::half in[4][8];
+  alignas(32) Eigen::half in[4][8];
   pstore<Eigen::half>(in[0], kernel.packet[0]);
   pstore<Eigen::half>(in[1], kernel.packet[1]);
   pstore<Eigen::half>(in[2], kernel.packet[2]);
   pstore<Eigen::half>(in[3], kernel.packet[3]);
 
-  EIGEN_ALIGN32 Eigen::half out[4][8];
+  alignas(32) Eigen::half out[4][8];
 
   for (int i = 0; i < 4; ++i) {
     for (int j = 0; j < 4; ++j) {

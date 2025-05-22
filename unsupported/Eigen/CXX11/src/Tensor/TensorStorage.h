@@ -43,7 +43,7 @@ class TensorStorage
 
   // Allocate an array of size at least one to prevent compiler warnings.
   static const std::size_t MinSize = max_n_1<Size>::size;
-  EIGEN_ALIGN_MAX T m_data[MinSize];
+  alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) T m_data[MinSize];
 
   FixedDimensions m_dimensions;
 

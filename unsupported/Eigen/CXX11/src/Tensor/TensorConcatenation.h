@@ -254,7 +254,7 @@ struct TensorEvaluator<const TensorConcatenationOp<Axis, LeftArgType, RightArgTy
     EIGEN_STATIC_ASSERT((packetSize > 1), YOU_MADE_A_PROGRAMMING_MISTAKE)
     eigen_assert(index + packetSize - 1 < dimensions().TotalSize());
 
-    EIGEN_ALIGN_MAX CoeffReturnType values[packetSize];
+    alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) CoeffReturnType values[packetSize];
     for (int i = 0; i < packetSize; ++i) {
       values[i] = coeff(index+i);
     }
@@ -356,7 +356,7 @@ template<typename Axis, typename LeftArgType, typename RightArgType, typename De
     EIGEN_STATIC_ASSERT((packetSize > 1), YOU_MADE_A_PROGRAMMING_MISTAKE)
     eigen_assert(index + packetSize - 1 < this->dimensions().TotalSize());
 
-    EIGEN_ALIGN_MAX CoeffReturnType values[packetSize];
+    alignas(EIGEN_MAX_STATIC_ALIGN_BYTES) CoeffReturnType values[packetSize];
     internal::pstore<CoeffReturnType, PacketReturnType>(values, x);
     for (int i = 0; i < packetSize; ++i) {
       coeffRef(index+i) = values[i];
