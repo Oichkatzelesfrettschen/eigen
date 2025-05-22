@@ -45,6 +45,9 @@ done
 
 pip3 install clang==17.*
 
+# Ensure latest pre-commit and pytest for repository checks
+pip3 install --no-cache-dir pre-commit pytest
+
 pip3 install --no-cache-dir \
   tensorflow-cpu jax jaxlib \
   tensorflow-model-optimization mlflow onnxruntime-tools
