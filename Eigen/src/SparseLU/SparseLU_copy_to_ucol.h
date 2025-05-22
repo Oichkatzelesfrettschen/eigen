@@ -75,9 +75,9 @@ Index SparseLUImpl<Scalar,StorageIndex>::copy_to_ucol(const Index jcol, const In
         new_next = nextu + segsize; 
         while (new_next > glu.nzumax) 
         {
-          mem = memXpand<ScalarVector>(glu.ucol, glu.nzumax, nextu, UCOL, glu.num_expansions); 
+          mem = memXpand<ScalarVector>(glu.ucol, glu.nzumax, nextu, MemType::UCOL, glu.num_expansions);
           if (mem) return mem; 
-          mem = memXpand<IndexVector>(glu.usub, glu.nzumax, nextu, USUB, glu.num_expansions); 
+          mem = memXpand<IndexVector>(glu.usub, glu.nzumax, nextu, MemType::USUB, glu.num_expansions);
           if (mem) return mem; 
           
         }
