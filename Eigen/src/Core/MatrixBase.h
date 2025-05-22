@@ -194,8 +194,8 @@ template<typename Derived> class MatrixBase
     RealScalar stableNorm() const;
     RealScalar blueNorm() const;
     RealScalar hypotNorm() const;
-    EIGEN_DEVICE_FUNC const PlainObject normalized() const;
-    EIGEN_DEVICE_FUNC const PlainObject stableNormalized() const;
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC const PlainObject normalized() const;
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC const PlainObject stableNormalized() const;
     EIGEN_DEVICE_FUNC void normalize();
     EIGEN_DEVICE_FUNC void stableNormalize();
 
@@ -328,7 +328,7 @@ template<typename Derived> class MatrixBase
 
     inline const PartialPivLU<PlainObject> lu() const;
 
-    inline const Inverse<Derived> inverse() const;
+    EIGEN_NODISCARD inline const Inverse<Derived> inverse() const;
 
     template<typename ResultType>
     inline void computeInverseAndDetWithCheck(
@@ -343,7 +343,7 @@ template<typename Derived> class MatrixBase
       bool& invertible,
       const RealScalar& absDeterminantThreshold = NumTraits<Scalar>::dummy_precision()
     ) const;
-    Scalar determinant() const;
+    EIGEN_NODISCARD Scalar determinant() const;
 
 /////////// Cholesky module ///////////
 
@@ -383,14 +383,14 @@ template<typename Derived> class MatrixBase
 #else
     inline PlainObject
 #endif
-    cross(const MatrixBase<OtherDerived>& other) const;
+    EIGEN_NODISCARD cross(const MatrixBase<OtherDerived>& other) const;
 
     template<typename OtherDerived>
     EIGEN_DEVICE_FUNC
-    inline PlainObject cross3(const MatrixBase<OtherDerived>& other) const;
+    EIGEN_NODISCARD inline PlainObject cross3(const MatrixBase<OtherDerived>& other) const;
 
     EIGEN_DEVICE_FUNC
-    inline PlainObject unitOrthogonal(void) const;
+    EIGEN_NODISCARD inline PlainObject unitOrthogonal(void) const;
 
     EIGEN_DEVICE_FUNC
     inline Matrix<Scalar,3,1> eulerAngles(Index a0, Index a1, Index a2) const;
@@ -410,7 +410,7 @@ template<typename Derived> class MatrixBase
                   internal::traits<Derived>::ColsAtCompileTime==1 ? 1 : SizeMinusOne> ConstStartMinusOne;
     typedef EIGEN_EXPR_BINARYOP_SCALAR_RETURN_TYPE(ConstStartMinusOne,Scalar,quotient) HNormalizedReturnType;
     EIGEN_DEVICE_FUNC
-    inline const HNormalizedReturnType hnormalized() const;
+    EIGEN_NODISCARD inline const HNormalizedReturnType hnormalized() const;
 
 ////////// Householder module ///////////
 

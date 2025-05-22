@@ -117,7 +117,7 @@ EIGEN_DEVICE_FUNC inline typename NumTraits<typename internal::traits<Derived>::
   * \sa norm(), normalize()
   */
 template<typename Derived>
-EIGEN_DEVICE_FUNC inline const typename MatrixBase<Derived>::PlainObject
+EIGEN_NODISCARD EIGEN_DEVICE_FUNC inline const typename MatrixBase<Derived>::PlainObject
 MatrixBase<Derived>::normalized() const
 {
   typedef typename internal::nested_eval<Derived,2>::type _Nested;
@@ -160,7 +160,7 @@ EIGEN_DEVICE_FUNC inline void MatrixBase<Derived>::normalize()
   * \sa stableNorm(), stableNormalize(), normalized()
   */
 template<typename Derived>
-EIGEN_DEVICE_FUNC inline const typename MatrixBase<Derived>::PlainObject
+EIGEN_NODISCARD EIGEN_DEVICE_FUNC inline const typename MatrixBase<Derived>::PlainObject
 MatrixBase<Derived>::stableNormalized() const
 {
   typedef typename internal::nested_eval<Derived,3>::type _Nested;

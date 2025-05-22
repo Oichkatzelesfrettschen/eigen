@@ -129,7 +129,7 @@ class QuaternionBase : public RotationBase<Derived, 3>
   EIGEN_DEVICE_FUNC inline void normalize() { coeffs().normalize(); }
   /** \returns a normalized copy of \c *this
     * \sa normalize(), MatrixBase::normalized() */
-  EIGEN_DEVICE_FUNC inline Quaternion<Scalar> normalized() const { return Quaternion<Scalar>(coeffs().normalized()); }
+  EIGEN_NODISCARD EIGEN_DEVICE_FUNC inline Quaternion<Scalar> normalized() const { return Quaternion<Scalar>(coeffs().normalized()); }
 
     /** \returns the dot product of \c *this and \a other
     * Geometrically speaking, the dot product of two unit quaternions
@@ -151,10 +151,10 @@ class QuaternionBase : public RotationBase<Derived, 3>
   template<class OtherDerived> EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE Derived& operator*= (const QuaternionBase<OtherDerived>& q);
 
   /** \returns the quaternion describing the inverse rotation */
-  EIGEN_DEVICE_FUNC Quaternion<Scalar> inverse() const;
+  EIGEN_NODISCARD EIGEN_DEVICE_FUNC Quaternion<Scalar> inverse() const;
 
   /** \returns the conjugated quaternion */
-  EIGEN_DEVICE_FUNC Quaternion<Scalar> conjugate() const;
+  EIGEN_NODISCARD EIGEN_DEVICE_FUNC Quaternion<Scalar> conjugate() const;
 
   template<class OtherDerived> EIGEN_DEVICE_FUNC Quaternion<Scalar> slerp(const Scalar& t, const QuaternionBase<OtherDerived>& other) const;
 
@@ -661,7 +661,7 @@ EIGEN_DEVICE_FUNC Quaternion<Scalar,Options> Quaternion<Scalar,Options>::FromTwo
   * \sa QuaternionBase::conjugate()
   */
 template <class Derived>
-EIGEN_DEVICE_FUNC inline Quaternion<typename internal::traits<Derived>::Scalar> QuaternionBase<Derived>::inverse() const
+EIGEN_NODISCARD EIGEN_DEVICE_FUNC inline Quaternion<typename internal::traits<Derived>::Scalar> QuaternionBase<Derived>::inverse() const
 {
   // FIXME should this function be called multiplicativeInverse and conjugate() be called inverse() or opposite()  ??
   Scalar n2 = this->squaredNorm();
@@ -691,7 +691,7 @@ template<int Arch, class Derived, typename Scalar> struct quat_conj
   * \sa Quaternion2::inverse()
   */
 template <class Derived>
-EIGEN_DEVICE_FUNC inline Quaternion<typename internal::traits<Derived>::Scalar>
+EIGEN_NODISCARD EIGEN_DEVICE_FUNC inline Quaternion<typename internal::traits<Derived>::Scalar>
 QuaternionBase<Derived>::conjugate() const
 {
   return internal::quat_conj<Architecture::Target, Derived,

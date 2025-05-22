@@ -89,7 +89,7 @@ template<typename Derived> struct determinant_impl<Derived, 4>
   * \returns the determinant of this matrix
   */
 template<typename Derived>
-inline typename internal::traits<Derived>::Scalar MatrixBase<Derived>::determinant() const
+EIGEN_NODISCARD inline typename internal::traits<Derived>::Scalar MatrixBase<Derived>::determinant() const
 {
   eigen_assert(rows() == cols());
   typedef typename internal::nested_eval<Derived,Base::RowsAtCompileTime>::type Nested;
