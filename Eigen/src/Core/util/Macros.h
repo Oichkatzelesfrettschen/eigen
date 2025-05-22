@@ -15,6 +15,8 @@
 #define EIGEN_MAJOR_VERSION 3
 #define EIGEN_MINOR_VERSION 90
 
+#include <type_traits>
+
 #define EIGEN_VERSION_AT_LEAST(x,y,z) (EIGEN_WORLD_VERSION>x || (EIGEN_WORLD_VERSION>=x && \
                                       (EIGEN_MAJOR_VERSION>y || (EIGEN_MAJOR_VERSION>=y && \
                                                                  EIGEN_MINOR_VERSION>=z))))
@@ -983,7 +985,7 @@ namespace Eigen {
 
 // Workaround for MSVC 2010 (see ML thread "patch with compile for for MSVC 2010")
 #if EIGEN_COMP_MSVC_STRICT && (EIGEN_COMP_MSVC_STRICT<=1600)
-#define EIGEN_MSVC10_WORKAROUND_BINARYOP_RETURN_TYPE(X) typename internal::enable_if<true,X>::type
+#define EIGEN_MSVC10_WORKAROUND_BINARYOP_RETURN_TYPE(X) std::enable_if_t<true,X>
 #else
 #define EIGEN_MSVC10_WORKAROUND_BINARYOP_RETURN_TYPE(X) X
 #endif

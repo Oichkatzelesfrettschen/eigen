@@ -41,7 +41,7 @@
 #endif
 
 #define EIGEN_SFINAE_ENABLE_IF( __condition__ ) \
-    typename internal::enable_if< ( __condition__ ) , int >::type = 0
+    std::enable_if_t< ( __condition__ ) , int > = 0
 
 
 #if EIGEN_HAS_CONSTEXPR

@@ -26,7 +26,7 @@ bool match(const T& xpr, std::string ref, std::string str_xpr = "") {
 #define MATCH(X,R) match(X, R, #X)
 
 template<typename T1,typename T2>
-typename internal::enable_if<internal::is_same<T1,T2>::value,bool>::type
+std::enable_if_t<internal::is_same<T1,T2>::value,bool>
 is_same_fixed(const T1& a, const T2& b)
 {
   return (Index(a) == Index(b));
@@ -45,7 +45,7 @@ bool is_same_seq(const T1& a, const T2& b)
 }
 
 template<typename T1,typename T2>
-typename internal::enable_if<internal::is_same<T1,T2>::value,bool>::type
+std::enable_if_t<internal::is_same<T1,T2>::value,bool>
 is_same_type(const T1&, const T2&)
 {
   return true;

@@ -41,7 +41,7 @@ const TC& ref_prod(TC &C, const TA &A, const TB &B)
 }
 
 template<typename T, int Rows, int Cols, int Depth, int OC, int OA, int OB>
-typename internal::enable_if<! ( (Rows ==1&&Depth!=1&&OA==ColMajor)
+std::enable_if_t<! ( (Rows ==1&&Depth!=1&&OA==ColMajor)
                               || (Depth==1&&Rows !=1&&OA==RowMajor)
                               || (Cols ==1&&Depth!=1&&OB==RowMajor)
                               || (Depth==1&&Cols !=1&&OB==ColMajor)
@@ -57,7 +57,7 @@ test_lazy_single(int rows, int cols, int depth)
 }
 
 template<typename T, int Rows, int Cols, int Depth, int OC, int OA, int OB>
-typename internal::enable_if<  ( (Rows ==1&&Depth!=1&&OA==ColMajor)
+std::enable_if_t<  ( (Rows ==1&&Depth!=1&&OA==ColMajor)
                               || (Depth==1&&Rows !=1&&OA==RowMajor)
                               || (Cols ==1&&Depth!=1&&OB==RowMajor)
                               || (Depth==1&&Cols !=1&&OB==ColMajor)

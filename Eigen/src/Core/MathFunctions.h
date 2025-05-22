@@ -760,22 +760,22 @@ inline EIGEN_MATHFUNC_RETVAL(random, Scalar) random()
 
 template<typename T>
 EIGEN_DEVICE_FUNC
-typename internal::enable_if<internal::is_integral<T>::value,bool>::type
+std::enable_if_t<internal::is_integral<T>::value,bool>
 isnan_impl(const T&) { return false; }
 
 template<typename T>
 EIGEN_DEVICE_FUNC
-typename internal::enable_if<internal::is_integral<T>::value,bool>::type
+std::enable_if_t<internal::is_integral<T>::value,bool>
 isinf_impl(const T&) { return false; }
 
 template<typename T>
 EIGEN_DEVICE_FUNC
-typename internal::enable_if<internal::is_integral<T>::value,bool>::type
+std::enable_if_t<internal::is_integral<T>::value,bool>
 isfinite_impl(const T&) { return true; }
 
 template<typename T>
 EIGEN_DEVICE_FUNC
-typename internal::enable_if<(!internal::is_integral<T>::value)&&(!NumTraits<T>::IsComplex),bool>::type
+std::enable_if_t<(!internal::is_integral<T>::value)&&(!NumTraits<T>::IsComplex),bool>
 isfinite_impl(const T& x)
 {
   #ifdef EIGEN_CUDA_ARCH
@@ -790,7 +790,7 @@ isfinite_impl(const T& x)
 
 template<typename T>
 EIGEN_DEVICE_FUNC
-typename internal::enable_if<(!internal::is_integral<T>::value)&&(!NumTraits<T>::IsComplex),bool>::type
+std::enable_if_t<(!internal::is_integral<T>::value)&&(!NumTraits<T>::IsComplex),bool>
 isinf_impl(const T& x)
 {
   #ifdef EIGEN_CUDA_ARCH
@@ -805,7 +805,7 @@ isinf_impl(const T& x)
 
 template<typename T>
 EIGEN_DEVICE_FUNC
-typename internal::enable_if<(!internal::is_integral<T>::value)&&(!NumTraits<T>::IsComplex),bool>::type
+std::enable_if_t<(!internal::is_integral<T>::value)&&(!NumTraits<T>::IsComplex),bool>
 isnan_impl(const T& x)
 {
   #ifdef EIGEN_CUDA_ARCH
@@ -1235,7 +1235,7 @@ double log(const double &x) { return ::log(x); }
 
 template<typename T>
 EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE
-typename internal::enable_if<NumTraits<T>::IsSigned || NumTraits<T>::IsComplex,typename NumTraits<T>::Real>::type
+std::enable_if_t<NumTraits<T>::IsSigned || NumTraits<T>::IsComplex,typename NumTraits<T>::Real>
 abs(const T &x) {
   EIGEN_USING_STD_MATH(abs);
   return abs(x);
@@ -1243,7 +1243,7 @@ abs(const T &x) {
 
 template<typename T>
 EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE
-typename internal::enable_if<!(NumTraits<T>::IsSigned || NumTraits<T>::IsComplex),typename NumTraits<T>::Real>::type
+std::enable_if_t<!(NumTraits<T>::IsSigned || NumTraits<T>::IsComplex),typename NumTraits<T>::Real>
 abs(const T &x) {
   return x;
 }
