@@ -6,7 +6,7 @@ if (BLAZE_FOUND AND Boost_FOUND)
   btl_add_bench(btl_blaze main.cpp)
   # Note: The newest blaze version requires C++14.
   # Ideally, we should set this depending on the version of Blaze we found
-  set_property(TARGET btl_blaze PROPERTY CXX_STANDARD 14)
+  set_property(TARGET btl_blaze PROPERTY CXX_STANDARD 23)
   if(BUILD_btl_blaze)
     target_link_libraries(btl_blaze ${Boost_LIBRARIES})
   endif()

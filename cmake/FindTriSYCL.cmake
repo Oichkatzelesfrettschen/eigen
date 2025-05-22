@@ -61,8 +61,8 @@ set(CL_SYCL_LANGUAGE_VERSION 220 CACHE VERSION
   "Host language version to be used by trisYCL (default is: 220)")
 set(TRISYCL_CL_LANGUAGE_VERSION 220 CACHE VERSION
   "Device language version to be used by trisYCL (default is: 220)")
-#set(TRISYCL_COMPILE_OPTIONS "-std=c++1z -Wall -Wextra")
-set(CMAKE_CXX_STANDARD 14)
+#set(TRISYCL_COMPILE_OPTIONS "-std=c++23 -Wall -Wextra")
+set(CMAKE_CXX_STANDARD 23)
 set(CXX_STANDARD_REQUIRED ON)
 
 
