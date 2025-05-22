@@ -18,6 +18,8 @@ done
 
 apt-get update -y
 
+export CXXFLAGS="-std=c++17"
+
 for pkg in \
   build-essential gcc g++ clang lld llvm \
   clang-17 clang-tools-17 libclang-17-dev \
@@ -62,7 +64,7 @@ for pkg in \
   gcc-arm-linux-gnueabi g++-arm-linux-gnueabi \
   gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf \
   gcc-riscv64-linux-gnu g++-riscv64-linux-gnu \
-  gcc-powerpc-linux-gnu g++-powerpc-linux-gnu \
+  binutils-powerpc-linux-gnu gcc-powerpc-linux-gnu g++-powerpc-linux-gnu \
   gcc-powerpc64-linux-gnu g++-powerpc64-linux-gnu \
   gcc-powerpc64le-linux-gnu g++-powerpc64le-linux-gnu \
   gcc-m68k-linux-gnu g++-m68k-linux-gnu \
