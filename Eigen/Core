@@ -246,6 +246,18 @@
     #define EIGEN_VECTORIZE
     #define EIGEN_VECTORIZE_ZVECTOR
     #include <vecintrin.h>
+  #elif defined(__loongarch_asx)
+    #define EIGEN_VECTORIZE
+    #define EIGEN_VECTORIZE_LASX
+    #include <lasxintrin.h>
+  #elif defined(__loongarch_sx)
+    #define EIGEN_VECTORIZE
+    #define EIGEN_VECTORIZE_LSX
+    #include <lsxintrin.h>
+  #elif defined(__riscv) && defined(__riscv_vector)
+    #define EIGEN_VECTORIZE
+    #define EIGEN_VECTORIZE_RVV
+    #include <riscv_vector.h>
   #endif
 #endif
 

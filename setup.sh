@@ -52,7 +52,7 @@ pip3 install --no-cache-dir \
 for pkg in \
   qemu-user-static \
   qemu-system-x86 qemu-system-arm qemu-system-aarch64 \
-  qemu-system-riscv64 qemu-system-ppc qemu-system-ppc64 qemu-utils; do
+  qemu-system-riscv64 qemu-system-ppc qemu-system-ppc64 qemu-system-s390x qemu-utils; do
   apt_pin_install "$pkg"
 done
 
@@ -77,6 +77,7 @@ for pkg in \
   gcc-m68k-linux-gnu g++-m68k-linux-gnu \
   gcc-hppa-linux-gnu g++-hppa-linux-gnu \
   gcc-loongarch64-linux-gnu g++-loongarch64-linux-gnu \
+  gcc-s390x-linux-gnu g++-s390x-linux-gnu \
   gcc-mips-linux-gnu g++-mips-linux-gnu \
   gcc-mipsel-linux-gnu g++-mipsel-linux-gnu \
   gcc-mips64-linux-gnuabi64 g++-mips64-linux-gnuabi64 \

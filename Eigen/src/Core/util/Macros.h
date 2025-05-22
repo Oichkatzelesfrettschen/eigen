@@ -210,6 +210,20 @@
   #define EIGEN_ARCH_PPC 0
 #endif
 
+/// \internal EIGEN_ARCH_RISCV set to 1 if the architecture is RISC-V
+#if defined(__riscv)
+  #define EIGEN_ARCH_RISCV 1
+#else
+  #define EIGEN_ARCH_RISCV 0
+#endif
+
+/// \internal EIGEN_ARCH_LOONGARCH set to 1 if the architecture is LoongArch
+#if defined(__loongarch64)
+  #define EIGEN_ARCH_LOONGARCH 1
+#else
+  #define EIGEN_ARCH_LOONGARCH 0
+#endif
+
 
 
 // Operating system identification, EIGEN_OS_*
