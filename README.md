@@ -57,4 +57,17 @@ The repository provides cross-compilation checks for PowerPC using
 handles building and executing the tests under emulation when these tools are
 present.
 
+## Go Bindings
+
+Bindings for Go are generated in `go/ec`. The module targets **Go 1.23** and
+mirrors the C API produced under `eigenc/include`. After running the porter
+scripts you can execute the Go tests:
+
+```bash
+cd go && go test ./...
+```
+
+The convenience script `porter/build_all.sh` will regenerate headers and run the
+entire suite including the Go tests.
+
 

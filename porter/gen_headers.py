@@ -16,7 +16,7 @@ MAPPING_PATH = os.path.join(REPO_ROOT, "porter", "mapping.yaml")
 OUT_DIR = os.path.join(REPO_ROOT, "eigenc", "include")
 OUT_PATH = os.path.join(OUT_DIR, "ec_generated.h")
 
-MATRIX_RE = re.compile(r"Matrix<\s*([^,>]+)\s*,\s*([^,>]+)\s*,\s*([^,>]+)\s*>")
+MATRIX_RE = re.compile(r"Matrix<\s*([^,>]+)\s*,\s*([^,>]+)\s*,\s*([^,>]+)")
 
 CTYPE_MAP = {
     "float": "float",
@@ -29,17 +29,22 @@ def parse_mapping(path):
         if HAVE_YAML:
             data = yaml.safe_load(f) or {}
         else:
-            # very small YAML subset parser
-            data = {}
-            for line in f:
-                line = line.strip()
-                if not line or line.startswith('#'):
-                    continue
-                if line == 'mappings:':
-                    continue
-                if ':' in line:
-                    k, v = line.split(':', 1)
-                    data[k.strip()] = v.strip()
+            txt = f.read()
+            txt_stripped = txt.lstrip()
+            if txt_stripped.startswith('{') or txt_stripped.startswith('['):
+                data = json.loads(txt)
+            else:
+                # very small YAML subset parser
+                data = {}
+                for line in txt.splitlines():
+                    line = line.strip()
+                    if not line or line.startswith('#'):
+                        continue
+                    if line == 'mappings:':
+                        continue
+                    if ':' in line:
+                        k, v = line.split(':', 1)
+                        data[k.strip()] = v.strip()
         mappings = data.get("mappings", data)
     return mappings
 
@@ -63,7 +68,11 @@ def gen_header(mappings):
     fn_mul = {}
 
     for spec, cname in mappings.items():
-        ctype, rows, cols = parse_spec(spec)
+        try:
+            ctype, rows, cols = parse_spec(spec)
+        except Exception:
+            print(f"Skipping unsupported spec: {spec}", file=sys.stderr)
+            continue
         lines.append(f"typedef struct {{")
         lines.append("    size_t rows;")
         lines.append("    size_t cols;")
