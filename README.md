@@ -52,11 +52,14 @@ int main(void) {
 
 ## Cross Compilation
 
-The repository provides cross-compilation checks for PowerPC using
-`powerpc-linux-gnu-gcc` and `qemu-ppc-static`.  The `tests/run_all.sh` script
-handles building and executing the tests under emulation when these tools are
-present.  If 32-bit development libraries are available, the same script also
-attempts a 32-bit x86 build using `gcc -m32`.
+The repository provides cross-compilation checks for PowerPC and RISC-V.
+`tests/run_all.sh` builds the test program with the corresponding cross
+compiler and runs it under QEMU. Specifically, it uses
+`powerpc-linux-gnu-gcc` with `qemu-ppc-static` and
+`riscv64-linux-gnu-gcc` with `qemu-riscv64-static`. The emulation step is
+skipped if either the toolchain or QEMU binary is missing. If 32-bit
+development libraries are available, the same script also attempts a 32-bit x86
+build using `gcc -m32`.
 
 ## Go Bindings
 
