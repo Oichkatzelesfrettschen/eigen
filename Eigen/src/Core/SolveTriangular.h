@@ -87,7 +87,7 @@ struct triangular_solver_selector<Lhs,Rhs,Side,Mode,NoUnrolling,Dynamic>
 
   static void run(const Lhs& lhs, Rhs& rhs)
   {
-    typename internal::add_const_on_value_type<ActualLhsType>::type actualLhs = LhsProductTraits::extract(lhs);
+    std::add_const_t<ActualLhsType> actualLhs = LhsProductTraits::extract(lhs);
 
     const Index size = lhs.rows();
     const Index othersize = Side==OnTheLeft? rhs.cols() : rhs.rows();

@@ -9,6 +9,7 @@
 
 #ifndef EIGEN_GENERAL_MATRIX_MATRIX_TRIANGULAR_H
 #define EIGEN_GENERAL_MATRIX_MATRIX_TRIANGULAR_H
+#include <type_traits>
 
 namespace Eigen { 
 
@@ -207,13 +208,13 @@ struct general_product_to_triangular_selector<MatrixType,ProductType,UpLo,true>
     typedef internal::blas_traits<Lhs> LhsBlasTraits;
     typedef typename LhsBlasTraits::DirectLinearAccessType ActualLhs;
     typedef typename internal::remove_all<ActualLhs>::type _ActualLhs;
-    typename internal::add_const_on_value_type<ActualLhs>::type actualLhs = LhsBlasTraits::extract(prod.lhs());
+    std::add_const_t<ActualLhs> actualLhs = LhsBlasTraits::extract(prod.lhs());
     
     typedef typename internal::remove_all<typename ProductType::RhsNested>::type Rhs;
     typedef internal::blas_traits<Rhs> RhsBlasTraits;
     typedef typename RhsBlasTraits::DirectLinearAccessType ActualRhs;
     typedef typename internal::remove_all<ActualRhs>::type _ActualRhs;
-    typename internal::add_const_on_value_type<ActualRhs>::type actualRhs = RhsBlasTraits::extract(prod.rhs());
+    std::add_const_t<ActualRhs> actualRhs = RhsBlasTraits::extract(prod.rhs());
 
     Scalar actualAlpha = alpha * LhsBlasTraits::extractScalarFactor(prod.lhs().derived()) * RhsBlasTraits::extractScalarFactor(prod.rhs().derived());
 
@@ -253,13 +254,13 @@ struct general_product_to_triangular_selector<MatrixType,ProductType,UpLo,false>
     typedef internal::blas_traits<Lhs> LhsBlasTraits;
     typedef typename LhsBlasTraits::DirectLinearAccessType ActualLhs;
     typedef typename internal::remove_all<ActualLhs>::type _ActualLhs;
-    typename internal::add_const_on_value_type<ActualLhs>::type actualLhs = LhsBlasTraits::extract(prod.lhs());
+    std::add_const_t<ActualLhs> actualLhs = LhsBlasTraits::extract(prod.lhs());
     
     typedef typename internal::remove_all<typename ProductType::RhsNested>::type Rhs;
     typedef internal::blas_traits<Rhs> RhsBlasTraits;
     typedef typename RhsBlasTraits::DirectLinearAccessType ActualRhs;
     typedef typename internal::remove_all<ActualRhs>::type _ActualRhs;
-    typename internal::add_const_on_value_type<ActualRhs>::type actualRhs = RhsBlasTraits::extract(prod.rhs());
+    std::add_const_t<ActualRhs> actualRhs = RhsBlasTraits::extract(prod.rhs());
 
     typename ProductType::Scalar actualAlpha = alpha * LhsBlasTraits::extractScalarFactor(prod.lhs().derived()) * RhsBlasTraits::extractScalarFactor(prod.rhs().derived());
 

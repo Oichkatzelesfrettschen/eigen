@@ -9,6 +9,7 @@
 
 #ifndef EIGEN_ARRAY_H
 #define EIGEN_ARRAY_H
+#include <type_traits>
 
 namespace Eigen {
 
@@ -239,7 +240,7 @@ class Array
     template<typename OtherDerived>
     EIGEN_DEVICE_FUNC
     EIGEN_STRONG_INLINE Array(const EigenBase<OtherDerived> &other,
-                              std::enable_if_t<internal::is_convertible<typename OtherDerived::Scalar,Scalar>::value,
+                              std::enable_if_t<std::is_convertible_v<typename OtherDerived::Scalar,Scalar>,
                                               PrivateType> = PrivateType())
       : Base(other.derived())
     { }

@@ -9,6 +9,7 @@
 
 #ifndef EIGEN_FORCEALIGNEDACCESS_H
 #define EIGEN_FORCEALIGNEDACCESS_H
+#include <type_traits>
 
 namespace Eigen {
 
@@ -124,7 +125,7 @@ MatrixBase<Derived>::forceAlignedAccess()
   */
 template<typename Derived>
 template<bool Enable>
-inline typename internal::add_const_on_value_type<typename internal::conditional<Enable,ForceAlignedAccess<Derived>,Derived&>::type>::type
+inline std::add_const_t<typename internal::conditional<Enable,ForceAlignedAccess<Derived>,Derived&>::type>
 MatrixBase<Derived>::forceAlignedAccessIf() const
 {
   return derived();  // FIXME This should not work but apparently is never used

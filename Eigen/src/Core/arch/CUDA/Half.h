@@ -497,7 +497,6 @@ struct random_default_impl<half, false, false>
   }
 };
 
-template<> struct is_arithmetic<half> { enum { value = true }; };
 
 } // end namespace internal
 

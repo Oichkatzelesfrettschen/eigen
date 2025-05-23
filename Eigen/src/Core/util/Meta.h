@@ -83,36 +83,11 @@ template<typename T> struct remove_all<T&>        { typedef typename remove_all<
 template<typename T> struct remove_all<T const*>  { typedef typename remove_all<T>::type type; };
 template<typename T> struct remove_all<T*>        { typedef typename remove_all<T>::type type; };
 
-template<typename T> struct is_arithmetic      { enum { value = false }; };
-template<> struct is_arithmetic<float>         { enum { value = true }; };
-template<> struct is_arithmetic<double>        { enum { value = true }; };
-template<> struct is_arithmetic<long double>   { enum { value = true }; };
-template<> struct is_arithmetic<bool>          { enum { value = true }; };
-template<> struct is_arithmetic<char>          { enum { value = true }; };
-template<> struct is_arithmetic<signed char>   { enum { value = true }; };
-template<> struct is_arithmetic<unsigned char> { enum { value = true }; };
-template<> struct is_arithmetic<signed short>  { enum { value = true }; };
-template<> struct is_arithmetic<unsigned short>{ enum { value = true }; };
-template<> struct is_arithmetic<signed int>    { enum { value = true }; };
-template<> struct is_arithmetic<unsigned int>  { enum { value = true }; };
-template<> struct is_arithmetic<signed long>   { enum { value = true }; };
-template<> struct is_arithmetic<unsigned long> { enum { value = true }; };
+template <typename T>
+using is_arithmetic = std::is_arithmetic<T>;
 
-#if EIGEN_HAS_CXX23
-using std::is_integral;
-#else
-template<typename T> struct is_integral               { enum { value = false }; };
-template<> struct is_integral<bool>                   { enum { value = true }; };
-template<> struct is_integral<char>                   { enum { value = true }; };
-template<> struct is_integral<signed char>            { enum { value = true }; };
-template<> struct is_integral<unsigned char>          { enum { value = true }; };
-template<> struct is_integral<signed short>           { enum { value = true }; };
-template<> struct is_integral<unsigned short>         { enum { value = true }; };
-template<> struct is_integral<signed int>             { enum { value = true }; };
-template<> struct is_integral<unsigned int>           { enum { value = true }; };
-template<> struct is_integral<signed long>            { enum { value = true }; };
-template<> struct is_integral<unsigned long>          { enum { value = true }; };
-#endif
+template <typename T>
+using is_integral = std::is_integral<T>;
 
 
 template <typename T> struct add_const { typedef const T type; };
@@ -121,46 +96,12 @@ template <typename T> struct add_const<T&> { typedef T& type; };
 template <typename T> struct is_const { enum { value = 0 }; };
 template <typename T> struct is_const<T const> { enum { value = 1 }; };
 
-template<typename T> struct add_const_on_value_type            { typedef const T type;  };
-template<typename T> struct add_const_on_value_type<T&>        { typedef T const& type; };
-template<typename T> struct add_const_on_value_type<T*>        { typedef T const* type; };
-template<typename T> struct add_const_on_value_type<T* const>  { typedef T const* const type; };
-template<typename T> struct add_const_on_value_type<T const* const>  { typedef T const* const type; };
+template <typename T>
+using add_const_on_value_type = std::add_const_t<T>;
 
 
-template<typename From, typename To>
-struct is_convertible_impl
-{
-private:
-  struct any_conversion
-  {
-    template <typename T> any_conversion(const volatile T&);
-    template <typename T> any_conversion(T&);
-  };
-  struct yes {int a[1];};
-  struct no  {int a[2];};
-
-  static yes test(const To&, int);
-  static no  test(any_conversion, ...);
-
-public:
-  static From ms_from;
-#ifdef __INTEL_COMPILER
-  #pragma warning push
-  #pragma warning ( disable : 2259 )
-#endif
-  enum { value = sizeof(test(ms_from, 0))==sizeof(yes) };
-#ifdef __INTEL_COMPILER
-  #pragma warning pop
-#endif
-};
-
-template<typename From, typename To>
-struct is_convertible
-{
-  enum { value = is_convertible_impl<typename remove_all<From>::type,
-                                     typename remove_all<To  >::type>::value };
-};
+template <typename From, typename To>
+constexpr bool is_convertible = std::is_convertible_v<From, To>;
 
 /** \internal Allows to enable/disable an overload
   * according to a compile time condition.

@@ -39,10 +39,10 @@ template<typename T> struct is_valid_index_type
 {
   enum { value =
 #if EIGEN_HAS_TYPE_TRAITS
-   internal::is_integral<T>::value || std::is_enum<T>::value
+   std::is_integral_v<T> || std::is_enum<T>::value
 #else
-  // without C++23, we use is_convertible to Index instead of is_integral in order to treat enums as Index.
-  internal::is_convertible<T,Index>::value
+  // without C++23, we use std::is_convertible to Index instead of is_integral in order to treat enums as Index.
+  std::is_convertible_v<T,Index>
 #endif
   };
 };
@@ -67,7 +67,7 @@ struct promote_scalar_arg<S,T,true>
 
 // Recursively check safe conversion to PromotedType, and then ExprScalar if they are different.
 template<typename ExprScalar,typename T,typename PromotedType,
-  bool ConvertibleToLiteral = internal::is_convertible<T,PromotedType>::value,
+  bool ConvertibleToLiteral = std::is_convertible_v<T,PromotedType>,
   bool IsSafe = NumTraits<T>::IsInteger || !NumTraits<PromotedType>::IsInteger>
 struct promote_scalar_arg_unsupported;
 
@@ -428,7 +428,7 @@ struct transfer_constness
 {
   typedef typename conditional<
     bool(internal::is_const<T1>::value),
-    typename internal::add_const_on_value_type<T2>::type,
+    std::add_const_t<T2>,
     T2
   >::type type;
 };

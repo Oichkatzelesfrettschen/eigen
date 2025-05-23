@@ -116,7 +116,7 @@ class AutoDiffScalar
         std::enable_if_t<
             internal::is_same<Scalar, typename internal::traits<typename internal::remove_all<
                                           OtherDerType>>::Scalar>::value &&
-                internal::is_convertible<OtherDerType, DerType>::value,
+                std::is_convertible_v<OtherDerType, DerType>,
             void *>::type = 0
 #endif
         )

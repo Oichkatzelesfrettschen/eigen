@@ -12,7 +12,7 @@
 template<typename From, typename To>
 bool check_is_convertible(const From&, const To&)
 {
-  return internal::is_convertible<From,To>::value;
+  return std::is_convertible_v<From, To>;
 }
 
 struct FooReturnType {
@@ -47,14 +47,14 @@ void test_meta()
   VERIFY(( internal::is_same< internal::remove_const<float* const>::type, float* >::value));
 
   // test add_const_on_value_type
-  VERIFY(( internal::is_same< internal::add_const_on_value_type<float&>::type, float const& >::value));
-  VERIFY(( internal::is_same< internal::add_const_on_value_type<float*>::type, float const* >::value));
+  VERIFY(( internal::is_same< std::add_const_t<float&>, float const& >::value));
+  VERIFY(( internal::is_same< std::add_const_t<float*>, float const* >::value));
 
-  VERIFY(( internal::is_same< internal::add_const_on_value_type<float>::type, const float >::value));
-  VERIFY(( internal::is_same< internal::add_const_on_value_type<const float>::type, const float >::value));
+  VERIFY(( internal::is_same< std::add_const_t<float>, const float >::value));
+  VERIFY(( internal::is_same< std::add_const_t<const float>, const float >::value));
 
-  VERIFY(( internal::is_same< internal::add_const_on_value_type<const float* const>::type, const float* const>::value));
-  VERIFY(( internal::is_same< internal::add_const_on_value_type<float* const>::type, const float* const>::value));
+  VERIFY(( internal::is_same< std::add_const_t<const float* const>, const float* const>::value));
+  VERIFY(( internal::is_same< std::add_const_t<float* const>, const float* const>::value));
   
   VERIFY(( internal::is_same<float,internal::remove_reference<float&>::type >::value));
   VERIFY(( internal::is_same<const float,internal::remove_reference<const float&>::type >::value));
@@ -62,14 +62,14 @@ void test_meta()
   VERIFY(( internal::is_same<const float,internal::remove_pointer<const float*>::type >::value));
   VERIFY(( internal::is_same<float,internal::remove_pointer<float* const >::type >::value));
   
-  VERIFY(( internal::is_convertible<float,double>::value ));
-  VERIFY(( internal::is_convertible<int,double>::value ));
-  VERIFY(( internal::is_convertible<double,int>::value ));
-  VERIFY((!internal::is_convertible<std::complex<double>,double>::value ));
-  VERIFY(( internal::is_convertible<Array33f,Matrix3f>::value ));
+  VERIFY(( std::is_convertible_v<float,double> ));
+  VERIFY(( std::is_convertible_v<int,double> ));
+  VERIFY(( std::is_convertible_v<double,int> ));
+  VERIFY((!std::is_convertible_v<std::complex<double>,double> ));
+  VERIFY(( std::is_convertible_v<Array33f,Matrix3f> ));
 //   VERIFY((!internal::is_convertible<Matrix3f,Matrix3d>::value )); //does not work because the conversion is prevented by a static assertion
-  VERIFY((!internal::is_convertible<Array33f,int>::value ));
-  VERIFY((!internal::is_convertible<MatrixXf,float>::value ));
+  VERIFY((!std::is_convertible_v<Array33f,int> ));
+  VERIFY((!std::is_convertible_v<MatrixXf,float> ));
   {
     float f;
     MatrixXf A, B;

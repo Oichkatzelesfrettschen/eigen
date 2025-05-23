@@ -17,7 +17,6 @@ namespace internal {
 // Most of the following operations require arch >= 3.0
 #if defined(EIGEN_HAS_CUDA_FP16) && defined(EIGEN_CUDACC) && defined(EIGEN_CUDA_ARCH) && EIGEN_CUDA_ARCH >= 300
 
-template<> struct is_arithmetic<half2> { enum { value = true }; };
 
 template<> struct packet_traits<Eigen::half> : default_packet_traits
 {
@@ -350,7 +349,6 @@ typedef struct {
 } Packet16h;
 
 
-template<> struct is_arithmetic<Packet16h> { enum { value = true }; };
 
 template <>
 struct packet_traits<half> : default_packet_traits {
@@ -718,7 +716,6 @@ typedef struct {
 } Packet8h;
 
 
-template<> struct is_arithmetic<Packet8h> { enum { value = true }; };
 
 template <>
 struct packet_traits<Eigen::half> : default_packet_traits {
@@ -977,7 +974,6 @@ typedef struct {
 } Packet4h;
 
 
-template<> struct is_arithmetic<Packet4h> { enum { value = true }; };
 
 template <>
 struct packet_traits<Eigen::half> : default_packet_traits {

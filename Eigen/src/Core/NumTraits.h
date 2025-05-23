@@ -119,7 +119,7 @@ template<typename T> struct GenericNumTraits
     IsInteger = std::numeric_limits<T>::is_integer,
     IsSigned = std::numeric_limits<T>::is_signed,
     IsComplex = 0,
-    RequireInitialization = internal::is_arithmetic<T>::value ? 0 : 1,
+    RequireInitialization = std::is_arithmetic_v<T> ? 0 : 1,
     ReadCost = 1,
     AddCost = 1,
     MulCost = 1

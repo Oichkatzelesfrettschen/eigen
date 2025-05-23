@@ -10,6 +10,7 @@
 
 #ifndef EIGEN_DENSESTORAGEBASE_H
 #define EIGEN_DENSESTORAGEBASE_H
+#include <type_traits>
 
 #if defined(EIGEN_INITIALIZE_MATRICES_BY_ZERO)
 # define EIGEN_INITIALIZE_COEFFS
@@ -769,7 +770,7 @@ class PlainObjectBase : public internal::dense_xpr_base<Derived>::type
     // then the argument is meant to be the size of the object.
     template<typename T>
     EIGEN_DEVICE_FUNC
-    EIGEN_STRONG_INLINE void _init1(Index size, std::enable_if_t<(Base::SizeAtCompileTime!=1 || !internal::is_convertible<T, Scalar>::value)
+    EIGEN_STRONG_INLINE void _init1(Index size, std::enable_if_t<(Base::SizeAtCompileTime!=1 || !std::is_convertible_v<T, Scalar>)
                                                                               && ((!internal::is_same<typename internal::traits<Derived>::XprKind,ArrayXpr>::value || Base::SizeAtCompileTime==Dynamic)),T>::type* = 0)
     {
       // NOTE MSVC 2008 complains if we directly put bool(NumTraits<T>::IsInteger) as the EIGEN_STATIC_ASSERT argument.
@@ -783,7 +784,7 @@ class PlainObjectBase : public internal::dense_xpr_base<Derived>::type
     // We have a 1x1 matrix/array => the argument is interpreted as the value of the unique coefficient (case where scalar type can be implicitely converted)
     template<typename T>
     EIGEN_DEVICE_FUNC
-    EIGEN_STRONG_INLINE void _init1(const Scalar& val0, std::enable_if_t<Base::SizeAtCompileTime==1 && internal::is_convertible<T, Scalar>::value,T>::type* = 0)
+    EIGEN_STRONG_INLINE void _init1(const Scalar& val0, std::enable_if_t<Base::SizeAtCompileTime==1 && std::is_convertible_v<T, Scalar>,T>::type* = 0)
     {
       EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(PlainObjectBase, 1)
       m_storage.data()[0] = val0;
@@ -796,7 +797,7 @@ class PlainObjectBase : public internal::dense_xpr_base<Derived>::type
                                     std::enable_if_t<(!internal::is_same<Index,Scalar>::value)
                                                                   && (internal::is_same<Index,T>::value)
                                                                   && Base::SizeAtCompileTime==1
-                                                                  && internal::is_convertible<T, Scalar>::value,T*>::type* = 0)
+                                                                  && std::is_convertible_v<T, Scalar>,T*>::type* = 0)
     {
       EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(PlainObjectBase, 1)
       m_storage.data()[0] = Scalar(val0);
@@ -851,7 +852,7 @@ class PlainObjectBase : public internal::dense_xpr_base<Derived>::type
     EIGEN_STRONG_INLINE void _init1(const Scalar& val0,
                                     std::enable_if_t<Base::SizeAtCompileTime!=Dynamic
                                                                   && Base::SizeAtCompileTime!=1
-                                                                  && internal::is_convertible<T, Scalar>::value
+                                                                  && std::is_convertible_v<T, Scalar>
                                                                   && internal::is_same<typename internal::traits<Derived>::XprKind,ArrayXpr>::value,T>::type* = 0)
     {
       Base::setConstant(val0);
@@ -865,7 +866,7 @@ class PlainObjectBase : public internal::dense_xpr_base<Derived>::type
                                                                   && (internal::is_same<Index,T>::value)
                                                                   && Base::SizeAtCompileTime!=Dynamic
                                                                   && Base::SizeAtCompileTime!=1
-                                                                  && internal::is_convertible<T, Scalar>::value
+                                                                  && std::is_convertible_v<T, Scalar>
                                                                   && internal::is_same<typename internal::traits<Derived>::XprKind,ArrayXpr>::value,T*>::type* = 0)
     {
       Base::setConstant(val0);

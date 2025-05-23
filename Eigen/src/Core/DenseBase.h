@@ -389,7 +389,7 @@ template<typename Derived> class DenseBase
     EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
     Derived& operator/=(const Scalar& other);
 
-    typedef typename internal::add_const_on_value_type<typename internal::eval<Derived>::type>::type EvalReturnType;
+    typedef std::add_const_t<typename internal::eval<Derived>::type> EvalReturnType;
     /** \returns the matrix or vector obtained by evaluating this expression.
       *
       * Notice that in the case of a plain matrix or vector (not an expression) this function just returns
