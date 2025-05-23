@@ -448,10 +448,6 @@
 #endif
 #endif
 
-// Constexpr support is required by Eigen's C++14 minimum baseline
-#ifndef EIGEN_HAS_CONSTEXPR
-#define EIGEN_HAS_CONSTEXPR 1
-#endif
 
 // Does the compiler support C++11 math?
 // Let's be conservative and enable the default C++11 implementation only if we are sure it exists

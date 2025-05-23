@@ -44,7 +44,6 @@ template<DenseIndex n, typename Index, std::size_t Rank> const Index array_get(c
 }
 
 
-#if EIGEN_HAS_CONSTEXPR
 template <typename Index, std::size_t Rank>
 struct index_known_statically_impl<DimensionList<Index, Rank> > {
   EIGEN_DEVICE_FUNC static constexpr bool run(const DenseIndex) {
@@ -136,98 +135,6 @@ struct index_statically_lt_impl<const DimensionList<Index, Rank> > {
   }
 };
 
-#else
-template <typename Index, std::size_t Rank>
-struct index_known_statically_impl<DimensionList<Index, Rank> > {
-  EIGEN_DEVICE_FUNC static EIGEN_ALWAYS_INLINE bool run(const DenseIndex) {
-    return true;
-  }
-};
-template <typename Index, std::size_t Rank>
-struct index_known_statically_impl<const DimensionList<Index, Rank> > {
-  EIGEN_DEVICE_FUNC static EIGEN_ALWAYS_INLINE bool run(const DenseIndex) {
-    return true;
-  }
-};
-
-template <typename Index, std::size_t Rank>
-struct all_indices_known_statically_impl<DimensionList<Index, Rank> > {
-  EIGEN_DEVICE_FUNC static EIGEN_ALWAYS_INLINE bool run() {
-    return true;
-  }
-};
-template <typename Index, std::size_t Rank>
-struct all_indices_known_statically_impl<const DimensionList<Index, Rank> > {
-  EIGEN_DEVICE_FUNC static EIGEN_ALWAYS_INLINE bool run() {
-    return true;
-  }
-};
-
-template <typename Index, std::size_t Rank>
-struct indices_statically_known_to_increase_impl<DimensionList<Index, Rank> > {
-  static EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE bool run() {
-    return true;
-  }
-};
-template <typename Index, std::size_t Rank>
-struct indices_statically_known_to_increase_impl<const DimensionList<Index, Rank> > {
-  static EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE bool run() {
-    return true;
-  }
-};
-
-template <typename Index, std::size_t Rank>
-struct index_statically_eq_impl<DimensionList<Index, Rank> > {
-  static EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE bool run(const DenseIndex, const DenseIndex) {
-    return false;
-  }
-};
-template <typename Index, std::size_t Rank>
-struct index_statically_eq_impl<const DimensionList<Index, Rank> > {
-  static EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE bool run(const DenseIndex, const DenseIndex) {
-    return false;
-  }
-};
-
-template <typename Index, std::size_t Rank>
-struct index_statically_ne_impl<DimensionList<Index, Rank> > {
-  static EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE bool run(const DenseIndex, const DenseIndex){
-    return false;
-  }
-};
-template <typename Index, std::size_t Rank>
-struct index_statically_ne_impl<const DimensionList<Index, Rank> > {
-  static EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE bool run(const DenseIndex, const DenseIndex) {
-    return false;
-  }
-};
-
-template <typename Index, std::size_t Rank>
-struct index_statically_gt_impl<DimensionList<Index, Rank> > {
-  static EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE bool run(const DenseIndex, const DenseIndex) {
-    return false;
-  }
-};
-template <typename Index, std::size_t Rank>
-struct index_statically_gt_impl<const DimensionList<Index, Rank> > {
-  static EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE bool run(const DenseIndex, const DenseIndex) {
-    return false;
-  }
-};
-
-template <typename Index, std::size_t Rank>
-struct index_statically_lt_impl<DimensionList<Index, Rank> > {
-  static EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE bool run(const DenseIndex, const DenseIndex) {
-    return false;
-  }
-};
-template <typename Index, std::size_t Rank>
-struct index_statically_lt_impl<const DimensionList<Index, Rank> > {
-  static EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE bool run(const DenseIndex, const DenseIndex) {
-    return false;
-  }
-};
-#endif
 
 }  // end namespace internal
 }  // end namespace Eigen
