@@ -18,3 +18,12 @@ validate everything:
 ```bash
 bash porter/build_all.sh
 ```
+
+## Troubleshooting AST Generation
+
+`scan_templates.py` uses clang's Python bindings to generate AST dumps. If you
+see warnings about failed parsing or missing translation units, ensure that
+libclang is installed and visible. On Debian-based systems install the
+`libclang-dev` package. If `libclang.so` lives in a non-standard location,
+export the environment variable `LIBCLANG_PATH` pointing to the shared library
+before running the script.
