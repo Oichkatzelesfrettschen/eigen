@@ -175,10 +175,10 @@ class CwiseTernaryOp : public CwiseTernaryOpImpl<
   const TernaryOp& functor() const { return m_functor; }
 
  protected:
-  Arg1Nested m_arg1;
-  Arg2Nested m_arg2;
-  Arg3Nested m_arg3;
-  const TernaryOp m_functor;
+  [[no_unique_address]] Arg1Nested m_arg1;
+  [[no_unique_address]] Arg2Nested m_arg2;
+  [[no_unique_address]] Arg3Nested m_arg3;
+  [[no_unique_address]] const TernaryOp m_functor;
 };
 
 // Generic API dispatcher

@@ -77,8 +77,8 @@ class PartialReduxExpr : public internal::dense_xpr_base< PartialReduxExpr<Matri
     const MemberOp& functor() const { return m_functor; }
 
   protected:
-    typename MatrixType::Nested m_matrix;
-    const MemberOp m_functor;
+    [[no_unique_address]] typename MatrixType::Nested m_matrix;
+    [[no_unique_address]] const MemberOp m_functor;
 };
 
 #define EIGEN_MEMBER_FUNCTOR(MEMBER,COST)                               \
