@@ -24,6 +24,18 @@ CTYPE_MAP = {
     "int": "int",
 }
 
+
+def _c_ident(name: str) -> str:
+    ident = re.sub(r"[^0-9a-zA-Z_]", "_", name)
+    ident = re.sub(r"_+", "_", ident).strip("_") or "id"
+    if ident[0].isdigit():
+        ident = "_" + ident
+    return ident
+
+
+def _fn_name(base: str, suffix: str) -> str:
+    return f"{_c_ident(base)}_{suffix}"
+
 def parse_mapping(path):
     with open(path, "r", encoding="utf-8") as f:
         if HAVE_YAML:
@@ -80,7 +92,7 @@ def gen_header(mappings):
         lines.append(f"}} {cname};")
         lines.append("")
 
-        add_fn = f"{cname}_add"
+        add_fn = _fn_name(cname, "add")
         lines.append(f"static inline void {add_fn}(const {cname} *a, const {cname} *b, {cname} *out) {{")
         lines.append("    assert(a->rows == b->rows && a->cols == b->cols && a->rows == out->rows && a->cols == out->cols);")
         lines.append("    for (size_t i = 0; i < a->rows * a->cols; ++i)")
@@ -88,7 +100,7 @@ def gen_header(mappings):
         lines.append("}")
         lines.append("")
 
-        mul_fn = f"{cname}_mul"
+        mul_fn = _fn_name(cname, "mul")
         lines.append(f"static inline void {mul_fn}(const {cname} *a, const {cname} *b, {cname} *out) {{")
         lines.append("    assert(a->cols == b->rows && a->rows == out->rows && b->cols == out->cols);")
         lines.append("    for (size_t i = 0; i < a->rows; ++i) {")
