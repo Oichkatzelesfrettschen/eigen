@@ -366,10 +366,10 @@
 // Assume modern compilers supporting template specializations
 #define EIGEN_HAS_STATIC_ARRAY_TEMPLATE 1
 
+
 // C++23 is the minimum supported standard
 #undef  EIGEN_MAX_CPP_VER
 #define EIGEN_MAX_CPP_VER 23
-
 #define EIGEN_HAS_CXX23 1
 
 // Do we support r-value references?

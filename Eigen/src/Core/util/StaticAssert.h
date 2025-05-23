@@ -14,17 +14,14 @@
 /* Some notes on Eigen's static assertion mechanism:
  *
  *  - in EIGEN_STATIC_ASSERT(CONDITION,MSG) the parameter CONDITION must be a compile time boolean
- *    expression, and MSG an enum listed in struct internal::static_assertion<true>
- *
- *  - define EIGEN_NO_STATIC_ASSERT to disable them (and save compilation time)
- *    in that case, the static assertion is converted to the following runtime assert:
- *      eigen_assert(CONDITION && "MSG")
+ *    expression, and MSG is displayed when the assertion fails.
  *
  *  - currently EIGEN_STATIC_ASSERT can only be used in function scope
  *
  */
 
 #ifndef EIGEN_STATIC_ASSERT
+
 #ifndef EIGEN_NO_STATIC_ASSERT
 
 // Use native static_assert with C++23
@@ -36,6 +33,7 @@
 
 #endif // EIGEN_NO_STATIC_ASSERT
 #endif // EIGEN_STATIC_ASSERT
+
 
 // static assertion failing if the type \a TYPE is not a vector type
 #define EIGEN_STATIC_ASSERT_VECTOR_ONLY(TYPE) \
