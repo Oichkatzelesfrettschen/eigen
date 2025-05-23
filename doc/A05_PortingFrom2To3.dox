@@ -259,9 +259,8 @@ use it unless you are sure of what you are doing, i.e., you have rigourosly meas
 
 \section AlignMacros Alignment-related macros
 
-The `EIGEN_ALIGN_128` macro was renamed to `EIGEN_ALIGN16` and is now deprecated
-in favor of the C++11 `alignas` specifier. Existing macros expand to `alignas` so
-older code continues to compile.
+The `EIGEN_ALIGN_128` macro was renamed to `EIGEN_ALIGN16` and has been removed.
+Use the C++11 `alignas` specifier directly in your code.
 
 The \link TopicPreprocessorDirectivesPerformance EIGEN_DONT_ALIGN \endlink option still exists in Eigen 3, but it has a new cousin: \link TopicPreprocessorDirectivesPerformance  EIGEN_DONT_ALIGN_STATICALLY.\endlink It allows to get rid of all static alignment issues while keeping alignment of dynamic-size heap-allocated arrays. Vectorization of statically allocated arrays is still preserved (unless you define \link TopicPreprocessorDirectivesPerformance EIGEN_UNALIGNED_VECTORIZE \endlink =0), at the cost of unaligned memory stores.
 

@@ -678,23 +678,9 @@ namespace Eigen {
  * If we made alignment depend on whether or not EIGEN_VECTORIZE is defined, it would be impossible to link
  * vectorized and non-vectorized code.
  */
-#if defined(__cplusplus) && __cplusplus >= 201103L
-  // Prefer the standard alignas specifier when available.
-  // These macros are deprecated and will expand to alignas.
-  #define EIGEN_ALIGN_TO_BOUNDARY(n) alignas(n)
-#else
-  #if (defined EIGEN_CUDACC)
-    #define EIGEN_ALIGN_TO_BOUNDARY(n) __align__(n)
-  #elif EIGEN_COMP_GNUC || EIGEN_COMP_PGI || EIGEN_COMP_IBM || EIGEN_COMP_ARM
-    #define EIGEN_ALIGN_TO_BOUNDARY(n) __attribute__((aligned(n)))
-  #elif EIGEN_COMP_MSVC
-    #define EIGEN_ALIGN_TO_BOUNDARY(n) __declspec(align(n))
-  #elif EIGEN_COMP_SUNCC
-    // FIXME not sure about this one:
-    #define EIGEN_ALIGN_TO_BOUNDARY(n) __attribute__((aligned(n)))
-  #else
-    #error Please tell me what is the equivalent of __attribute__((aligned(n))) for your compiler
-  #endif
+#if 0
+#define EIGEN_ALIGN_TO_BOUNDARY(n) alignas(n)
+#warning "EIGEN_ALIGN_TO_BOUNDARY is deprecated; use alignas"
 #endif
 
 // If the user explicitly disable vectorization, then we also disable alignment
@@ -786,17 +772,7 @@ namespace Eigen {
 // Henceforth, only EIGEN_MAX_STATIC_ALIGN_BYTES should be used.
 
 
-// Shortcuts to EIGEN_ALIGN_TO_BOUNDARY.
-// Deprecated: prefer using the alignas specifier directly.
-#define EIGEN_ALIGN8  EIGEN_ALIGN_TO_BOUNDARY(8)
-#define EIGEN_ALIGN16 EIGEN_ALIGN_TO_BOUNDARY(16)
-#define EIGEN_ALIGN32 EIGEN_ALIGN_TO_BOUNDARY(32)
-#define EIGEN_ALIGN64 EIGEN_ALIGN_TO_BOUNDARY(64)
-#if EIGEN_MAX_STATIC_ALIGN_BYTES>0
-#define EIGEN_ALIGN_MAX EIGEN_ALIGN_TO_BOUNDARY(EIGEN_MAX_STATIC_ALIGN_BYTES)
-#else
-#define EIGEN_ALIGN_MAX
-#endif
+// EIGEN_ALIGN* macros have been removed. Use the standard alignas specifier.
 
 
 // Dynamic alignment control

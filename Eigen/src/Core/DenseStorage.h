@@ -82,7 +82,7 @@ struct plain_array
 template <typename T, int Size, int MatrixOrArrayOptions>
 struct plain_array<T, Size, MatrixOrArrayOptions, 8>
 {
-  EIGEN_ALIGN_TO_BOUNDARY(8) T array[Size];
+  alignas(8) T array[Size];
 
   EIGEN_DEVICE_FUNC
   plain_array() 
@@ -101,7 +101,7 @@ struct plain_array<T, Size, MatrixOrArrayOptions, 8>
 template <typename T, int Size, int MatrixOrArrayOptions>
 struct plain_array<T, Size, MatrixOrArrayOptions, 16>
 {
-  EIGEN_ALIGN_TO_BOUNDARY(16) T array[Size];
+  alignas(16) T array[Size];
 
   EIGEN_DEVICE_FUNC
   plain_array() 
@@ -120,7 +120,7 @@ struct plain_array<T, Size, MatrixOrArrayOptions, 16>
 template <typename T, int Size, int MatrixOrArrayOptions>
 struct plain_array<T, Size, MatrixOrArrayOptions, 32>
 {
-  EIGEN_ALIGN_TO_BOUNDARY(32) T array[Size];
+  alignas(32) T array[Size];
 
   EIGEN_DEVICE_FUNC
   plain_array() 
@@ -139,7 +139,7 @@ struct plain_array<T, Size, MatrixOrArrayOptions, 32>
 template <typename T, int Size, int MatrixOrArrayOptions>
 struct plain_array<T, Size, MatrixOrArrayOptions, 64>
 {
-  EIGEN_ALIGN_TO_BOUNDARY(64) T array[Size];
+  alignas(64) T array[Size];
 
   EIGEN_DEVICE_FUNC
   plain_array() 
