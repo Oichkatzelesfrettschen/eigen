@@ -27,3 +27,8 @@ libclang is installed and visible. On Debian-based systems install the
 `libclang-dev` package. If `libclang.so` lives in a non-standard location,
 export the environment variable `LIBCLANG_PATH` pointing to the shared library
 before running the script.
+
+If the script reports that `index.parse` returned `None` or that libclang
+produced no translation unit, verify that `LIBCLANG_PATH` is set correctly or
+that the Clang development libraries are installed. Re-run `scan_templates.py`
+after adjusting the environment.
