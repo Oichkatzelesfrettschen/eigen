@@ -7,9 +7,6 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifdef EIGEN_TEST_PART_2
-#define EIGEN_MAX_CPP_VER 03
-#endif
 
 #include "main.h"
 

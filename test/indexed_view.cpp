@@ -7,15 +7,6 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifdef EIGEN_TEST_PART_2
-// Make sure we also check c++23 max implementation
-#define EIGEN_MAX_CPP_VER 23
-#endif
-
-#ifdef EIGEN_TEST_PART_3
-// Make sure we also check c++23 max implementation
-#define EIGEN_MAX_CPP_VER 23
-#endif
 
 #include <valarray>
 #include <vector>
