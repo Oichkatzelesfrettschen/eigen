@@ -16,7 +16,7 @@ int main(void) {
     EC_Matrix2f Ag = {2,2,a_data};
     EC_Matrix2f Bg = {2,2,b_data};
     EC_Matrix2f C_mul = {2,2,mul_data};
-    ec_mul(&Ag, &Bg, &C_mul);
+    EC_Matrix2f_mul(&Ag, &Bg, &C_mul);
 
     FILE *f = fopen("/tmp/c_out.txt", "w");
     for (size_t i=0; i<4; ++i) fprintf(f, "%f\n", add_data[i]);
