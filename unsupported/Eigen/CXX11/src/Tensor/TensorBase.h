@@ -814,7 +814,7 @@ class TensorBase<Derived, ReadOnlyAccessors>
     extract_image_patches(const Index patch_rows = 1, const Index patch_cols = 1,
                           const Index row_stride = 1, const Index col_stride = 1,
                           const Index in_row_stride = 1, const Index in_col_stride = 1,
-                          const PaddingType padding_type = PADDING_SAME, const Scalar padding_value = Scalar(0)) const {
+                          const PaddingType padding_type = PaddingType::PADDING_SAME, const Scalar padding_value = Scalar(0)) const {
       return TensorImagePatchOp<Dynamic, Dynamic, const Derived>(derived(), patch_rows, patch_cols, row_stride, col_stride,
                                                                  in_row_stride, in_col_stride, 1, 1, padding_type, padding_value);
     }
@@ -837,7 +837,7 @@ class TensorBase<Derived, ReadOnlyAccessors>
     const TensorVolumePatchOp<Dynamic, Dynamic, Dynamic, const Derived>
     extract_volume_patches(const Index patch_planes, const Index patch_rows, const Index patch_cols,
                            const Index plane_stride = 1, const Index row_stride = 1, const Index col_stride = 1,
-                           const PaddingType padding_type = PADDING_SAME, const Scalar padding_value = Scalar(0)) const {
+                           const PaddingType padding_type = PaddingType::PADDING_SAME, const Scalar padding_value = Scalar(0)) const {
       return TensorVolumePatchOp<Dynamic, Dynamic, Dynamic, const Derived>(derived(), patch_planes, patch_rows, patch_cols, plane_stride, row_stride, col_stride, 1, 1, 1, 1, 1, 1, padding_type, padding_value);
     }
 

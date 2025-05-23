@@ -82,7 +82,7 @@ struct plain_array
 template <typename T, int Size, int MatrixOrArrayOptions>
 struct plain_array<T, Size, MatrixOrArrayOptions, 8>
 {
-  EIGEN_ALIGN_TO_BOUNDARY(8) T array[Size];
+  alignas(8) T array[Size];
 
   EIGEN_DEVICE_FUNC
   plain_array() 
@@ -101,7 +101,7 @@ struct plain_array<T, Size, MatrixOrArrayOptions, 8>
 template <typename T, int Size, int MatrixOrArrayOptions>
 struct plain_array<T, Size, MatrixOrArrayOptions, 16>
 {
-  EIGEN_ALIGN_TO_BOUNDARY(16) T array[Size];
+  alignas(16) T array[Size];
 
   EIGEN_DEVICE_FUNC
   plain_array() 
@@ -120,7 +120,7 @@ struct plain_array<T, Size, MatrixOrArrayOptions, 16>
 template <typename T, int Size, int MatrixOrArrayOptions>
 struct plain_array<T, Size, MatrixOrArrayOptions, 32>
 {
-  EIGEN_ALIGN_TO_BOUNDARY(32) T array[Size];
+  alignas(32) T array[Size];
 
   EIGEN_DEVICE_FUNC
   plain_array() 
@@ -139,7 +139,7 @@ struct plain_array<T, Size, MatrixOrArrayOptions, 32>
 template <typename T, int Size, int MatrixOrArrayOptions>
 struct plain_array<T, Size, MatrixOrArrayOptions, 64>
 {
-  EIGEN_ALIGN_TO_BOUNDARY(64) T array[Size];
+  alignas(64) T array[Size];
 
   EIGEN_DEVICE_FUNC
   plain_array() 
@@ -369,7 +369,7 @@ template<typename T, int _Options> class DenseStorage<T, Dynamic, Dynamic, Dynam
     }
 #if EIGEN_HAS_RVALUE_REFERENCES
     EIGEN_DEVICE_FUNC
-    DenseStorage(DenseStorage&& other) EIGEN_NOEXCEPT
+    DenseStorage(DenseStorage&& other) noexcept
       : m_data(std::move(other.m_data))
       , m_rows(std::move(other.m_rows))
       , m_cols(std::move(other.m_cols))
@@ -379,7 +379,7 @@ template<typename T, int _Options> class DenseStorage<T, Dynamic, Dynamic, Dynam
       other.m_cols = 0;
     }
     EIGEN_DEVICE_FUNC
-    DenseStorage& operator=(DenseStorage&& other) EIGEN_NOEXCEPT
+    DenseStorage& operator=(DenseStorage&& other) noexcept
     {
       using std::swap;
       swap(m_data, other.m_data);
@@ -449,7 +449,7 @@ template<typename T, int _Rows, int _Options> class DenseStorage<T, Dynamic, _Ro
     }    
 #if EIGEN_HAS_RVALUE_REFERENCES
     EIGEN_DEVICE_FUNC
-    DenseStorage(DenseStorage&& other) EIGEN_NOEXCEPT
+    DenseStorage(DenseStorage&& other) noexcept
       : m_data(std::move(other.m_data))
       , m_cols(std::move(other.m_cols))
     {
@@ -457,7 +457,7 @@ template<typename T, int _Rows, int _Options> class DenseStorage<T, Dynamic, _Ro
       other.m_cols = 0;
     }
     EIGEN_DEVICE_FUNC
-    DenseStorage& operator=(DenseStorage&& other) EIGEN_NOEXCEPT
+    DenseStorage& operator=(DenseStorage&& other) noexcept
     {
       using std::swap;
       swap(m_data, other.m_data);
@@ -523,7 +523,7 @@ template<typename T, int _Cols, int _Options> class DenseStorage<T, Dynamic, Dyn
     }    
 #if EIGEN_HAS_RVALUE_REFERENCES
     EIGEN_DEVICE_FUNC
-    DenseStorage(DenseStorage&& other) EIGEN_NOEXCEPT
+    DenseStorage(DenseStorage&& other) noexcept
       : m_data(std::move(other.m_data))
       , m_rows(std::move(other.m_rows))
     {
@@ -531,7 +531,7 @@ template<typename T, int _Cols, int _Options> class DenseStorage<T, Dynamic, Dyn
       other.m_rows = 0;
     }
     EIGEN_DEVICE_FUNC
-    DenseStorage& operator=(DenseStorage&& other) EIGEN_NOEXCEPT
+    DenseStorage& operator=(DenseStorage&& other) noexcept
     {
       using std::swap;
       swap(m_data, other.m_data);
