@@ -125,7 +125,7 @@ ei_add_test(kronecker_product)
 ei_add_test(special_functions)
 
 # TODO: The following test names are prefixed with the cxx11 string, since historically
-# the tests depended on c++11. This isn't the case anymore so we ought to rename them.
+# the tests depended on C++11. This isn't the case anymore so we ought to rename them.
 # FIXME: Old versions of MSVC fail to compile this code, so we just disable these tests
 # when using visual studio. We should make the check more strict to enable the tests for
 # newer versions of MSVC.

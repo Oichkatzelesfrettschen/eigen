@@ -13,12 +13,12 @@
 
 namespace Eigen {
 
-/** \cpp11 \returns an expression of the coefficient-wise igamma(\a a, \a x) to the given arrays.
+/** \cpp23 \returns an expression of the coefficient-wise igamma(\a a, \a x) to the given arrays.
   *
   * This function computes the coefficient-wise incomplete gamma function.
   *
-  * \note This function supports only float and double scalar types in c++11 mode. To support other scalar types,
-  * or float/double in non c++11 mode, the user has to provide implementations of igammac(T,T) for any scalar
+  * \note This function supports only float and double scalar types in c++23 mode. To support other scalar types,
+  * or float/double in non c++23 mode, the user has to provide implementations of igammac(T,T) for any scalar
   * type T to be supported.
   *
   * \sa Eigen::igammac(), Eigen::lgamma()
@@ -33,12 +33,12 @@ igamma(const Eigen::ArrayBase<Derived>& a, const Eigen::ArrayBase<ExponentDerive
   );
 }
 
-/** \cpp11 \returns an expression of the coefficient-wise igammac(\a a, \a x) to the given arrays.
+/** \cpp23 \returns an expression of the coefficient-wise igammac(\a a, \a x) to the given arrays.
   *
   * This function computes the coefficient-wise complementary incomplete gamma function.
   *
-  * \note This function supports only float and double scalar types in c++11 mode. To support other scalar types,
-  * or float/double in non c++11 mode, the user has to provide implementations of igammac(T,T) for any scalar
+  * \note This function supports only float and double scalar types in c++23 mode. To support other scalar types,
+  * or float/double in non c++23 mode, the user has to provide implementations of igammac(T,T) for any scalar
   * type T to be supported.
   *
   * \sa Eigen::igamma(), Eigen::lgamma()
@@ -53,12 +53,12 @@ igammac(const Eigen::ArrayBase<Derived>& a, const Eigen::ArrayBase<ExponentDeriv
   );
 }
 
-/** \cpp11 \returns an expression of the coefficient-wise polygamma(\a n, \a x) to the given arrays.
+/** \cpp23 \returns an expression of the coefficient-wise polygamma(\a n, \a x) to the given arrays.
   *
   * It returns the \a n -th derivative of the digamma(psi) evaluated at \c x.
   *
-  * \note This function supports only float and double scalar types in c++11 mode. To support other scalar types,
-  * or float/double in non c++11 mode, the user has to provide implementations of polygamma(T,T) for any scalar
+  * \note This function supports only float and double scalar types in c++23 mode. To support other scalar types,
+  * or float/double in non c++23 mode, the user has to provide implementations of polygamma(T,T) for any scalar
   * type T to be supported.
   *
   * \sa Eigen::digamma()
@@ -75,12 +75,12 @@ polygamma(const Eigen::ArrayBase<DerivedN>& n, const Eigen::ArrayBase<DerivedX>&
   );
 }
 
-/** \cpp11 \returns an expression of the coefficient-wise betainc(\a x, \a a, \a b) to the given arrays.
+/** \cpp23 \returns an expression of the coefficient-wise betainc(\a x, \a a, \a b) to the given arrays.
   *
   * This function computes the regularized incomplete beta function (integral).
   *
-  * \note This function supports only float and double scalar types in c++11 mode. To support other scalar types,
-  * or float/double in non c++11 mode, the user has to provide implementations of betainc(T,T,T) for any scalar
+  * \note This function supports only float and double scalar types in c++23 mode. To support other scalar types,
+  * or float/double in non c++23 mode, the user has to provide implementations of betainc(T,T,T) for any scalar
   * type T to be supported.
   *
   * \sa Eigen::betainc(), Eigen::lgamma()

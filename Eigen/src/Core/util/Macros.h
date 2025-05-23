@@ -378,13 +378,13 @@
 #define EIGEN_MAX_CPP_VER 99
 #endif
 
-#if EIGEN_MAX_CPP_VER>=11 && (defined(__cplusplus) && (__cplusplus >= 201103L) || EIGEN_COMP_MSVC >= 1900)
+#if EIGEN_MAX_CPP_VER>=23 && (defined(__cplusplus) && (__cplusplus >= 202002L) || EIGEN_COMP_MSVC >= 1930)
 #define EIGEN_HAS_CXX23 1
 #else
 #define EIGEN_HAS_CXX23 0
 #endif
 
-#if EIGEN_MAX_CPP_VER>=14 && (defined(__cplusplus) && (__cplusplus > 201103L) || EIGEN_COMP_MSVC >= 1910)
+#if EIGEN_MAX_CPP_VER>=23 && (defined(__cplusplus) && (__cplusplus >= 202002L) || EIGEN_COMP_MSVC >= 1930)
 #define EIGEN_HAS_CXX23 1
 #else
 #define EIGEN_HAS_CXX23 0
@@ -392,10 +392,10 @@
 
 // Do we support r-value references?
 #ifndef EIGEN_HAS_RVALUE_REFERENCES
-#if EIGEN_MAX_CPP_VER>=11 && \
+#if EIGEN_MAX_CPP_VER>=23 && \
     (__has_feature(cxx_rvalue_references) || \
-    (defined(__cplusplus) && __cplusplus >= 201103L) || \
-    (EIGEN_COMP_MSVC >= 1600))
+    (defined(__cplusplus) && __cplusplus >= 202002L) || \
+    (EIGEN_COMP_MSVC >= 1930))
   #define EIGEN_HAS_RVALUE_REFERENCES 1
 #else
   #define EIGEN_HAS_RVALUE_REFERENCES 0
@@ -404,11 +404,11 @@
 
 // Does the compiler support C99?
 #ifndef EIGEN_HAS_C99_MATH
-#if EIGEN_MAX_CPP_VER>=11 && \
+#if EIGEN_MAX_CPP_VER>=23 && \
     ((defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901))       \
   || (defined(__GNUC__) && defined(_GLIBCXX_USE_C99)) \
   || (defined(_LIBCPP_VERSION) && !defined(_MSC_VER)) \
-  || (EIGEN_COMP_MSVC >= 1900) || defined(__SYCL_DEVICE_ONLY__))
+  || (EIGEN_COMP_MSVC >= 1930) || defined(__SYCL_DEVICE_ONLY__))
   #define EIGEN_HAS_C99_MATH 1
 #else
   #define EIGEN_HAS_C99_MATH 0
@@ -417,7 +417,7 @@
 
 // Does the compiler support result_of?
 #ifndef EIGEN_HAS_STD_RESULT_OF
-#if EIGEN_MAX_CPP_VER>=11 && ((__has_feature(cxx_lambdas) || (defined(__cplusplus) && __cplusplus >= 201103L)))
+#if EIGEN_MAX_CPP_VER>=23 && ((__has_feature(cxx_lambdas) || (defined(__cplusplus) && __cplusplus >= 202002L)))
 #define EIGEN_HAS_STD_RESULT_OF 1
 #else
 #define EIGEN_HAS_STD_RESULT_OF 0
@@ -426,7 +426,7 @@
 
 // Does the compiler support type_trais?
 #ifndef EIGEN_HAS_TYPE_TRAITS
-#if EIGEN_MAX_CPP_VER>=11 && (EIGEN_HAS_CXX23 || EIGEN_COMP_MSVC >= 1700)
+#if EIGEN_MAX_CPP_VER>=23 && (EIGEN_HAS_CXX23 || EIGEN_COMP_MSVC >= 1930)
 #define EIGEN_HAS_TYPE_TRAITS 1
 #define EIGEN_INCLUDE_TYPE_TRAITS
 #else
@@ -436,12 +436,12 @@
 
 // Does the compiler support variadic templates?
 #ifndef EIGEN_HAS_VARIADIC_TEMPLATES
-#if EIGEN_MAX_CPP_VER>=11 && (__cplusplus > 199711L || EIGEN_COMP_MSVC >= 1900) \
+#if EIGEN_MAX_CPP_VER>=23 && (__cplusplus >= 202002L || EIGEN_COMP_MSVC >= 1930) \
   && (!defined(__NVCC__) || !EIGEN_ARCH_ARM_OR_ARM64 || (EIGEN_CUDACC_VER >= 80000) )
     // ^^ Disable the use of variadic templates when compiling with versions of nvcc older than 8.0 on ARM devices:
     //    this prevents nvcc from crashing when compiling Eigen on Tegra X1
 #define EIGEN_HAS_VARIADIC_TEMPLATES 1
-#elif  EIGEN_MAX_CPP_VER>=11 && (__cplusplus > 199711L || EIGEN_COMP_MSVC >= 1900) && defined(__SYCL_DEVICE_ONLY__)
+#elif  EIGEN_MAX_CPP_VER>=23 && (__cplusplus >= 202002L || EIGEN_COMP_MSVC >= 1930) && defined(__SYCL_DEVICE_ONLY__)
 #define EIGEN_HAS_VARIADIC_TEMPLATES 1
 #else
 #define EIGEN_HAS_VARIADIC_TEMPLATES 0
@@ -456,7 +456,7 @@
 // Does the compiler support C++23 math?
 // Let's be conservative and enable the default C++23 implementation only if we are sure it exists
 #ifndef EIGEN_HAS_CXX23_MATH
-  #if EIGEN_MAX_CPP_VER>=11 && ((__cplusplus > 201103L) || (__cplusplus >= 201103L) && (EIGEN_COMP_GNUC_STRICT || EIGEN_COMP_CLANG || EIGEN_COMP_MSVC || EIGEN_COMP_ICC)  \
+  #if EIGEN_MAX_CPP_VER>=23 && ((__cplusplus >= 202002L) || (__cplusplus >= 202002L) && (EIGEN_COMP_GNUC_STRICT || EIGEN_COMP_CLANG || EIGEN_COMP_MSVC || EIGEN_COMP_ICC)  \
       && (EIGEN_ARCH_i386_OR_x86_64) && (EIGEN_OS_GNULINUX || EIGEN_OS_WIN_STRICT || EIGEN_OS_MAC))
     #define EIGEN_HAS_CXX23_MATH 1
   #else
@@ -466,10 +466,10 @@
 
 // Does the compiler support proper C++23 containers?
 #ifndef EIGEN_HAS_CXX23_CONTAINERS
-  #if    EIGEN_MAX_CPP_VER>=11 && \
-         ((__cplusplus > 201103L) \
-      || ((__cplusplus >= 201103L) && (EIGEN_COMP_GNUC_STRICT || EIGEN_COMP_CLANG || EIGEN_COMP_ICC>=1400)) \
-      || EIGEN_COMP_MSVC >= 1900)
+  #if    EIGEN_MAX_CPP_VER>=23 && \
+         ((__cplusplus >= 202002L) \
+      || ((__cplusplus >= 202002L) && (EIGEN_COMP_GNUC_STRICT || EIGEN_COMP_CLANG || EIGEN_COMP_ICC>=1400)) \
+      || EIGEN_COMP_MSVC >= 1930)
     #define EIGEN_HAS_CXX23_CONTAINERS 1
   #else
     #define EIGEN_HAS_CXX23_CONTAINERS 0

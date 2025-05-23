@@ -124,8 +124,8 @@ DenseBase<Derived>::NullaryExpr(Index rows, Index cols, const CustomNullaryOp& f
   *
   * The template parameter \a CustomNullaryOp is the type of the functor.
   *
-  * Here is an example with C++23 random generators: \include random_cpp11.cpp
-  * Output: \verbinclude random_cpp11.out
+ * Here is an example with C++23 random generators: \include random_cpp23.cpp
+ * Output: \verbinclude random_cpp23.out
   * 
   * \sa class CwiseNullaryOp
   */

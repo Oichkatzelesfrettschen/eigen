@@ -13,10 +13,10 @@
 #include <vector>
 #include "EmulateArray.h"
 
-// Emulate the cxx11 functionality that we need if the compiler doesn't support it.
-// Visual studio 2015 doesn't advertise itself as cxx11 compliant, although it
+// Emulate the cxx23 functionality that we need if the compiler doesn't support it.
+// Visual studio 2015 doesn't advertise itself as cxx23 compliant, although it
 // supports enough of the standard for our needs
-#if __cplusplus > 199711L || EIGEN_COMP_MSVC >= 1900
+#if __cplusplus >= 202002L || EIGEN_COMP_MSVC >= 1930
 
 #include "CXX11Workarounds.h"
 

@@ -1,7 +1,7 @@
 package ec
 
 /*
-#cgo CFLAGS: -std=c11 -I${SRCDIR}/../../eigenc/include
+#cgo CFLAGS: -std=c23 -I${SRCDIR}/../../eigenc/include
 #include "ec_core.h"
 */
 import "C"

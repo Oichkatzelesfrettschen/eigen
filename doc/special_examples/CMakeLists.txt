@@ -21,15 +21,15 @@ endif(QT4_FOUND)
 
 check_cxx_compiler_flag("-std=c++23" EIGEN_COMPILER_SUPPORT_CPP23)
 if(EIGEN_COMPILER_SUPPORT_CPP23)
-  add_executable(random_cpp11 random_cpp11.cpp)
-  target_link_libraries(random_cpp11 ${EIGEN_STANDARD_LIBRARIES_TO_LINK_TO})
-  add_dependencies(all_examples random_cpp11)
-  ei_add_target_property(random_cpp11 COMPILE_FLAGS "-std=c++23")
+  add_executable(random_cpp23 random_cpp23.cpp)
+  target_link_libraries(random_cpp23 ${EIGEN_STANDARD_LIBRARIES_TO_LINK_TO})
+  add_dependencies(all_examples random_cpp23)
+  ei_add_target_property(random_cpp23 COMPILE_FLAGS "-std=c++23")
 
   add_custom_command(
-    TARGET random_cpp11
+    TARGET random_cpp23
     POST_BUILD
-    COMMAND random_cpp11
-    ARGS >${CMAKE_CURRENT_BINARY_DIR}/random_cpp11.out
+    COMMAND random_cpp23
+    ARGS >${CMAKE_CURRENT_BINARY_DIR}/random_cpp23.out
   )
 endif()

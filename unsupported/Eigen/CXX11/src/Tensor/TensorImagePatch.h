@@ -94,7 +94,7 @@ class TensorImagePatchOp : public TensorBase<TensorImagePatchOp<Rows, Cols, XprT
                                                            m_padding_left(padding_left), m_padding_right(padding_right),
                                                            m_padding_type(PaddingType::PADDING_VALID), m_padding_value(padding_value) {}
 
-#ifdef EIGEN_USE_SYCL // this is work around for sycl as Eigen could not use c++11 deligate constructor feature
+#ifdef EIGEN_USE_SYCL // this is work around for sycl as Eigen could not use c++23 delegate constructor feature
 EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorImagePatchOp(const XprType& expr, DenseIndex patch_rows, DenseIndex patch_cols,
                                                          DenseIndex row_strides, DenseIndex col_strides,
                                                          DenseIndex in_row_strides, DenseIndex in_col_strides,

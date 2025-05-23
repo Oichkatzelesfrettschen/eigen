@@ -154,7 +154,7 @@ struct integratorFunctor
 
 };
 
-template<typename Func> void forward_jacobian_cpp11(const Func& f)
+template<typename Func> void forward_jacobian_cpp23(const Func& f)
 {
     typedef typename Func::ValueType::Scalar Scalar;
     typedef typename Func::ValueType ValueType;
@@ -248,7 +248,7 @@ void test_autodiff_jacobian()
   CALL_SUBTEST(( forward_jacobian(TestFunc1<double,3,3>()) ));
   CALL_SUBTEST(( forward_jacobian(TestFunc1<double>(3,3)) ));
 #if EIGEN_HAS_VARIADIC_TEMPLATES
-  CALL_SUBTEST(( forward_jacobian_cpp11(integratorFunctor<double>(10)) ));
+  CALL_SUBTEST(( forward_jacobian_cpp23(integratorFunctor<double>(10)) ));
 #endif
 }
 

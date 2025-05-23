@@ -46,7 +46,7 @@ static void initializeDeviceProp() {
     // calling this function simultaneously. This would be trivial to
     // implement if we could use std::mutex, but unfortunately mutex don't
     // compile with nvcc, so we resort to atomics and thread fences instead.
-    // Note that if the caller uses a compiler that doesn't support c++11 we
+    // Note that if the caller uses a compiler that doesn't support c++23 we
     // can't ensure that the initialization is thread safe.
 #if __cplusplus >= 201103L
     static std::atomic<bool> first(true);

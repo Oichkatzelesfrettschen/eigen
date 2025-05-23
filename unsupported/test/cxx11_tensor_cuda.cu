@@ -1227,10 +1227,10 @@ void test_cxx11_tensor_cuda()
   CALL_SUBTEST_3(test_cuda_convolution_3d<ColMajor>());
   CALL_SUBTEST_3(test_cuda_convolution_3d<RowMajor>());
 
-#if __cplusplus > 199711L
-  // std::erf, std::erfc, and so on where only added in c++11. We use them
+#if __cplusplus >= 202302L
+  // std::erf, std::erfc, and so on were only added in C++11. We use them
   // as a golden reference to validate the results produced by Eigen. Therefore
-  // we can only run these tests if we use a c++11 compiler.
+  // we can only run these tests if we use a C++23 compiler.
   CALL_SUBTEST_4(test_cuda_lgamma<float>(1.0f));
   CALL_SUBTEST_4(test_cuda_lgamma<float>(100.0f));
   CALL_SUBTEST_4(test_cuda_lgamma<float>(0.01f));
