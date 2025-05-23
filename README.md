@@ -85,4 +85,20 @@ Clang-Tidy configurations for both C23 and C++23 live in `.clang-tidy-c23` and
 `.clang-tidy`.  The project builds with either GCC or Clang; the test scripts
 use whichever compiler is available.
 
+### Running clang-tidy
+
+Generate a build directory with a compile database:
+
+```bash
+mkdir build && cd build
+cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+```
+
+Then execute the helper script which runs clang-tidy across the tree:
+
+```bash
+../scripts/run-clang-tidy.sh
+```
+
+
 

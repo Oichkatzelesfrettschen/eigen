@@ -9,11 +9,12 @@ repos:
     hooks:
       - id: clang-tidy
         additional_dependencies: [clang-tidy==17.0.6]
+        args: [-p, build]
         files: "\\.(c|cc|cpp|cxx|h|hpp)$"
       - id: clang-tidy
         name: clang-tidy-c23
         additional_dependencies: [clang-tidy==17.0.6]
-        args: [--config-file=.clang-tidy-c23]
+        args: [--config-file=.clang-tidy-c23, -p, build]
         files: "\\.(c|h)$"
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
