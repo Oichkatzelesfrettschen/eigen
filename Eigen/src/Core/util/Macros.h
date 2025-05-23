@@ -363,118 +363,48 @@
 # define __has_feature(x) 0
 #endif
 
-// Some old compilers do not support template specializations like:
-// template<typename T,int N> void foo(const T x[N]);
-#if !( EIGEN_COMP_CLANG && ((EIGEN_COMP_CLANG<309) || defined(__apple_build_version__)) || EIGEN_COMP_GNUC_STRICT && EIGEN_COMP_GNUC<49)
+// Assume modern compilers supporting template specializations
 #define EIGEN_HAS_STATIC_ARRAY_TEMPLATE 1
-#else
-#define EIGEN_HAS_STATIC_ARRAY_TEMPLATE 0
-#endif
 
-// Upperbound on the C++ version to use.
-// Expected values are 03, 11, 14, 17, etc.
-// By default, let's use an arbitrarily large C++ version.
-#ifndef EIGEN_MAX_CPP_VER
-#define EIGEN_MAX_CPP_VER 99
-#endif
 
-#if EIGEN_MAX_CPP_VER>=23 && (defined(__cplusplus) && (__cplusplus >= 202002L) || EIGEN_COMP_MSVC >= 1930)
+// C++23 is the minimum supported standard
+#undef  EIGEN_MAX_CPP_VER
+#define EIGEN_MAX_CPP_VER 23
 #define EIGEN_HAS_CXX23 1
-#else
-#define EIGEN_HAS_CXX23 0
-#endif
-
-#if EIGEN_MAX_CPP_VER>=23 && (defined(__cplusplus) && (__cplusplus >= 202002L) || EIGEN_COMP_MSVC >= 1930)
-#define EIGEN_HAS_CXX23 1
-#else
-#define EIGEN_HAS_CXX23 0
-#endif
 
 // Do we support r-value references?
-#ifndef EIGEN_HAS_RVALUE_REFERENCES
-#if EIGEN_MAX_CPP_VER>=23 && \
-    (__has_feature(cxx_rvalue_references) || \
-    (defined(__cplusplus) && __cplusplus >= 202002L) || \
-    (EIGEN_COMP_MSVC >= 1930))
-  #define EIGEN_HAS_RVALUE_REFERENCES 1
-#else
-  #define EIGEN_HAS_RVALUE_REFERENCES 0
-#endif
-#endif
+#undef  EIGEN_HAS_RVALUE_REFERENCES
+#define EIGEN_HAS_RVALUE_REFERENCES 1
 
 // Does the compiler support C99?
-#ifndef EIGEN_HAS_C99_MATH
-#if EIGEN_MAX_CPP_VER>=23 && \
-    ((defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901))       \
-  || (defined(__GNUC__) && defined(_GLIBCXX_USE_C99)) \
-  || (defined(_LIBCPP_VERSION) && !defined(_MSC_VER)) \
-  || (EIGEN_COMP_MSVC >= 1930) || defined(__SYCL_DEVICE_ONLY__))
-  #define EIGEN_HAS_C99_MATH 1
-#else
-  #define EIGEN_HAS_C99_MATH 0
-#endif
-#endif
+#undef  EIGEN_HAS_C99_MATH
+#define EIGEN_HAS_C99_MATH 1
 
 // Does the compiler support result_of?
-#ifndef EIGEN_HAS_STD_RESULT_OF
-#if EIGEN_MAX_CPP_VER>=23 && ((__has_feature(cxx_lambdas) || (defined(__cplusplus) && __cplusplus >= 202002L)))
+#undef  EIGEN_HAS_STD_RESULT_OF
 #define EIGEN_HAS_STD_RESULT_OF 1
-#else
-#define EIGEN_HAS_STD_RESULT_OF 0
-#endif
-#endif
 
 // Does the compiler support type_trais?
-#ifndef EIGEN_HAS_TYPE_TRAITS
-#if EIGEN_MAX_CPP_VER>=23 && (EIGEN_HAS_CXX23 || EIGEN_COMP_MSVC >= 1930)
+#undef  EIGEN_HAS_TYPE_TRAITS
 #define EIGEN_HAS_TYPE_TRAITS 1
 #define EIGEN_INCLUDE_TYPE_TRAITS
-#else
-#define EIGEN_HAS_TYPE_TRAITS 0
-#endif
-#endif
 
 // Does the compiler support variadic templates?
-#ifndef EIGEN_HAS_VARIADIC_TEMPLATES
-#if EIGEN_MAX_CPP_VER>=23 && (__cplusplus >= 202002L || EIGEN_COMP_MSVC >= 1930) \
-  && (!defined(__NVCC__) || !EIGEN_ARCH_ARM_OR_ARM64 || (EIGEN_CUDACC_VER >= 80000) )
-    // ^^ Disable the use of variadic templates when compiling with versions of nvcc older than 8.0 on ARM devices:
-    //    this prevents nvcc from crashing when compiling Eigen on Tegra X1
+#undef  EIGEN_HAS_VARIADIC_TEMPLATES
 #define EIGEN_HAS_VARIADIC_TEMPLATES 1
-#elif  EIGEN_MAX_CPP_VER>=23 && (__cplusplus >= 202002L || EIGEN_COMP_MSVC >= 1930) && defined(__SYCL_DEVICE_ONLY__)
-#define EIGEN_HAS_VARIADIC_TEMPLATES 1
-#else
-#define EIGEN_HAS_VARIADIC_TEMPLATES 0
-#endif
-#endif
 
 // Constexpr support is required by Eigen's C++23 minimum baseline
-#ifndef EIGEN_HAS_CONSTEXPR
+#undef  EIGEN_HAS_CONSTEXPR
 #define EIGEN_HAS_CONSTEXPR 1
-#endif
 
 // Does the compiler support C++23 math?
 // Let's be conservative and enable the default C++23 implementation only if we are sure it exists
-#ifndef EIGEN_HAS_CXX23_MATH
-  #if EIGEN_MAX_CPP_VER>=23 && ((__cplusplus >= 202002L) || (__cplusplus >= 202002L) && (EIGEN_COMP_GNUC_STRICT || EIGEN_COMP_CLANG || EIGEN_COMP_MSVC || EIGEN_COMP_ICC)  \
-      && (EIGEN_ARCH_i386_OR_x86_64) && (EIGEN_OS_GNULINUX || EIGEN_OS_WIN_STRICT || EIGEN_OS_MAC))
-    #define EIGEN_HAS_CXX23_MATH 1
-  #else
-    #define EIGEN_HAS_CXX23_MATH 0
-  #endif
-#endif
+#undef  EIGEN_HAS_CXX23_MATH
+#define EIGEN_HAS_CXX23_MATH 1
 
 // Does the compiler support proper C++23 containers?
-#ifndef EIGEN_HAS_CXX23_CONTAINERS
-  #if    EIGEN_MAX_CPP_VER>=23 && \
-         ((__cplusplus >= 202002L) \
-      || ((__cplusplus >= 202002L) && (EIGEN_COMP_GNUC_STRICT || EIGEN_COMP_CLANG || EIGEN_COMP_ICC>=1400)) \
-      || EIGEN_COMP_MSVC >= 1930)
-    #define EIGEN_HAS_CXX23_CONTAINERS 1
-  #else
-    #define EIGEN_HAS_CXX23_CONTAINERS 0
-  #endif
-#endif
+#undef  EIGEN_HAS_CXX23_CONTAINERS
+#define EIGEN_HAS_CXX23_CONTAINERS 1
 
 
 /** Allows to disable some optimizations which might affect the accuracy of the result.
@@ -544,6 +474,11 @@
 #define EIGEN_DECLARE_FUNCTION_ALLOWING_MULTIPLE_DEFINITIONS EIGEN_DEVICE_FUNC
 #define EIGEN_DEFINE_FUNCTION_ALLOWING_MULTIPLE_DEFINITIONS EIGEN_DEVICE_FUNC inline
 
+#include <cstdlib>   // for abort
+#include <iostream>  // for std::cerr
+#include <string_view>
+#include <source_location>
+
 #ifdef NDEBUG
 # ifndef EIGEN_NO_DEBUG
 #  define EIGEN_NO_DEBUG
@@ -555,16 +490,23 @@
   #define eigen_plain_assert(x)
 #else
   #if EIGEN_SAFE_TO_USE_STANDARD_ASSERT_MACRO
+
     namespace Eigen {
     namespace internal {
     inline bool copy_bool(bool b) { return b; }
+    inline void assert_fail(std::string_view condition,
+                            std::source_location loc = std::source_location::current())
+    {
+      std::cerr << "assertion failed: " << condition
+                << " in function " << loc.function_name()
+                << " at " << loc.file_name() << ":" << loc.line() << std::endl;
+      abort();
+    }
     }
     }
     #define eigen_plain_assert(x) assert(x)
   #else
     // work around bug 89
-    #include <cstdlib>   // for abort
-    #include <iostream>  // for std::cerr
 
     namespace Eigen {
     namespace internal {
@@ -573,9 +515,12 @@
     namespace {
     EIGEN_DONT_INLINE bool copy_bool(bool b) { return b; }
     }
-    inline void assert_fail(const char *condition, const char *function, const char *file, int line)
+    inline void assert_fail(std::string_view condition,
+                            std::source_location loc = std::source_location::current())
     {
-      std::cerr << "assertion failed: " << condition << " in function " << function << " at " << file << ":" << line << std::endl;
+      std::cerr << "assertion failed: " << condition
+                << " in function " << loc.function_name()
+                << " at " << loc.file_name() << ":" << loc.line() << std::endl;
       abort();
     }
     }
@@ -583,14 +528,31 @@
     #define eigen_plain_assert(x) \
       do { \
         if(!Eigen::internal::copy_bool(x)) \
-          Eigen::internal::assert_fail(EIGEN_MAKESTRING(x), __PRETTY_FUNCTION__, __FILE__, __LINE__); \
-      } while(false)
+          Eigen::internal::assert_fail(EIGEN_MAKESTRING(x), std::source_location::current()); \
+    } while(false)
   #endif
 #endif
 
+namespace Eigen {
+EIGEN_DEVICE_FUNC inline void eigen_assert_impl(
+    bool condition, std::string_view expr,
+    std::source_location loc = std::source_location::current()) {
+#ifndef EIGEN_NO_DEBUG
+  if (!internal::copy_bool(condition)) {
+    internal::assert_fail(expr, loc);
+  }
+#else
+  (void)condition;
+  (void)expr;
+  (void)loc;
+#endif
+}
+}  // namespace Eigen
+
 // eigen_assert can be overridden
 #ifndef eigen_assert
-#define eigen_assert(x) eigen_plain_assert(x)
+#define eigen_assert(x) \
+  ::Eigen::eigen_assert_impl((x), EIGEN_MAKESTRING(x), std::source_location::current())
 #endif
 
 #ifdef EIGEN_INTERNAL_DEBUGGING
@@ -631,7 +593,9 @@ namespace Eigen {
 }
 #define EIGEN_UNUSED_VARIABLE(var) Eigen::internal::ignore_unused_variable(var);
 
-// Mark return values that must not be discarded.
+
+// Mark return values that must not be discarded
+
 #define EIGEN_NODISCARD [[nodiscard]]
 
 #if !defined(EIGEN_ASM_COMMENT)
