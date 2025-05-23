@@ -12,6 +12,7 @@ families which can be filled in later.
 import os
 import sys
 import re
+import warnings
 
 try:
     import yaml
@@ -160,8 +161,14 @@ def main():
             if HAVE_CLANG:
                 try:
                     tu = index.parse(path, args=compile_args)
+                    if tu is None or tu.cursor is None:
+                        raise RuntimeError("libclang returned no translation unit")
                 except Exception as exc:
-                    print(f"Failed to parse {path}: {exc}", file=sys.stderr)
+                    warnings.warn(
+                        f"Failed to parse {rel_path} with clang: {exc}. "
+                        "Set LIBCLANG_PATH to the directory containing libclang.so "
+                        "or install the Clang package to enable AST generation."
+                    )
                     tu = None
             else:
                 tu = None
