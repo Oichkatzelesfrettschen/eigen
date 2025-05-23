@@ -159,14 +159,19 @@ def main():
             rel_path = os.path.relpath(path, EIGEN_DIR)
             print(f"Parsing {rel_path}...", file=sys.stderr)
             if HAVE_CLANG:
+                tu = None
                 try:
                     tu = index.parse(path, args=compile_args)
-                    if tu is None or tu.cursor is None:
-                        raise RuntimeError("libclang returned no translation unit")
                 except Exception as exc:
                     warnings.warn(
                         f"Failed to parse {rel_path} with clang: {exc}. "
-                        "Set LIBCLANG_PATH to the directory containing libclang.so "
+                        "Set LIBCLANG_PATH to the directory containing libclang "
+                        "or install the Clang package to enable AST generation."
+                    )
+                if tu is None or getattr(tu, "cursor", None) is None:
+                    warnings.warn(
+                        f"libclang produced no translation unit for {rel_path}. "
+                        "Set LIBCLANG_PATH to the directory containing libclang "
                         "or install the Clang package to enable AST generation."
                     )
                     tu = None
