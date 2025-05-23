@@ -1,4 +1,5 @@
 #include <fstream>
+#include "ec_generated.h"
 
 int main() {
     float A[4] = {1,2,3,4};
@@ -9,13 +10,10 @@ int main() {
     for(int i=0;i<4;i++)
         C_add[i] = A[i] + B[i];
 
-    for(int i=0;i<2;i++)
-        for(int j=0;j<2;j++) {
-            float sum = 0;
-            for(int k=0;k<2;k++)
-                sum += A[i*2+k]*B[k*2+j];
-            C_mul[i*2+j] = sum;
-        }
+    EC_Matrix2f Ac = {2,2,A};
+    EC_Matrix2f Bc = {2,2,B};
+    EC_Matrix2f Cc = {2,2,C_mul};
+    EC_Matrix2f_mul(&Ac, &Bc, &Cc);
 
     std::ofstream f("/tmp/cpp_out.txt");
     for(int i=0;i<4;i++)

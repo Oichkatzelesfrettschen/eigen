@@ -7,7 +7,7 @@ ROOT_DIR="$(cd "$(dirname "$0")/.."; pwd)"
 gcc -std=c23 -I"${ROOT_DIR}/eigenc/include" "${ROOT_DIR}/tests/core/test_core.c" -o /tmp/ec_test \
   || gcc -std=c2x -I"${ROOT_DIR}/eigenc/include" "${ROOT_DIR}/tests/core/test_core.c" -o /tmp/ec_test
 
-g++ -std=c++23 -I"${ROOT_DIR}" "${ROOT_DIR}/tests/core/test_core.cpp" -o /tmp/eigen_test23
+g++ -std=c++23 -I"${ROOT_DIR}" -I"${ROOT_DIR}/eigenc/include" "${ROOT_DIR}/tests/core/test_core.cpp" -o /tmp/eigen_test23
 
 /tmp/ec_test
 /tmp/eigen_test23
