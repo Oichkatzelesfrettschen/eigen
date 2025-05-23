@@ -18,7 +18,7 @@
 #define EIGEN_USE_SYCL
 
 #include "main.h"
-#include <unsupported/Eigen/CXX11/Tensor>
+#include <unsupported/Eigen/CXX23/Tensor>
 
 using Eigen::Tensor;
 static const int DataLayout = ColMajor;
@@ -293,7 +293,7 @@ static void test_patch_padding_valid_sycl(const Eigen::SyclDevice& sycl_device){
   size_t patchTensorBuffSize =result_col_major.size()*sizeof(DataType);
   DataType* gpu_data_result_col_major  = static_cast<DataType*>(sycl_device.allocate(patchTensorBuffSize));
   TensorMap<Tensor<DataType, 5, DataLayout,IndexType>> gpu_result_col_major(gpu_data_result_col_major, patchColMajorTensorRange);
-  gpu_result_col_major.device(sycl_device)=gpu_col_major.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PADDING_VALID);
+gpu_result_col_major.device(sycl_device)=gpu_col_major.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PaddingType::PADDING_VALID);
   sycl_device.memcpyDeviceToHost(result_col_major.data(), gpu_data_result_col_major, patchTensorBuffSize);
 
   VERIFY_IS_EQUAL(result_col_major.dimension(0), input_depth);  // depth
@@ -308,7 +308,7 @@ static void test_patch_padding_valid_sycl(const Eigen::SyclDevice& sycl_device){
   patchTensorBuffSize =result_row_major.size()*sizeof(DataType);
   DataType* gpu_data_result_row_major  = static_cast<DataType*>(sycl_device.allocate(patchTensorBuffSize));
   TensorMap<Tensor<DataType, 5, RowMajor,IndexType>> gpu_result_row_major(gpu_data_result_row_major, patchRowMajorTensorRange);
-  gpu_result_row_major.device(sycl_device)=gpu_row_major.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PADDING_VALID);
+gpu_result_row_major.device(sycl_device)=gpu_row_major.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PaddingType::PADDING_VALID);
   sycl_device.memcpyDeviceToHost(result_row_major.data(), gpu_data_result_row_major, patchTensorBuffSize);
 
   VERIFY_IS_EQUAL(result_col_major.dimension(0), result_row_major.dimension(4));
@@ -394,7 +394,7 @@ static void test_patch_padding_valid_same_value_sycl(const Eigen::SyclDevice& sy
   size_t patchTensorBuffSize =result_col_major.size()*sizeof(DataType);
   DataType* gpu_data_result_col_major  = static_cast<DataType*>(sycl_device.allocate(patchTensorBuffSize));
   TensorMap<Tensor<DataType, 5, DataLayout,IndexType>> gpu_result_col_major(gpu_data_result_col_major, patchColMajorTensorRange);
-  gpu_result_col_major.device(sycl_device)=gpu_col_major.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PADDING_VALID);
+gpu_result_col_major.device(sycl_device)=gpu_col_major.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PaddingType::PADDING_VALID);
   sycl_device.memcpyDeviceToHost(result_col_major.data(), gpu_data_result_col_major, patchTensorBuffSize);
 
   VERIFY_IS_EQUAL(result_col_major.dimension(0), input_depth);  // depth
@@ -409,7 +409,7 @@ static void test_patch_padding_valid_same_value_sycl(const Eigen::SyclDevice& sy
   patchTensorBuffSize =result_row_major.size()*sizeof(DataType);
   DataType* gpu_data_result_row_major  = static_cast<DataType*>(sycl_device.allocate(patchTensorBuffSize));
   TensorMap<Tensor<DataType, 5, RowMajor,IndexType>> gpu_result_row_major(gpu_data_result_row_major, patchRowMajorTensorRange);
-  gpu_result_row_major.device(sycl_device)=gpu_row_major.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PADDING_VALID);
+gpu_result_row_major.device(sycl_device)=gpu_row_major.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PaddingType::PADDING_VALID);
   sycl_device.memcpyDeviceToHost(result_row_major.data(), gpu_data_result_row_major, patchTensorBuffSize);
 
   VERIFY_IS_EQUAL(result_col_major.dimension(0), result_row_major.dimension(4));
@@ -497,7 +497,7 @@ Tensor<DataType, 5, DataLayout,IndexType> result_col_major(patchColMajorTensorRa
 size_t patchTensorBuffSize =result_col_major.size()*sizeof(DataType);
 DataType* gpu_data_result_col_major  = static_cast<DataType*>(sycl_device.allocate(patchTensorBuffSize));
 TensorMap<Tensor<DataType, 5, DataLayout,IndexType>> gpu_result_col_major(gpu_data_result_col_major, patchColMajorTensorRange);
-gpu_result_col_major.device(sycl_device)=gpu_col_major.extract_image_patches(ksize, ksize, stride, stride, PADDING_SAME);
+gpu_result_col_major.device(sycl_device)=gpu_col_major.extract_image_patches(ksize, ksize, stride, stride, PaddingType::PADDING_SAME);
 sycl_device.memcpyDeviceToHost(result_col_major.data(), gpu_data_result_col_major, patchTensorBuffSize);
 
 
@@ -514,7 +514,7 @@ sycl_device.memcpyDeviceToHost(result_col_major.data(), gpu_data_result_col_majo
   patchTensorBuffSize =result_row_major.size()*sizeof(DataType);
   DataType* gpu_data_result_row_major  = static_cast<DataType*>(sycl_device.allocate(patchTensorBuffSize));
   TensorMap<Tensor<DataType, 5, RowMajor,IndexType>> gpu_result_row_major(gpu_data_result_row_major, patchRowMajorTensorRange);
-  gpu_result_row_major.device(sycl_device)=gpu_row_major.extract_image_patches(ksize, ksize, stride, stride, PADDING_SAME);
+gpu_result_row_major.device(sycl_device)=gpu_row_major.extract_image_patches(ksize, ksize, stride, stride, PaddingType::PADDING_SAME);
   sycl_device.memcpyDeviceToHost(result_row_major.data(), gpu_data_result_row_major, patchTensorBuffSize);
 
   VERIFY_IS_EQUAL(result_col_major.dimension(0), result_row_major.dimension(4));

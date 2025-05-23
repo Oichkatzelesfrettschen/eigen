@@ -46,7 +46,7 @@ struct CommaInitializer
 
   /* Copy/Move constructor which transfers ownership. This is crucial in 
    * absence of return value optimization to avoid assertions during destruction. */
-  // FIXME in C++11 mode this could be replaced by a proper RValue constructor
+  // FIXME in C++23 mode this could be replaced by a proper RValue constructor
   EIGEN_DEVICE_FUNC
   inline CommaInitializer(const CommaInitializer& o)
   : m_xpr(o.m_xpr), m_row(o.m_row), m_col(o.m_col), m_currentBlockRows(o.m_currentBlockRows) {

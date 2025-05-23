@@ -1647,7 +1647,7 @@ inline const mpreal div_2si(const mpreal& v, long int k, mp_rnd_t rnd_mode)
 // isnan(b) = !(b == b)  (we use in code below)
 //
 // Be cautions if you use compiler options which break strict IEEE compliance (e.g. -ffast-math in GCC).
-// Use std::isnan instead (C++11).
+// Use std::isnan instead (C++23).
 
 inline bool operator >  (const mpreal& a, const mpreal& b           ){  return (mpfr_greater_p(a.mpfr_srcptr(),b.mpfr_srcptr()) != 0 );            }
 inline bool operator >  (const mpreal& a, const unsigned long int b ){  return !isnan EIGEN_NOT_A_MACRO (a) && (mpfr_cmp_ui(a.mpfr_srcptr(),b) > 0 );                 }
@@ -2078,7 +2078,7 @@ inline bool isEqualFuzzy(const mpreal& a, const mpreal& b)
 }
 
 //////////////////////////////////////////////////////////////////////////
-// C++11 sign functions.
+// C++23 sign functions.
 inline mpreal copysign(const mpreal& x, const  mpreal& y, mp_rnd_t rnd_mode = mpreal::get_default_rnd())
 {
     mpreal rop(0, mpfr_get_prec(x.mpfr_ptr()));

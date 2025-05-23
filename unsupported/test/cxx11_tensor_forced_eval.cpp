@@ -10,7 +10,7 @@
 #include "main.h"
 
 #include <Eigen/Core>
-#include <Eigen/CXX11/Tensor>
+#include <Eigen/CXX23/Tensor>
 
 using Eigen::MatrixXf;
 using Eigen::Tensor;

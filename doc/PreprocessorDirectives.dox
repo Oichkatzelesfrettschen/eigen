@@ -64,7 +64,7 @@ functions by defining EIGEN_HAS_C99_MATH=1.
 
  - \b EIGEN_HAS_C99_MATH - controls the usage of C99 math functions such as erf, erfc, lgamma, etc.
    Automatic detection disabled if EIGEN_MAX_CPP_VER<11.
- - \b EIGEN_HAS_CXX11_MATH - controls the implementation of some functions such as round, logp1, isinf, isnan, etc.
+ - \b EIGEN_HAS_CXX23_MATH - controls the implementation of some functions such as round, logp1, isinf, isnan, etc.
    Automatic detection disabled if EIGEN_MAX_CPP_VER<11.
  - \b EIGEN_HAS_RVALUE_REFERENCES - defines whetehr rvalue references are supported
    Automatic detection disabled if EIGEN_MAX_CPP_VER<11.
@@ -72,7 +72,9 @@ functions by defining EIGEN_HAS_C99_MATH=1.
    Automatic detection disabled if EIGEN_MAX_CPP_VER<11.
  - \b EIGEN_HAS_VARIADIC_TEMPLATES - defines whether variadic templates are supported
    Automatic detection disabled if EIGEN_MAX_CPP_VER<11.
- - \b EIGEN_HAS_CXX11_CONTAINERS - defines whether STL's containers follows C++11 specifications
+ - \b EIGEN_HAS_CONSTEXPR - defines whether relaxed const expression are supported
+   Automatic detection disabled if EIGEN_MAX_CPP_VER<14.
+ - \b EIGEN_HAS_CXX23_CONTAINERS - defines whether STL's containers follows C++23 specifications
    Automatic detection disabled if EIGEN_MAX_CPP_VER<11.
 
 \section TopicPreprocessorDirectivesAssertions Assertions

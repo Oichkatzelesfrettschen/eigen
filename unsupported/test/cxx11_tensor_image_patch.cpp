@@ -9,7 +9,7 @@
 
 #include "main.h"
 
-#include <Eigen/CXX11/Tensor>
+#include <Eigen/CXX23/Tensor>
 
 using Eigen::Tensor;
 
@@ -194,7 +194,7 @@ void test_patch_padding_valid()
     tensor.data()[i] = i + 1;
   }
   // ColMajor
-  Tensor<float, 5> result = tensor.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PADDING_VALID);
+  Tensor<float, 5> result = tensor.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PaddingType::PADDING_VALID);
 
   VERIFY_IS_EQUAL(result.dimension(0), input_depth);  // depth
   VERIFY_IS_EQUAL(result.dimension(1), ksize);  // kernel rows
@@ -209,7 +209,7 @@ void test_patch_padding_valid()
   VERIFY_IS_EQUAL(tensor.dimension(2), tensor_row_major.dimension(1));
   VERIFY_IS_EQUAL(tensor.dimension(3), tensor_row_major.dimension(0));
 
-  Tensor<float, 5, RowMajor> result_row_major = tensor_row_major.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PADDING_VALID);
+  Tensor<float, 5, RowMajor> result_row_major = tensor_row_major.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PaddingType::PADDING_VALID);
   VERIFY_IS_EQUAL(result.dimension(0), result_row_major.dimension(4));
   VERIFY_IS_EQUAL(result.dimension(1), result_row_major.dimension(3));
   VERIFY_IS_EQUAL(result.dimension(2), result_row_major.dimension(2));
@@ -267,7 +267,7 @@ void test_patch_padding_valid_same_value()
   // ColMajor
   Tensor<float, 4> tensor(input_depth, input_rows, input_cols, input_batches);
   tensor = tensor.constant(11.0f);
-  Tensor<float, 5> result = tensor.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PADDING_VALID);
+  Tensor<float, 5> result = tensor.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PaddingType::PADDING_VALID);
 
   VERIFY_IS_EQUAL(result.dimension(0), input_depth);  // depth
   VERIFY_IS_EQUAL(result.dimension(1), ksize);  // kernel rows
@@ -282,7 +282,7 @@ void test_patch_padding_valid_same_value()
   VERIFY_IS_EQUAL(tensor.dimension(2), tensor_row_major.dimension(1));
   VERIFY_IS_EQUAL(tensor.dimension(3), tensor_row_major.dimension(0));
 
-  Tensor<float, 5, RowMajor> result_row_major = tensor_row_major.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PADDING_VALID);
+  Tensor<float, 5, RowMajor> result_row_major = tensor_row_major.extract_image_patches(ksize, ksize, stride, stride, 1, 1, PaddingType::PADDING_VALID);
   VERIFY_IS_EQUAL(result.dimension(0), result_row_major.dimension(4));
   VERIFY_IS_EQUAL(result.dimension(1), result_row_major.dimension(3));
   VERIFY_IS_EQUAL(result.dimension(2), result_row_major.dimension(2));
@@ -343,7 +343,7 @@ void test_patch_padding_same()
   for (int i = 0; i < tensor.size(); ++i) {
     tensor.data()[i] = i + 1;
   }
-  Tensor<float, 5> result = tensor.extract_image_patches(ksize, ksize, stride, stride, PADDING_SAME);
+  Tensor<float, 5> result = tensor.extract_image_patches(ksize, ksize, stride, stride, PaddingType::PADDING_SAME);
 
   VERIFY_IS_EQUAL(result.dimension(0), input_depth);  // depth
   VERIFY_IS_EQUAL(result.dimension(1), ksize);  // kernel rows
@@ -358,7 +358,7 @@ void test_patch_padding_same()
   VERIFY_IS_EQUAL(tensor.dimension(2), tensor_row_major.dimension(1));
   VERIFY_IS_EQUAL(tensor.dimension(3), tensor_row_major.dimension(0));
 
-  Tensor<float, 5, RowMajor> result_row_major = tensor_row_major.extract_image_patches(ksize, ksize, stride, stride, PADDING_SAME);
+  Tensor<float, 5, RowMajor> result_row_major = tensor_row_major.extract_image_patches(ksize, ksize, stride, stride, PaddingType::PADDING_SAME);
   VERIFY_IS_EQUAL(result.dimension(0), result_row_major.dimension(4));
   VERIFY_IS_EQUAL(result.dimension(1), result_row_major.dimension(3));
   VERIFY_IS_EQUAL(result.dimension(2), result_row_major.dimension(2));
@@ -423,7 +423,7 @@ void test_patch_padding_same_negative_padding_clip_to_zero() {
     tensor.data()[i] = i + 1;
   }
   Tensor<float, 5> result = tensor.extract_image_patches(
-      ksize, ksize, row_stride, col_stride, 1, 1, PADDING_SAME);
+      ksize, ksize, row_stride, col_stride, 1, 1, PaddingType::PADDING_SAME);
   // row padding will be computed as -2 originally and then be clipped to 0.
   VERIFY_IS_EQUAL(result.coeff(0), 1.0f);
   VERIFY_IS_EQUAL(result.coeff(1), 6.0f);
@@ -444,7 +444,7 @@ void test_patch_padding_same_negative_padding_clip_to_zero() {
 
   Tensor<float, 5, RowMajor> result_row_major =
       tensor_row_major.extract_image_patches(ksize, ksize, row_stride,
-                                             col_stride, 1, 1, PADDING_SAME);
+                                             col_stride, 1, 1, PaddingType::PADDING_SAME);
   VERIFY_IS_EQUAL(result_row_major.coeff(0), 1.0f);
   VERIFY_IS_EQUAL(result_row_major.coeff(1), 6.0f);
   VERIFY_IS_EQUAL(result_row_major.coeff(2), 11.0f);

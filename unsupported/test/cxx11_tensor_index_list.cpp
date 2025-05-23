@@ -9,7 +9,7 @@
 
 #include "main.h"
 
-#include <Eigen/CXX11/Tensor>
+#include <Eigen/CXX23/Tensor>
 
 #ifdef EIGEN_HAS_INDEX_LIST
 

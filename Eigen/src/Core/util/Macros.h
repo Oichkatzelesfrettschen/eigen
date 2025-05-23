@@ -379,15 +379,15 @@
 #endif
 
 #if EIGEN_MAX_CPP_VER>=11 && (defined(__cplusplus) && (__cplusplus >= 201103L) || EIGEN_COMP_MSVC >= 1900)
-#define EIGEN_HAS_CXX11 1
+#define EIGEN_HAS_CXX23 1
 #else
-#define EIGEN_HAS_CXX11 0
+#define EIGEN_HAS_CXX23 0
 #endif
 
 #if EIGEN_MAX_CPP_VER>=14 && (defined(__cplusplus) && (__cplusplus > 201103L) || EIGEN_COMP_MSVC >= 1910)
-#define EIGEN_HAS_CXX14 1
+#define EIGEN_HAS_CXX23 1
 #else
-#define EIGEN_HAS_CXX14 0
+#define EIGEN_HAS_CXX23 0
 #endif
 
 // Do we support r-value references?
@@ -426,7 +426,7 @@
 
 // Does the compiler support type_trais?
 #ifndef EIGEN_HAS_TYPE_TRAITS
-#if EIGEN_MAX_CPP_VER>=11 && (EIGEN_HAS_CXX11 || EIGEN_COMP_MSVC >= 1700)
+#if EIGEN_MAX_CPP_VER>=11 && (EIGEN_HAS_CXX23 || EIGEN_COMP_MSVC >= 1700)
 #define EIGEN_HAS_TYPE_TRAITS 1
 #define EIGEN_INCLUDE_TYPE_TRAITS
 #else
@@ -448,27 +448,31 @@
 #endif
 #endif
 
+// Constexpr support is required by Eigen's C++23 minimum baseline
+#ifndef EIGEN_HAS_CONSTEXPR
+#define EIGEN_HAS_CONSTEXPR 1
+#endif
 
-// Does the compiler support C++11 math?
-// Let's be conservative and enable the default C++11 implementation only if we are sure it exists
-#ifndef EIGEN_HAS_CXX11_MATH
+// Does the compiler support C++23 math?
+// Let's be conservative and enable the default C++23 implementation only if we are sure it exists
+#ifndef EIGEN_HAS_CXX23_MATH
   #if EIGEN_MAX_CPP_VER>=11 && ((__cplusplus > 201103L) || (__cplusplus >= 201103L) && (EIGEN_COMP_GNUC_STRICT || EIGEN_COMP_CLANG || EIGEN_COMP_MSVC || EIGEN_COMP_ICC)  \
       && (EIGEN_ARCH_i386_OR_x86_64) && (EIGEN_OS_GNULINUX || EIGEN_OS_WIN_STRICT || EIGEN_OS_MAC))
-    #define EIGEN_HAS_CXX11_MATH 1
+    #define EIGEN_HAS_CXX23_MATH 1
   #else
-    #define EIGEN_HAS_CXX11_MATH 0
+    #define EIGEN_HAS_CXX23_MATH 0
   #endif
 #endif
 
-// Does the compiler support proper C++11 containers?
-#ifndef EIGEN_HAS_CXX11_CONTAINERS
+// Does the compiler support proper C++23 containers?
+#ifndef EIGEN_HAS_CXX23_CONTAINERS
   #if    EIGEN_MAX_CPP_VER>=11 && \
          ((__cplusplus > 201103L) \
       || ((__cplusplus >= 201103L) && (EIGEN_COMP_GNUC_STRICT || EIGEN_COMP_CLANG || EIGEN_COMP_ICC>=1400)) \
       || EIGEN_COMP_MSVC >= 1900)
-    #define EIGEN_HAS_CXX11_CONTAINERS 1
+    #define EIGEN_HAS_CXX23_CONTAINERS 1
   #else
-    #define EIGEN_HAS_CXX11_CONTAINERS 0
+    #define EIGEN_HAS_CXX23_CONTAINERS 0
   #endif
 #endif
 
@@ -627,7 +631,7 @@ namespace Eigen {
 }
 #define EIGEN_UNUSED_VARIABLE(var) Eigen::internal::ignore_unused_variable(var);
 
-// Mark return values that must not be discarded when C++17 attributes are
+// Mark return values that must not be discarded when C++23 attributes are
 // available. Fall back to nothing on older standards.
 #if (EIGEN_MAX_CPP_VER>=17) && \
     ((defined(__cplusplus) && __cplusplus >= 201703L) || \
@@ -674,23 +678,9 @@ namespace Eigen {
  * If we made alignment depend on whether or not EIGEN_VECTORIZE is defined, it would be impossible to link
  * vectorized and non-vectorized code.
  */
-#if defined(__cplusplus) && __cplusplus >= 201103L
-  // Prefer the standard alignas specifier when available.
-  // These macros are deprecated and will expand to alignas.
-  #define EIGEN_ALIGN_TO_BOUNDARY(n) alignas(n)
-#else
-  #if (defined EIGEN_CUDACC)
-    #define EIGEN_ALIGN_TO_BOUNDARY(n) __align__(n)
-  #elif EIGEN_COMP_GNUC || EIGEN_COMP_PGI || EIGEN_COMP_IBM || EIGEN_COMP_ARM
-    #define EIGEN_ALIGN_TO_BOUNDARY(n) __attribute__((aligned(n)))
-  #elif EIGEN_COMP_MSVC
-    #define EIGEN_ALIGN_TO_BOUNDARY(n) __declspec(align(n))
-  #elif EIGEN_COMP_SUNCC
-    // FIXME not sure about this one:
-    #define EIGEN_ALIGN_TO_BOUNDARY(n) __attribute__((aligned(n)))
-  #else
-    #error Please tell me what is the equivalent of __attribute__((aligned(n))) for your compiler
-  #endif
+#if 0
+#define EIGEN_ALIGN_TO_BOUNDARY(n) alignas(n)
+#warning "EIGEN_ALIGN_TO_BOUNDARY is deprecated; use alignas"
 #endif
 
 // If the user explicitly disable vectorization, then we also disable alignment
@@ -782,17 +772,7 @@ namespace Eigen {
 // Henceforth, only EIGEN_MAX_STATIC_ALIGN_BYTES should be used.
 
 
-// Shortcuts to EIGEN_ALIGN_TO_BOUNDARY.
-// Deprecated: prefer using the alignas specifier directly.
-#define EIGEN_ALIGN8  EIGEN_ALIGN_TO_BOUNDARY(8)
-#define EIGEN_ALIGN16 EIGEN_ALIGN_TO_BOUNDARY(16)
-#define EIGEN_ALIGN32 EIGEN_ALIGN_TO_BOUNDARY(32)
-#define EIGEN_ALIGN64 EIGEN_ALIGN_TO_BOUNDARY(64)
-#if EIGEN_MAX_STATIC_ALIGN_BYTES>0
-#define EIGEN_ALIGN_MAX EIGEN_ALIGN_TO_BOUNDARY(EIGEN_MAX_STATIC_ALIGN_BYTES)
-#else
-#define EIGEN_ALIGN_MAX
-#endif
+// EIGEN_ALIGN* macros have been removed. Use the standard alignas specifier.
 
 
 // Dynamic alignment control
@@ -1014,11 +994,5 @@ namespace Eigen {
 #  define EIGEN_CATCH(X) else
 #endif
 
-
-#define EIGEN_INCLUDE_TYPE_TRAITS
-#define EIGEN_NOEXCEPT noexcept
-#define EIGEN_NOEXCEPT_IF(x) noexcept(x)
-#define EIGEN_NO_THROW noexcept(true)
-#define EIGEN_EXCEPTION_SPEC(X) noexcept(false)
 
 #endif // EIGEN_MACROS_H
