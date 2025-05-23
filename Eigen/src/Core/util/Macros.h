@@ -474,6 +474,11 @@
 #define EIGEN_DECLARE_FUNCTION_ALLOWING_MULTIPLE_DEFINITIONS EIGEN_DEVICE_FUNC
 #define EIGEN_DEFINE_FUNCTION_ALLOWING_MULTIPLE_DEFINITIONS EIGEN_DEVICE_FUNC inline
 
+#include <cstdlib>   // for abort
+#include <iostream>  // for std::cerr
+#include <string_view>
+#include <source_location>
+
 #ifdef NDEBUG
 # ifndef EIGEN_NO_DEBUG
 #  define EIGEN_NO_DEBUG
@@ -485,16 +490,23 @@
   #define eigen_plain_assert(x)
 #else
   #if EIGEN_SAFE_TO_USE_STANDARD_ASSERT_MACRO
+
     namespace Eigen {
     namespace internal {
     inline bool copy_bool(bool b) { return b; }
+    inline void assert_fail(std::string_view condition,
+                            std::source_location loc = std::source_location::current())
+    {
+      std::cerr << "assertion failed: " << condition
+                << " in function " << loc.function_name()
+                << " at " << loc.file_name() << ":" << loc.line() << std::endl;
+      abort();
+    }
     }
     }
     #define eigen_plain_assert(x) assert(x)
   #else
     // work around bug 89
-    #include <cstdlib>   // for abort
-    #include <iostream>  // for std::cerr
 
     namespace Eigen {
     namespace internal {
@@ -503,9 +515,12 @@
     namespace {
     EIGEN_DONT_INLINE bool copy_bool(bool b) { return b; }
     }
-    inline void assert_fail(const char *condition, const char *function, const char *file, int line)
+    inline void assert_fail(std::string_view condition,
+                            std::source_location loc = std::source_location::current())
     {
-      std::cerr << "assertion failed: " << condition << " in function " << function << " at " << file << ":" << line << std::endl;
+      std::cerr << "assertion failed: " << condition
+                << " in function " << loc.function_name()
+                << " at " << loc.file_name() << ":" << loc.line() << std::endl;
       abort();
     }
     }
@@ -513,14 +528,31 @@
     #define eigen_plain_assert(x) \
       do { \
         if(!Eigen::internal::copy_bool(x)) \
-          Eigen::internal::assert_fail(EIGEN_MAKESTRING(x), __PRETTY_FUNCTION__, __FILE__, __LINE__); \
-      } while(false)
+          Eigen::internal::assert_fail(EIGEN_MAKESTRING(x), std::source_location::current()); \
+    } while(false)
   #endif
 #endif
 
+namespace Eigen {
+EIGEN_DEVICE_FUNC inline void eigen_assert_impl(
+    bool condition, std::string_view expr,
+    std::source_location loc = std::source_location::current()) {
+#ifndef EIGEN_NO_DEBUG
+  if (!internal::copy_bool(condition)) {
+    internal::assert_fail(expr, loc);
+  }
+#else
+  (void)condition;
+  (void)expr;
+  (void)loc;
+#endif
+}
+}  // namespace Eigen
+
 // eigen_assert can be overridden
 #ifndef eigen_assert
-#define eigen_assert(x) eigen_plain_assert(x)
+#define eigen_assert(x) \
+  ::Eigen::eigen_assert_impl((x), EIGEN_MAKESTRING(x), std::source_location::current())
 #endif
 
 #ifdef EIGEN_INTERNAL_DEBUGGING
