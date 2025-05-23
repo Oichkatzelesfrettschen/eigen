@@ -467,10 +467,10 @@ macro(ei_testing_print_summary)
       message(STATUS "S390X ZVECTOR:     Using architecture defaults")
     endif()
 
-    if(EIGEN_TEST_CXX11)
-      message(STATUS "C++14:             ON")
+    if(EIGEN_TEST_CXX23)
+      message(STATUS "C++23:             ON")
     else()
-      message(STATUS "C++14:             OFF")
+      message(STATUS "C++23:             OFF")
     endif()
 
     if(EIGEN_TEST_SYCL)
@@ -686,7 +686,7 @@ macro(ei_set_build_string)
     set(TMP_BUILD_STRING ${TMP_BUILD_STRING}-64bit)
   endif()
 
-  if(EIGEN_TEST_CXX11)
+  if(EIGEN_TEST_CXX23)
     set(TMP_BUILD_STRING ${TMP_BUILD_STRING}-cxx14)
   endif()
 

@@ -10,7 +10,7 @@
 #include "main.h"
 #include <complex>
 #include <cmath>
-#include <Eigen/CXX11/Tensor>
+#include <Eigen/CXX23/Tensor>
 
 using Eigen::Tensor;
 

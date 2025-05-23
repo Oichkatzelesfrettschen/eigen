@@ -88,7 +88,7 @@ public:
   template<typename T>
   Index eval(const T& values) const { return derived().eval_impl(values); }
 
-#if EIGEN_HAS_CXX14
+#if EIGEN_HAS_CXX23
   template<typename... Types>
   Index eval(Types&&... values) const { return derived().eval_impl(std::make_tuple(values...)); }
 #endif
@@ -139,7 +139,7 @@ public:
   friend QuotientExpr<ValueExpr<internal::FixedInt<N> >,Derived> operator/(internal::FixedInt<N>, const BaseExpr& b)
   { return QuotientExpr<ValueExpr<internal::FixedInt<N> > ,Derived>(ValueExpr<internal::FixedInt<N> >(),b.derived()); }
 
-#if (!EIGEN_HAS_CXX14)
+#if (!EIGEN_HAS_CXX23)
   template<int N>
   AddExpr<Derived,ValueExpr<internal::FixedInt<N> > > operator+(internal::FixedInt<N> (*)()) const
   { return AddExpr<Derived,ValueExpr<internal::FixedInt<N> > >(derived(), ValueExpr<internal::FixedInt<N> >()); }
@@ -235,8 +235,8 @@ public:
 
   Index eval_impl(const SymbolValue<Tag> &values) const { return values.value(); }
 
-#if EIGEN_HAS_CXX14
-  // C++14 versions suitable for multiple symbols
+#if EIGEN_HAS_CXX23
+  // C++23 versions suitable for multiple symbols
   template<typename... Types>
   Index eval_impl(const std::tuple<Types...>& values) const { return std::get<SymbolValue<Tag> >(values).value(); }
 #endif

@@ -370,7 +370,7 @@ if(EIGEN_TEST_NO_EXCEPTIONS)
   message(STATUS "Disabling exceptions in tests/examples")
 endif()
 
-option(EIGEN_TEST_CXX11 "Enable testing with C++14 and C++14 features (e.g. Tensor module)." OFF)
+option(EIGEN_TEST_CXX23 "Enable testing with C++23 and C++23 features (e.g. Tensor module)." OFF)
 
 set(EIGEN_CUDA_COMPUTE_ARCH 30 CACHE STRING "The CUDA compute architecture level to target when compiling CUDA code")
 

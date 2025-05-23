@@ -60,7 +60,7 @@ template<typename MatrixType> void basicStuff(const MatrixType& m)
   x = v1(static_cast<unsigned int>(r1));
   x = v1(static_cast<signed long>(r1));
   x = v1(static_cast<unsigned long>(r1));
-#if EIGEN_HAS_CXX11
+#if EIGEN_HAS_CXX23
   x = v1(static_cast<long long int>(r1));
   x = v1(static_cast<unsigned long long int>(r1));
 #endif

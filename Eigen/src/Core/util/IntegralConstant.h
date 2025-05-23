@@ -75,8 +75,8 @@ public:
   template<int M>
   FixedInt<N&M> operator&( FixedInt<M>) const { return FixedInt<N&M>(); }
 
-#if EIGEN_HAS_CXX14
-  // Needed in C++14 to allow fix<N>():
+#if EIGEN_HAS_CXX23
+  // Needed in C++23 to allow fix<N>():
   FixedInt operator() () const { return *this; }
 
   VariableAndFixedInt<N> operator() (int val) const { return VariableAndFixedInt<N>(val); }
@@ -84,7 +84,7 @@ public:
   FixedInt ( FixedInt<N> (*)() ) {}
 #endif
 
-#if EIGEN_HAS_CXX11
+#if EIGEN_HAS_CXX23
   FixedInt(std::integral_constant<int,N>) {}
 #endif
 };
@@ -136,7 +136,7 @@ template<int N,int Default> struct get_fixed_value<FixedInt<N>,Default> {
   static const int value = N;
 };
 
-#if !EIGEN_HAS_CXX14
+#if !EIGEN_HAS_CXX23
 template<int N,int Default> struct get_fixed_value<FixedInt<N> (*)(),Default> {
   static const int value = N;
 };
@@ -152,7 +152,7 @@ struct get_fixed_value<variable_if_dynamic<T,N>,Default> {
 };
 
 template<typename T> EIGEN_DEVICE_FUNC Index get_runtime_value(const T &x) { return x; }
-#if !EIGEN_HAS_CXX14
+#if !EIGEN_HAS_CXX23
 template<int N> EIGEN_DEVICE_FUNC Index get_runtime_value(FixedInt<N> (*)()) { return N; }
 #endif
 
@@ -164,7 +164,7 @@ template<typename T, int DynamicKey=Dynamic, typename EnableIf=void> struct clea
 // Convert any integral type (e.g., short, int, unsigned int, etc.) to Eigen::Index
 template<typename T, int DynamicKey> struct cleanup_index_type<T,DynamicKey,typename internal::enable_if<internal::is_integral<T>::value>::type> { typedef Index type; };
 
-#if !EIGEN_HAS_CXX14
+#if !EIGEN_HAS_CXX23
 // In c++98/c++11, fix<N> is a pointer to function that we better cleanup to a true FixedInt<N>:
 template<int N, int DynamicKey> struct cleanup_index_type<FixedInt<N> (*)(), DynamicKey> { typedef FixedInt<N> type; };
 #endif
@@ -174,7 +174,7 @@ template<int N, int DynamicKey> struct cleanup_index_type<VariableAndFixedInt<N>
 // If VariableAndFixedInt matches DynamicKey, then we turn it to a pure runtime-value (aka Index):
 template<int DynamicKey> struct cleanup_index_type<VariableAndFixedInt<DynamicKey>, DynamicKey> { typedef Index type; };
 
-#if EIGEN_HAS_CXX11
+#if EIGEN_HAS_CXX23
 template<int N, int DynamicKey> struct cleanup_index_type<std::integral_constant<int,N>, DynamicKey> { typedef FixedInt<N> type; };
 #endif
 
@@ -182,7 +182,7 @@ template<int N, int DynamicKey> struct cleanup_index_type<std::integral_constant
 
 #ifndef EIGEN_PARSED_BY_DOXYGEN
 
-#if EIGEN_HAS_CXX14
+#if EIGEN_HAS_CXX23
 template<int N>
 static const internal::FixedInt<N> fix{};
 #else
