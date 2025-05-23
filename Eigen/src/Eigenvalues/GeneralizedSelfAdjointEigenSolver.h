@@ -150,7 +150,7 @@ class GeneralizedSelfAdjointEigenSolver : public SelfAdjointEigenSolver<_MatrixT
       *
       * \sa GeneralizedSelfAdjointEigenSolver(const MatrixType&, const MatrixType&, int)
       */
-    GeneralizedSelfAdjointEigenSolver& compute(const MatrixType& matA, const MatrixType& matB,
+    EIGEN_NODISCARD GeneralizedSelfAdjointEigenSolver& compute(const MatrixType& matA, const MatrixType& matB,
                                                int options = ComputeEigenvectors|Ax_lBx);
 
   protected:

@@ -140,7 +140,7 @@ template<typename _MatrixType, int _UpLo> class LLT
       * \sa solveInPlace(), MatrixBase::llt(), SelfAdjointView::llt()
       */
     template<typename Rhs>
-    inline const Solve<LLT, Rhs>
+    EIGEN_NODISCARD inline const Solve<LLT, Rhs>
     solve(const MatrixBase<Rhs>& b) const
     {
       eigen_assert(m_isInitialized && "LLT is not initialized.");
@@ -153,7 +153,7 @@ template<typename _MatrixType, int _UpLo> class LLT
     void solveInPlace(const MatrixBase<Derived> &bAndX) const;
 
     template<typename InputType>
-    LLT& compute(const EigenBase<InputType>& matrix);
+    EIGEN_NODISCARD LLT& compute(const EigenBase<InputType>& matrix);
 
     /** \returns an estimate of the reciprocal condition number of the matrix of
       *  which \c *this is the Cholesky decomposition.

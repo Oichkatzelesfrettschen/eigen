@@ -270,7 +270,7 @@ class CholmodBase : public SparseSolverBase<Derived>
     }
 
     /** Computes the sparse Cholesky decomposition of \a matrix */
-    Derived& compute(const MatrixType& matrix)
+    EIGEN_NODISCARD Derived& compute(const MatrixType& matrix)
     {
       analyzePattern(matrix);
       factorize(matrix);

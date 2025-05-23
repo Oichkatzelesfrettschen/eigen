@@ -196,7 +196,7 @@ template<typename _MatrixType, int _UpLo> class LDLT
       * \sa MatrixBase::ldlt(), SelfAdjointView::ldlt()
       */
     template<typename Rhs>
-    inline const Solve<LDLT, Rhs>
+    EIGEN_NODISCARD inline const Solve<LDLT, Rhs>
     solve(const MatrixBase<Rhs>& b) const
     {
       eigen_assert(m_isInitialized && "LDLT is not initialized.");
@@ -209,7 +209,7 @@ template<typename _MatrixType, int _UpLo> class LDLT
     bool solveInPlace(MatrixBase<Derived> &bAndX) const;
 
     template<typename InputType>
-    LDLT& compute(const EigenBase<InputType>& matrix);
+    EIGEN_NODISCARD LDLT& compute(const EigenBase<InputType>& matrix);
 
     /** \returns an estimate of the reciprocal condition number of the matrix of
      *  which \c *this is the LDLT decomposition.

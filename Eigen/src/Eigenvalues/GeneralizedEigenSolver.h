@@ -250,7 +250,7 @@ template<typename _MatrixType> class GeneralizedEigenSolver
       *
       * This method reuses of the allocated data in the GeneralizedEigenSolver object.
       */
-    GeneralizedEigenSolver& compute(const MatrixType& A, const MatrixType& B, bool computeEigenvectors = true);
+    EIGEN_NODISCARD GeneralizedEigenSolver& compute(const MatrixType& A, const MatrixType& B, bool computeEigenvectors = true);
 
     ComputationInfo info() const
     {

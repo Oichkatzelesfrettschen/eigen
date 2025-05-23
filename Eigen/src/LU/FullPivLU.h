@@ -116,7 +116,7 @@ template<typename _MatrixType> class FullPivLU
       * \returns a reference to *this
       */
     template<typename InputType>
-    FullPivLU& compute(const EigenBase<InputType>& matrix) {
+    EIGEN_NODISCARD FullPivLU& compute(const EigenBase<InputType>& matrix) {
       m_lu = matrix.derived();
       computeInPlace();
       return *this;
@@ -239,7 +239,7 @@ template<typename _MatrixType> class FullPivLU
       */
     // FIXME this is a copy-paste of the base-class member to add the isInitialized assertion.
     template<typename Rhs>
-    inline const Solve<FullPivLU, Rhs>
+    EIGEN_NODISCARD inline const Solve<FullPivLU, Rhs>
     solve(const MatrixBase<Rhs>& b) const
     {
       eigen_assert(m_isInitialized && "LU is not initialized.");

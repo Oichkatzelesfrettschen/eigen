@@ -202,7 +202,7 @@ public:
     * In other words, the returned solution is guaranteed to minimize the Euclidean norm \f$ \Vert A x - b \Vert \f$.
     */
   template<typename Rhs>
-  inline const Solve<Derived, Rhs>
+  EIGEN_NODISCARD inline const Solve<Derived, Rhs>
   solve(const MatrixBase<Rhs>& b) const
   {
     eigen_assert(m_isInitialized && "SVD is not initialized.");

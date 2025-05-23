@@ -361,7 +361,7 @@ public:
     }
     
     /** Computes the sparse Cholesky decomposition of \a matrix */
-    SimplicialLLT& compute(const MatrixType& matrix)
+    EIGEN_NODISCARD SimplicialLLT& compute(const MatrixType& matrix)
     {
       Base::template compute<false>(matrix);
       return *this;
@@ -458,7 +458,7 @@ public:
     }
 
     /** Computes the sparse Cholesky decomposition of \a matrix */
-    SimplicialLDLT& compute(const MatrixType& matrix)
+    EIGEN_NODISCARD SimplicialLDLT& compute(const MatrixType& matrix)
     {
       Base::template compute<true>(matrix);
       return *this;
@@ -550,7 +550,7 @@ public:
     }
     
     /** Computes the sparse Cholesky decomposition of \a matrix */
-    SimplicialCholesky& compute(const MatrixType& matrix)
+    EIGEN_NODISCARD SimplicialCholesky& compute(const MatrixType& matrix)
     {
       if(m_LDLT)
         Base::template compute<true>(matrix);

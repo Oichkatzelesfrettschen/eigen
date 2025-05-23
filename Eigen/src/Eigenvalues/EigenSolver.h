@@ -275,7 +275,7 @@ template<typename _MatrixType> class EigenSolver
       * Output: \verbinclude EigenSolver_compute.out
       */
     template<typename InputType>
-    EigenSolver& compute(const EigenBase<InputType>& matrix, bool computeEigenvectors = true);
+    EIGEN_NODISCARD EigenSolver& compute(const EigenBase<InputType>& matrix, bool computeEigenvectors = true);
 
     /** \returns NumericalIssue if the input contains INF or NaN values or overflow occured. Returns Success otherwise. */
     ComputationInfo info() const

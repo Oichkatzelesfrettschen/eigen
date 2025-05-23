@@ -230,14 +230,14 @@ class SparseQR : public SparseSolverBase<SparseQR<_MatrixType,_OrderingType> >
       * \sa compute()
       */
     template<typename Rhs>
-    inline const Solve<SparseQR, Rhs> solve(const MatrixBase<Rhs>& B) const 
+    EIGEN_NODISCARD inline const Solve<SparseQR, Rhs> solve(const MatrixBase<Rhs>& B) const
     {
       eigen_assert(m_isInitialized && "The factorization should be called first, use compute()");
       eigen_assert(this->rows() == B.rows() && "SparseQR::solve() : invalid number of rows in the right hand side matrix");
       return Solve<SparseQR, Rhs>(*this, B.derived());
     }
     template<typename Rhs>
-    inline const Solve<SparseQR, Rhs> solve(const SparseMatrixBase<Rhs>& B) const
+    EIGEN_NODISCARD inline const Solve<SparseQR, Rhs> solve(const SparseMatrixBase<Rhs>& B) const
     {
           eigen_assert(m_isInitialized && "The factorization should be called first, use compute()");
           eigen_assert(this->rows() == B.rows() && "SparseQR::solve() : invalid number of rows in the right hand side matrix");

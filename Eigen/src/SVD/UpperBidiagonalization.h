@@ -61,8 +61,8 @@ template<typename _MatrixType> class UpperBidiagonalization
       compute(matrix);
     }
     
-    UpperBidiagonalization& compute(const MatrixType& matrix);
-    UpperBidiagonalization& computeUnblocked(const MatrixType& matrix);
+    EIGEN_NODISCARD UpperBidiagonalization& compute(const MatrixType& matrix);
+    EIGEN_NODISCARD UpperBidiagonalization& computeUnblocked(const MatrixType& matrix);
     
     const MatrixType& householder() const { return m_householder; }
     const BidiagonalType& bidiagonal() const { return m_bidiagonal; }

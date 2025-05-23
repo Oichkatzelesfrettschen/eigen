@@ -173,7 +173,7 @@ class PardisoImpl : public SparseSolverBase<Derived>
       */
     Derived& factorize(const MatrixType& matrix);
 
-    Derived& compute(const MatrixType& matrix);
+    EIGEN_NODISCARD Derived& compute(const MatrixType& matrix);
 
     template<typename Rhs,typename Dest>
     void _solve_impl(const MatrixBase<Rhs> &b, MatrixBase<Dest> &dest) const;

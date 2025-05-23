@@ -235,7 +235,7 @@ public:
     * matrix A, or modify a copy of A.
     */
   template<typename MatrixDerived>
-  Derived& compute(const EigenBase<MatrixDerived>& A)
+  EIGEN_NODISCARD Derived& compute(const EigenBase<MatrixDerived>& A)
   {
     grab(A.derived());
     m_preconditioner.compute(matrix());

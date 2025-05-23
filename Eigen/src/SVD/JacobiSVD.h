@@ -558,7 +558,7 @@ template<typename _MatrixType, int QRPreconditioner> class JacobiSVD
      * Thin unitaries are only available if your matrix type has a Dynamic number of columns (for example MatrixXf). They also are not
      * available with the (non-default) FullPivHouseholderQR preconditioner.
      */
-    JacobiSVD& compute(const MatrixType& matrix, unsigned int computationOptions);
+    EIGEN_NODISCARD JacobiSVD& compute(const MatrixType& matrix, unsigned int computationOptions);
 
     /** \brief Method performing the decomposition of given matrix using current options.
      *
@@ -566,7 +566,7 @@ template<typename _MatrixType, int QRPreconditioner> class JacobiSVD
      *
      * This method uses the current \a computationOptions, as already passed to the constructor or to compute(const MatrixType&, unsigned int).
      */
-    JacobiSVD& compute(const MatrixType& matrix)
+    EIGEN_NODISCARD JacobiSVD& compute(const MatrixType& matrix)
     {
       return compute(matrix, m_computationOptions);
     }

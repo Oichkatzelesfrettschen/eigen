@@ -184,7 +184,7 @@ EIGEN_DEVICE_FUNC void TriangularViewImpl<MatrixType,Mode,Dense>::solveInPlace(c
 
 template<typename Derived, unsigned int Mode>
 template<int Side, typename Other>
-const internal::triangular_solve_retval<Side,TriangularView<Derived,Mode>,Other>
+EIGEN_NODISCARD const internal::triangular_solve_retval<Side,TriangularView<Derived,Mode>,Other>
 TriangularViewImpl<Derived,Mode,Dense>::solve(const MatrixBase<Other>& other) const
 {
   return internal::triangular_solve_retval<Side,TriangularViewType,Other>(derived(), other.derived());

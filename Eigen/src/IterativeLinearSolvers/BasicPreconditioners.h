@@ -79,7 +79,7 @@ class DiagonalPreconditioner
     }
     
     template<typename MatType>
-    DiagonalPreconditioner& compute(const MatType& mat)
+    EIGEN_NODISCARD DiagonalPreconditioner& compute(const MatType& mat)
     {
       return factorize(mat);
     }
@@ -91,7 +91,7 @@ class DiagonalPreconditioner
       x = m_invdiag.array() * b.array() ;
     }
 
-    template<typename Rhs> inline const Solve<DiagonalPreconditioner, Rhs>
+    template<typename Rhs> EIGEN_NODISCARD inline const Solve<DiagonalPreconditioner, Rhs>
     solve(const MatrixBase<Rhs>& b) const
     {
       eigen_assert(m_isInitialized && "DiagonalPreconditioner is not initialized.");
@@ -180,7 +180,7 @@ class LeastSquareDiagonalPreconditioner : public DiagonalPreconditioner<_Scalar>
     }
     
     template<typename MatType>
-    LeastSquareDiagonalPreconditioner& compute(const MatType& mat)
+    EIGEN_NODISCARD LeastSquareDiagonalPreconditioner& compute(const MatType& mat)
     {
       return factorize(mat);
     }
@@ -213,7 +213,7 @@ class IdentityPreconditioner
     IdentityPreconditioner& factorize(const MatrixType& ) { return *this; }
 
     template<typename MatrixType>
-    IdentityPreconditioner& compute(const MatrixType& ) { return *this; }
+    EIGEN_NODISCARD IdentityPreconditioner& compute(const MatrixType& ) { return *this; }
     
     template<typename Rhs>
     inline const Rhs& solve(const Rhs& b) const { return b; }

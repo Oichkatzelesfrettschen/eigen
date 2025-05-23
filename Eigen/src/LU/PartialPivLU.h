@@ -126,7 +126,7 @@ template<typename _MatrixType> class PartialPivLU
     explicit PartialPivLU(EigenBase<InputType>& matrix);
 
     template<typename InputType>
-    PartialPivLU& compute(const EigenBase<InputType>& matrix) {
+    EIGEN_NODISCARD PartialPivLU& compute(const EigenBase<InputType>& matrix) {
       m_lu = matrix.derived();
       compute();
       return *this;
@@ -171,7 +171,7 @@ template<typename _MatrixType> class PartialPivLU
       */
     // FIXME this is a copy-paste of the base-class member to add the isInitialized assertion.
     template<typename Rhs>
-    inline const Solve<PartialPivLU, Rhs>
+    EIGEN_NODISCARD inline const Solve<PartialPivLU, Rhs>
     solve(const MatrixBase<Rhs>& b) const
     {
       eigen_assert(m_isInitialized && "PartialPivLU is not initialized.");

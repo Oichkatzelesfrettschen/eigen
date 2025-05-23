@@ -144,7 +144,7 @@ class CompleteOrthogonalDecomposition {
    *
    */
   template <typename Rhs>
-  inline const Solve<CompleteOrthogonalDecomposition, Rhs> solve(
+  EIGEN_NODISCARD inline const Solve<CompleteOrthogonalDecomposition, Rhs> solve(
       const MatrixBase<Rhs>& b) const {
     eigen_assert(m_cpqr.m_isInitialized &&
                  "CompleteOrthogonalDecomposition is not initialized.");
@@ -181,7 +181,7 @@ class CompleteOrthogonalDecomposition {
   const MatrixType& matrixT() const { return m_cpqr.matrixQR(); }
 
   template <typename InputType>
-  CompleteOrthogonalDecomposition& compute(const EigenBase<InputType>& matrix) {
+  EIGEN_NODISCARD CompleteOrthogonalDecomposition& compute(const EigenBase<InputType>& matrix) {
     // Compute the column pivoted QR factorization A P = Q R.
     m_cpqr.compute(matrix);
     computeInPlace();

@@ -149,7 +149,7 @@ template<typename _MatrixType> class HessenbergDecomposition
       * Output: \verbinclude HessenbergDecomposition_compute.out
       */
     template<typename InputType>
-    HessenbergDecomposition& compute(const EigenBase<InputType>& matrix)
+    EIGEN_NODISCARD HessenbergDecomposition& compute(const EigenBase<InputType>& matrix)
     {
       m_matrix = matrix.derived();
       if(matrix.rows()<2)

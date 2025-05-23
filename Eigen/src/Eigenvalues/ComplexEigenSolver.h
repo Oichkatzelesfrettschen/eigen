@@ -210,7 +210,7 @@ template<typename _MatrixType> class ComplexEigenSolver
       * Output: \verbinclude ComplexEigenSolver_compute.out
       */
     template<typename InputType>
-    ComplexEigenSolver& compute(const EigenBase<InputType>& matrix, bool computeEigenvectors = true);
+    EIGEN_NODISCARD ComplexEigenSolver& compute(const EigenBase<InputType>& matrix, bool computeEigenvectors = true);
 
     /** \brief Reports whether previous computation was successful.
       *
