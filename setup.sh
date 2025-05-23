@@ -58,7 +58,7 @@ export CXXFLAGS="-std=c++23"
 for pkg in \
   build-essential gcc g++ clang lld llvm \
   clang-17 clang-tools-17 libclang-17-dev \
-  clang-format uncrustify astyle editorconfig pre-commit \
+  clang-format uncrustify astyle editorconfig pre-commit python3-pytest \
   make bmake ninja-build cmake meson \
   autoconf automake libtool m4 gawk flex bison byacc \
   pkg-config file ca-certificates curl git unzip \
@@ -84,8 +84,15 @@ done
 
 pip_install clang==17.*
 
-# Ensure latest pre-commit and pytest for repository checks
-pip_install pre-commit pytest
+# Fallback to pip if apt packages for pre-commit or pytest failed
+if ! command -v pre-commit >/dev/null 2>&1; then
+  echo "Falling back to pip for pre-commit" >> "$FAIL_LOG"
+  pip_install pre-commit
+fi
+if ! command -v pytest >/dev/null 2>&1; then
+  echo "Falling back to pip for pytest" >> "$FAIL_LOG"
+  pip_install pytest
+fi
 
 pip_install tensorflow-cpu jax jaxlib \
   tensorflow-model-optimization mlflow onnxruntime-tools
@@ -185,6 +192,10 @@ fi
 command -v gmake >/dev/null 2>&1 || ln -s "$(command -v make)" /usr/local/bin/gmake
 command -v clang-tidy >/dev/null 2>&1 || ln -s "$(command -v clang-tidy-17)" /usr/local/bin/clang-tidy
 command -v clang-format >/dev/null 2>&1 || ln -s "$(command -v clang-format-17)" /usr/local/bin/clang-format
+
+# Verify pre-commit and pytest availability
+pre-commit --version >/dev/null 2>&1 || echo "pre-commit --version failed" >> "$FAIL_LOG"
+pytest --version >/dev/null 2>&1 || echo "pytest --version failed" >> "$FAIL_LOG"
 
 apt-get clean || echo "apt-get clean failed" >> "$FAIL_LOG"
 rm -rf /var/lib/apt/lists/*
