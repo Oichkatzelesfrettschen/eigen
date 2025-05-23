@@ -593,7 +593,9 @@ namespace Eigen {
 }
 #define EIGEN_UNUSED_VARIABLE(var) Eigen::internal::ignore_unused_variable(var);
 
+
 // Mark return values that must not be discarded
+
 #define EIGEN_NODISCARD [[nodiscard]]
 
 #if !defined(EIGEN_ASM_COMMENT)
