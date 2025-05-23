@@ -197,6 +197,11 @@ command -v clang-format >/dev/null 2>&1 || ln -s "$(command -v clang-format-17)"
 pre-commit --version >/dev/null 2>&1 || echo "pre-commit --version failed" >> "$FAIL_LOG"
 pytest --version >/dev/null 2>&1 || echo "pytest --version failed" >> "$FAIL_LOG"
 
+# Ensure local hook scripts are executable
+if [ -d hooks ]; then
+  chmod +x hooks/* || true
+fi
+
 apt-get clean || echo "apt-get clean failed" >> "$FAIL_LOG"
 rm -rf /var/lib/apt/lists/*
 

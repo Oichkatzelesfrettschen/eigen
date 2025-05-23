@@ -74,7 +74,9 @@ entire suite including the Go tests.
 ## Development Environment
 
 Run `./setup.sh` to install the toolchain including GCC, Clang/LLVM, Meson and
-pre-commit.  After installation you can enable the git hooks with:
+pre-commit.  The pre-commit hooks are configured to use local scripts so they
+work even when the network is unavailable. After installation you can enable
+the git hooks with:
 
 ```bash
 pre-commit install

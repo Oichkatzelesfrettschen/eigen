@@ -1,22 +1,28 @@
 repos:
-  - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v17.0.6
+  - repo: local
     hooks:
       - id: clang-format
-        additional_dependencies: [clang-format==17.0.6]
-  - repo: https://github.com/pre-commit/mirrors-clang-tidy
-    rev: v17.0.6
-    hooks:
-      - id: clang-tidy
-        additional_dependencies: [clang-tidy==17.0.6]
+        name: clang-format
+        entry: hooks/clang-format.sh
+        language: script
         files: "\\.(c|cc|cpp|cxx|h|hpp)$"
       - id: clang-tidy
+        name: clang-tidy
+        entry: hooks/clang-tidy.sh
+        language: script
+        files: "\\.(c|cc|cpp|cxx|h|hpp)$"
+      - id: clang-tidy-c23
         name: clang-tidy-c23
-        additional_dependencies: [clang-tidy==17.0.6]
-        args: [--config-file=.clang-tidy-c23]
+        entry: hooks/clang-tidy-c23.sh
+        language: script
         files: "\\.(c|h)$"
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
-    hooks:
       - id: end-of-file-fixer
+        name: end-of-file-fixer
+        entry: hooks/end-of-file-fixer.py
+        language: python
+        files: ''
       - id: trailing-whitespace
+        name: trailing-whitespace
+        entry: hooks/trailing-whitespace.py
+        language: python
+        files: ''
