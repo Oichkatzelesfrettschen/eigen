@@ -9,13 +9,14 @@
 
 #ifndef EIGEN_DENSECOEFFSBASE_H
 #define EIGEN_DENSECOEFFSBASE_H
+#include <type_traits>
 
 namespace Eigen {
 
 namespace internal {
-template<typename T> struct add_const_on_value_type_if_arithmetic
-{
-  typedef typename conditional<is_arithmetic<T>::value, T, typename add_const_on_value_type<T>::type>::type type;
+template <typename T>
+struct add_const_on_value_type_if_arithmetic {
+  using type = std::conditional_t<std::is_arithmetic_v<T>, T, std::add_const_t<T>>;
 };
 }
 
@@ -47,7 +48,7 @@ class DenseCoeffsBase<Derived,ReadOnlyAccessors> : public EigenBase<Derived>
     // not possible, since the underlying expressions might not offer a valid address the reference could be referring to.
     typedef typename internal::conditional<bool(internal::traits<Derived>::Flags&LvalueBit),
                          const Scalar&,
-                         typename internal::conditional<internal::is_arithmetic<Scalar>::value, Scalar, const Scalar>::type
+                         typename internal::conditional<std::is_arithmetic_v<Scalar>, Scalar, const Scalar>::type
                      >::type CoeffReturnType;
 
     typedef typename internal::add_const_on_value_type_if_arithmetic<

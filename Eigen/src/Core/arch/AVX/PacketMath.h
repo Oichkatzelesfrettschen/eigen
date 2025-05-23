@@ -32,10 +32,6 @@ typedef __m256  Packet8f;
 typedef __m256i Packet8i;
 typedef __m256d Packet4d;
 
-template<> struct is_arithmetic<__m256>  { enum { value = true }; };
-template<> struct is_arithmetic<__m256i> { enum { value = true }; };
-template<> struct is_arithmetic<__m256d> { enum { value = true }; };
-
 #define _EIGEN_DECLARE_CONST_Packet8f(NAME,X) \
   const Packet8f p8f_##NAME = pset1<Packet8f>(X)
 

@@ -10,6 +10,7 @@
 
 #ifndef EIGEN_STL_DETAILS_H
 #define EIGEN_STL_DETAILS_H
+#include <type_traits>
 
 #ifndef EIGEN_ALIGNED_ALLOCATOR
   #define EIGEN_ALIGNED_ALLOCATOR Eigen::aligned_allocator
@@ -53,7 +54,7 @@ namespace Eigen {
   // even if this function is never called. Whence this little wrapper.
 #define EIGEN_WORKAROUND_MSVC_STL_SUPPORT(T) \
   typename Eigen::internal::conditional< \
-    Eigen::internal::is_arithmetic<T>::value, \
+    std::is_arithmetic_v<T>, \
     T, \
     Eigen::internal::workaround_msvc_stl_support<T> \
   >::type

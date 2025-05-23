@@ -9,6 +9,7 @@
 
 #ifndef EIGEN_SYMBOLIC_INDEX_H
 #define EIGEN_SYMBOLIC_INDEX_H
+#include <type_traits>
 
 namespace Eigen {
 
@@ -188,7 +189,7 @@ public:
 template<typename T>
 struct is_symbolic {
   // BaseExpr has no conversion ctor, so we only have to check whether T can be staticaly cast to its base class BaseExpr<T>.
-  enum { value = internal::is_convertible<T,BaseExpr<T> >::value };
+  enum { value = std::is_convertible_v<T,BaseExpr<T>> };
 };
 
 // Specialization for functions, because is_convertible fails in this case.

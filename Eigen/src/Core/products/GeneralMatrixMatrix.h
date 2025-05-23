@@ -9,6 +9,7 @@
 
 #ifndef EIGEN_GENERAL_MATRIX_MATRIX_H
 #define EIGEN_GENERAL_MATRIX_MATRIX_H
+#include <type_traits>
 
 namespace Eigen {
 
@@ -467,8 +468,8 @@ struct generic_product_impl<Lhs,Rhs,DenseShape,DenseShape,GemmProduct>
     if(a_lhs.cols()==0 || a_lhs.rows()==0 || a_rhs.cols()==0)
       return;
 
-    typename internal::add_const_on_value_type<ActualLhsType>::type lhs = LhsBlasTraits::extract(a_lhs);
-    typename internal::add_const_on_value_type<ActualRhsType>::type rhs = RhsBlasTraits::extract(a_rhs);
+    std::add_const_t<ActualLhsType> lhs = LhsBlasTraits::extract(a_lhs);
+    std::add_const_t<ActualRhsType> rhs = RhsBlasTraits::extract(a_rhs);
 
     Scalar actualAlpha = alpha * LhsBlasTraits::extractScalarFactor(a_lhs)
                                * RhsBlasTraits::extractScalarFactor(a_rhs);

@@ -32,19 +32,6 @@ typedef __m512 Packet16f;
 typedef __m512i Packet16i;
 typedef __m512d Packet8d;
 
-template <>
-struct is_arithmetic<__m512> {
-  enum { value = true };
-};
-template <>
-struct is_arithmetic<__m512i> {
-  enum { value = true };
-};
-template <>
-struct is_arithmetic<__m512d> {
-  enum { value = true };
-};
-
 template<> struct packet_traits<float>  : default_packet_traits
 {
   typedef Packet16f type;

@@ -9,6 +9,7 @@
 
 #ifndef EIGEN_TRIANGULARMATRIXVECTOR_H
 #define EIGEN_TRIANGULARMATRIXVECTOR_H
+#include <type_traits>
 
 namespace Eigen {
 
@@ -218,8 +219,8 @@ template<int Mode> struct trmv_selector<Mode,ColMajor>
     
     typedef Map<Matrix<ResScalar,Dynamic,1>, EIGEN_PLAIN_ENUM_MIN(AlignedMax,internal::packet_traits<ResScalar>::size)> MappedDest;
 
-    typename internal::add_const_on_value_type<ActualLhsType>::type actualLhs = LhsBlasTraits::extract(lhs);
-    typename internal::add_const_on_value_type<ActualRhsType>::type actualRhs = RhsBlasTraits::extract(rhs);
+    std::add_const_t<ActualLhsType> actualLhs = LhsBlasTraits::extract(lhs);
+    std::add_const_t<ActualRhsType> actualRhs = RhsBlasTraits::extract(rhs);
 
     LhsScalar lhs_alpha = LhsBlasTraits::extractScalarFactor(lhs);
     RhsScalar rhs_alpha = RhsBlasTraits::extractScalarFactor(rhs);

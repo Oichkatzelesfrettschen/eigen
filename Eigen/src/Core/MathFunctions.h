@@ -9,6 +9,7 @@
 
 #ifndef EIGEN_MATHFUNCTIONS_H
 #define EIGEN_MATHFUNCTIONS_H
+#include <type_traits>
 
 // source: http://www.geom.uiuc.edu/~huberty/math5337/groupe/digits.html
 // TODO this should better be moved to NumTraits
@@ -760,22 +761,22 @@ inline EIGEN_MATHFUNC_RETVAL(random, Scalar) random()
 
 template<typename T>
 EIGEN_DEVICE_FUNC
-std::enable_if_t<internal::is_integral<T>::value,bool>
+std::enable_if_t<std::is_integral_v<T>,bool>
 isnan_impl(const T&) { return false; }
 
 template<typename T>
 EIGEN_DEVICE_FUNC
-std::enable_if_t<internal::is_integral<T>::value,bool>
+std::enable_if_t<std::is_integral_v<T>,bool>
 isinf_impl(const T&) { return false; }
 
 template<typename T>
 EIGEN_DEVICE_FUNC
-std::enable_if_t<internal::is_integral<T>::value,bool>
+std::enable_if_t<std::is_integral_v<T>,bool>
 isfinite_impl(const T&) { return true; }
 
 template<typename T>
 EIGEN_DEVICE_FUNC
-std::enable_if_t<(!internal::is_integral<T>::value)&&(!NumTraits<T>::IsComplex),bool>
+std::enable_if_t<(!std::is_integral_v<T>)&&(!NumTraits<T>::IsComplex),bool>
 isfinite_impl(const T& x)
 {
   #ifdef EIGEN_CUDA_ARCH
@@ -790,7 +791,7 @@ isfinite_impl(const T& x)
 
 template<typename T>
 EIGEN_DEVICE_FUNC
-std::enable_if_t<(!internal::is_integral<T>::value)&&(!NumTraits<T>::IsComplex),bool>
+std::enable_if_t<(!std::is_integral_v<T>)&&(!NumTraits<T>::IsComplex),bool>
 isinf_impl(const T& x)
 {
   #ifdef EIGEN_CUDA_ARCH
@@ -805,7 +806,7 @@ isinf_impl(const T& x)
 
 template<typename T>
 EIGEN_DEVICE_FUNC
-std::enable_if_t<(!internal::is_integral<T>::value)&&(!NumTraits<T>::IsComplex),bool>
+std::enable_if_t<(!std::is_integral_v<T>)&&(!NumTraits<T>::IsComplex),bool>
 isnan_impl(const T& x)
 {
   #ifdef EIGEN_CUDA_ARCH
@@ -1005,7 +1006,7 @@ inline EIGEN_MATHFUNC_RETVAL(real, Scalar) real(const Scalar& x)
 
 template<typename Scalar>
 EIGEN_DEVICE_FUNC
-inline typename internal::add_const_on_value_type< EIGEN_MATHFUNC_RETVAL(real_ref, Scalar) >::type real_ref(const Scalar& x)
+inline std::add_const_t<EIGEN_MATHFUNC_RETVAL(real_ref, Scalar)> real_ref(const Scalar& x)
 {
   return internal::real_ref_impl<Scalar>::run(x);
 }
@@ -1033,7 +1034,7 @@ inline EIGEN_MATHFUNC_RETVAL(arg, Scalar) arg(const Scalar& x)
 
 template<typename Scalar>
 EIGEN_DEVICE_FUNC
-inline typename internal::add_const_on_value_type< EIGEN_MATHFUNC_RETVAL(imag_ref, Scalar) >::type imag_ref(const Scalar& x)
+inline std::add_const_t<EIGEN_MATHFUNC_RETVAL(imag_ref, Scalar)> imag_ref(const Scalar& x)
 {
   return internal::imag_ref_impl<Scalar>::run(x);
 }

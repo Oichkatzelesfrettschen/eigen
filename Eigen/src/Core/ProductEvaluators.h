@@ -583,8 +583,8 @@ struct product_evaluator<Product<Lhs, Rhs, LazyProduct>, ProductTag, DenseShape,
   }
 
 protected:
-  typename internal::add_const_on_value_type<LhsNested>::type m_lhs;
-  typename internal::add_const_on_value_type<RhsNested>::type m_rhs;
+  std::add_const_t<LhsNested> m_lhs;
+  std::add_const_t<RhsNested> m_rhs;
   
   LhsEtorType m_lhsImpl;
   RhsEtorType m_rhsImpl;

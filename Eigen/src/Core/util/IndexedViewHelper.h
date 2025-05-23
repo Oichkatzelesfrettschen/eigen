@@ -10,6 +10,7 @@
 
 #ifndef EIGEN_INDEXED_VIEW_HELPER_H
 #define EIGEN_INDEXED_VIEW_HELPER_H
+#include <type_traits>
 
 namespace Eigen {
 
@@ -119,7 +120,7 @@ template<> struct get_compile_time_incr<SingleRange> {
 
 // Turn a single index into something that looks like an array (i.e., that exposes a .size(), and operatro[](int) methods)
 template<typename T, int XprSize>
-struct IndexedViewCompatibleType<T,XprSize,std::enable_if_t<internal::is_integral<T>::value>> {
+struct IndexedViewCompatibleType<T,XprSize,std::enable_if_t<std::is_integral_v<T>>> {
   // Here we could simply use Array, but maybe it's less work for the compiler to use
   // a simpler wrapper as SingleRange
   //typedef Eigen::Array<Index,1,1> type;

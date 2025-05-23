@@ -56,7 +56,7 @@ struct selfadjoint_product_selector<MatrixType,OtherType,UpLo,true>
     typedef internal::blas_traits<OtherType> OtherBlasTraits;
     typedef typename OtherBlasTraits::DirectLinearAccessType ActualOtherType;
     typedef typename internal::remove_all<ActualOtherType>::type _ActualOtherType;
-    typename internal::add_const_on_value_type<ActualOtherType>::type actualOther = OtherBlasTraits::extract(other.derived());
+    std::add_const_t<ActualOtherType> actualOther = OtherBlasTraits::extract(other.derived());
 
     Scalar actualAlpha = alpha * OtherBlasTraits::extractScalarFactor(other.derived());
 
@@ -88,7 +88,7 @@ struct selfadjoint_product_selector<MatrixType,OtherType,UpLo,false>
     typedef internal::blas_traits<OtherType> OtherBlasTraits;
     typedef typename OtherBlasTraits::DirectLinearAccessType ActualOtherType;
     typedef typename internal::remove_all<ActualOtherType>::type _ActualOtherType;
-    typename internal::add_const_on_value_type<ActualOtherType>::type actualOther = OtherBlasTraits::extract(other.derived());
+    std::add_const_t<ActualOtherType> actualOther = OtherBlasTraits::extract(other.derived());
 
     Scalar actualAlpha = alpha * OtherBlasTraits::extractScalarFactor(other.derived());
 
