@@ -92,7 +92,7 @@ class TensorImagePatchOp : public TensorBase<TensorImagePatchOp<Rows, Cols, XprT
                                                            m_row_inflate_strides(row_inflate_strides), m_col_inflate_strides(col_inflate_strides),
                                                            m_padding_explicit(true), m_padding_top(padding_top), m_padding_bottom(padding_bottom),
                                                            m_padding_left(padding_left), m_padding_right(padding_right),
-                                                           m_padding_type(PADDING_VALID), m_padding_value(padding_value) {}
+                                                           m_padding_type(PaddingType::PADDING_VALID), m_padding_value(padding_value) {}
 
 #ifdef EIGEN_USE_SYCL // this is work around for sycl as Eigen could not use c++11 deligate constructor feature
 EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE TensorImagePatchOp(const XprType& expr, DenseIndex patch_rows, DenseIndex patch_cols,
@@ -252,14 +252,14 @@ struct TensorEvaluator<const TensorImagePatchOp<Rows, Cols, ArgType>, Device>
     } else {
       // Computing padding from the type
       switch (op.padding_type()) {
-        case PADDING_VALID:
+        case PaddingType::PADDING_VALID:
           m_outputRows = numext::ceil((m_input_rows_eff - m_patch_rows_eff + 1.f) / static_cast<float>(m_row_strides));
           m_outputCols = numext::ceil((m_input_cols_eff - m_patch_cols_eff + 1.f) / static_cast<float>(m_col_strides));
           // Calculate the padding
           m_rowPaddingTop = numext::maxi<Index>(0, ((m_outputRows - 1) * m_row_strides + m_patch_rows_eff - m_input_rows_eff) / 2);
           m_colPaddingLeft = numext::maxi<Index>(0, ((m_outputCols - 1) * m_col_strides + m_patch_cols_eff - m_input_cols_eff) / 2);
           break;
-        case PADDING_SAME:
+        case PaddingType::PADDING_SAME:
           m_outputRows = numext::ceil(m_input_rows_eff / static_cast<float>(m_row_strides));
           m_outputCols = numext::ceil(m_input_cols_eff / static_cast<float>(m_col_strides));
           // Calculate the padding
