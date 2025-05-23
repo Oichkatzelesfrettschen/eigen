@@ -84,14 +84,12 @@ done
 
 pip_install clang==17.*
 
-# Fallback to pip if apt packages for pre-commit or pytest failed
-if ! command -v pre-commit >/dev/null 2>&1; then
-  echo "Falling back to pip for pre-commit" >> "$FAIL_LOG"
-  pip_install pre-commit
-fi
-if ! command -v pytest >/dev/null 2>&1; then
-  echo "Falling back to pip for pytest" >> "$FAIL_LOG"
-  pip_install pytest
+# Ensure key Python tooling is installed via pip
+pip_install pre-commit configuredb pytest PyYAML pylint pyfuzz
+
+# Install pre-commit hooks while network is available
+if ! pre-commit install --install-hooks; then
+  echo "pre-commit install failed" >> "$FAIL_LOG"
 fi
 
 pip_install tensorflow-cpu jax jaxlib \
@@ -193,9 +191,12 @@ command -v gmake >/dev/null 2>&1 || ln -s "$(command -v make)" /usr/local/bin/gm
 command -v clang-tidy >/dev/null 2>&1 || ln -s "$(command -v clang-tidy-17)" /usr/local/bin/clang-tidy
 command -v clang-format >/dev/null 2>&1 || ln -s "$(command -v clang-format-17)" /usr/local/bin/clang-format
 
-# Verify pre-commit and pytest availability
-pre-commit --version >/dev/null 2>&1 || echo "pre-commit --version failed" >> "$FAIL_LOG"
-pytest --version >/dev/null 2>&1 || echo "pytest --version failed" >> "$FAIL_LOG"
+# Verify key Python tooling availability
+for tool in pre-commit configuredb pytest pyyaml pylint pyfuzz; do
+  if ! "$tool" --version >/dev/null 2>&1; then
+    echo "$tool --version failed" >> "$FAIL_LOG"
+  fi
+done
 
 apt-get clean || echo "apt-get clean failed" >> "$FAIL_LOG"
 rm -rf /var/lib/apt/lists/*
