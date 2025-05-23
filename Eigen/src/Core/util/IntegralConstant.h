@@ -23,11 +23,11 @@ template<int N> class VariableAndFixedInt;
   *
   * This class embeds a compile-time integer \c N.
   *
-  * It is similar to c++11 std::integral_constant<int,N> but with some additional features
+ * It is similar to c++23 std::integral_constant<int,N> but with some additional features
   * such as:
   *  - implicit conversion to int
   *  - arithmetic and some bitwise operators: -, +, *, /, %, &, |
-  *  - c++98/14 compatibility with fix<N> and fix<N>() syntax to define integral constants.
+ *  - c++23 compatibility with fix<N> and fix<N>() syntax to define integral constants.
   *
   * It is strongly discouraged to directly deal with this class FixedInt. Instances are expcected to
   * be created by the user using Eigen::fix<N> or Eigen::fix<N>(). In C++98-11, the former syntax does
@@ -165,7 +165,7 @@ template<typename T, int DynamicKey=Dynamic, typename EnableIf=void> struct clea
 template<typename T, int DynamicKey> struct cleanup_index_type<T,DynamicKey,typename internal::enable_if<internal::is_integral<T>::value>::type> { typedef Index type; };
 
 #if !EIGEN_HAS_CXX23
-// In c++98/c++11, fix<N> is a pointer to function that we better cleanup to a true FixedInt<N>:
+// In pre-c++23 versions, fix<N> was a pointer to function that we better cleanup to a true FixedInt<N>:
 template<int N, int DynamicKey> struct cleanup_index_type<FixedInt<N> (*)(), DynamicKey> { typedef FixedInt<N> type; };
 #endif
 
@@ -211,7 +211,7 @@ inline internal::VariableAndFixedInt<N> fix(T val) { return internal::VariableAn
   *
   * See also the function fix(int) to pass both a compile-time and runtime value.
   *
-  * In c++14, it is implemented as:
+ * In c++23, it is implemented as:
   * \code
   * template<int N> static const internal::FixedInt<N> fix{};
   * \endcode
@@ -219,13 +219,13 @@ inline internal::VariableAndFixedInt<N> fix(T val) { return internal::VariableAn
   * <a href="http://en.cppreference.com/w/cpp/types/integral_constant">\c std::integral_constant </a><tt> <int,N> </tt>
   * Here, \c fix<N> is thus an object of type \c internal::FixedInt<N>.
   *
-  * In c++98/11, it is implemented as a function:
+ * Prior to c++23 it was implemented as a function:
   * \code
   * template<int N> inline internal::FixedInt<N> fix();
   * \endcode
   * Here internal::FixedInt<N> is thus a pointer to function.
   *
-  * If for some reason you want a true object in c++98 then you can write: \code fix<N>() \endcode which is also valid in c++14.
+ * If for some reason you want a true object in c++98 then you can write: \code fix<N>() \endcode which is also valid in c++23.
   *
   * \sa fix<N>(int), seq, seqN
   */

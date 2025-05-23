@@ -27,7 +27,7 @@
 #ifndef EIGEN_STATIC_ASSERT
 #ifndef EIGEN_NO_STATIC_ASSERT
 
-  #if EIGEN_MAX_CPP_VER>=11 && (__has_feature(cxx_static_assert) || (defined(__cplusplus) && __cplusplus >= 201103L) || (EIGEN_COMP_MSVC >= 1600))
+#if EIGEN_MAX_CPP_VER>=23 && (__has_feature(cxx_static_assert) || (defined(__cplusplus) && __cplusplus >= 202302L) || (EIGEN_COMP_MSVC >= 1930))
 
     // if native static_assert is enabled, let's use it
     #define EIGEN_STATIC_ASSERT(X,MSG) static_assert(X,#MSG);

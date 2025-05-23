@@ -290,7 +290,7 @@ operator^(const EIGEN_CURRENT_STORAGE_BASE_CLASS<OtherDerived> &other) const
 
 // NOTE disabled until we agree on argument order
 #if 0
-/** \cpp11 \returns an expression of the coefficient-wise polygamma function.
+/** \cpp23 \returns an expression of the coefficient-wise polygamma function.
   *
   * \specialfunctions_module
   *

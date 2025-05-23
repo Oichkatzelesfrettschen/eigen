@@ -27,10 +27,10 @@ namespace Eigen {
   * // Defines an expression:
   * auto expr = (x+3)/y+z;
   *
-  * // And evaluate it: (c++14)
+ * // And evaluate it: (c++23)
   * std::cout << expr.eval(x=6,y=3,z=-13) << "\n";
   *
-  * // In c++98/11, only one symbol per expression is supported for now:
+ * // In versions prior to c++23, only one symbol per expression was supported:
   * auto expr98 = (3-x)/2;
   * std::cout << expr98.eval(x=6) << "\n";
   * \endcode
@@ -192,7 +192,7 @@ struct is_symbolic {
 };
 
 // Specialization for functions, because is_convertible fails in this case.
-// Useful in c++98/11 mode when testing is_symbolic<decltype(fix<N>)>
+// Useful prior to c++23 when testing is_symbolic<decltype(fix<N>)>
 template<typename T>
 struct is_symbolic<T (*)()> {
   enum { value = false };

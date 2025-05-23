@@ -8,13 +8,13 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #ifdef EIGEN_TEST_PART_2
-// Make sure we also check c++11 max implementation
-#define EIGEN_MAX_CPP_VER 11
+// Make sure we also check c++23 max implementation
+#define EIGEN_MAX_CPP_VER 23
 #endif
 
 #ifdef EIGEN_TEST_PART_3
-// Make sure we also check c++98 max implementation
-#define EIGEN_MAX_CPP_VER 03
+// Make sure we also check c++23 max implementation
+#define EIGEN_MAX_CPP_VER 23
 #endif
 
 #include <valarray>
@@ -214,7 +214,7 @@ void check_indexed_view()
   VERIFY( is_same_seq_type( seqN(2,std::integral_constant<int,5>()), seqN(2,fix<5>) ) );
   VERIFY( is_same_seq_type( seq(std::integral_constant<int,1>(),std::integral_constant<int,5>()), seq(fix<1>,fix<5>) ) );
 #else
-  // sorry, no compile-time size recovery in c++98/03
+  // sorry, no compile-time size recovery prior to c++23
   VERIFY( is_same_seq( seq(fix<2>,fix<5>), seqN(fix<2>,fix<4>) ) );
 #endif
 

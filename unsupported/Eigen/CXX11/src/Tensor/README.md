@@ -1803,8 +1803,8 @@ product of 2 1d tensors (through contractions) returns a 0d tensor.
 ## Limitations
 
 *   The number of tensor dimensions is currently limited to 250 when using a
-    compiler that supports cxx11. It is limited to only 5 for older compilers.
-*   The IndexList class requires a cxx11 compliant compiler. You can use an
+    compiler that supports cxx23. It is limited to only 5 for older compilers.
+*   The IndexList class requires a cxx23 compliant compiler. You can use an
     array of indices instead if you don't have access to a modern compiler.
 *   On GPUs only floating point values are properly tested and optimized for.
 *   Complex and integer values are known to be broken on GPUs. If you try to use

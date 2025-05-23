@@ -16,7 +16,7 @@
 #include <math_constants.h>
 #endif
 
-#if EIGEN_COMP_ICC>=1600 &&  __cplusplus >= 201103L
+#if EIGEN_COMP_ICC>=1600 &&  __cplusplus >= 202002L
 #include <cstdint>
 #endif
 
@@ -43,7 +43,7 @@ namespace internal {
 
 // Only recent versions of ICC complain about using ptrdiff_t to hold pointers,
 // and older versions do not provide *intptr_t types.
-#if EIGEN_COMP_ICC>=1600 &&  __cplusplus >= 201103L
+#if EIGEN_COMP_ICC>=1600 &&  __cplusplus >= 202002L
 typedef std::intptr_t  IntPtr;
 typedef std::uintptr_t UIntPtr;
 #else
@@ -292,7 +292,7 @@ protected:
   * It currently supports:
   *  - any types T defining T::SizeAtCompileTime
   *  - plain C arrays as T[N]
-  *  - std::array (c++11)
+  *  - std::array (c++23)
   *  - some internal types such as SingleRange and AllRange
   *
   * The second template parameter eases SFINAE-based specializations.
