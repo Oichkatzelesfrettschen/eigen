@@ -26,16 +26,6 @@ template<typename _MatrixType> struct traits<PartialPivLU<_MatrixType> >
   };
 };
 
-template<typename T,typename Derived>
-struct enable_if_ref;
-// {
-//   typedef Derived type;
-// };
-
-template<typename T,typename Derived>
-struct enable_if_ref<Ref<T>,Derived> {
-  typedef Derived type;
-};
 
 } // end namespace internal
 
