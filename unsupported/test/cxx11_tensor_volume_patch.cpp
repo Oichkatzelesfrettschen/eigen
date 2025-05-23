@@ -1,6 +1,6 @@
 #include "main.h"
 
-#include <Eigen/CXX11/Tensor>
+#include <Eigen/CXX23/Tensor>
 
 using Eigen::Tensor;
 

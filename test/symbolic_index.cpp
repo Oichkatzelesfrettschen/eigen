@@ -86,7 +86,7 @@ void check_symbolic_index()
   VERIFY_IS_EQUAL( ( end-3*last  ).eval(last=size-1), size- 3*(size-1) );
   VERIFY_IS_EQUAL( ( (end-3*last)/end  ).eval(last=size-1), (size- 3*(size-1))/size );
 
-#if EIGEN_HAS_CXX14
+#if EIGEN_HAS_CXX23
   {
     struct x_tag {};  static const Symbolic::SymbolExpr<x_tag> x;
     struct y_tag {};  static const Symbolic::SymbolExpr<y_tag> y;

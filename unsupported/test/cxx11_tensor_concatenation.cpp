@@ -9,7 +9,7 @@
 
 #include "main.h"
 
-#include <Eigen/CXX11/Tensor>
+#include <Eigen/CXX23/Tensor>
 
 using Eigen::Tensor;
 
@@ -39,7 +39,7 @@ static void test_static_dimension_failure()
   Tensor<int, 2, DataLayout> left(2, 3);
   Tensor<int, 3, DataLayout> right(2, 3, 1);
 
-#ifdef CXX11_TENSOR_CONCATENATION_STATIC_DIMENSION_FAILURE
+#ifdef CXX23_TENSOR_CONCATENATION_STATIC_DIMENSION_FAILURE
   // Technically compatible, but we static assert that the inputs have same
   // NumDims.
   Tensor<int, 3, DataLayout> concatenation = left.concatenate(right, 0);

@@ -14,7 +14,7 @@ namespace Eigen {
 
 namespace internal {
 
-#if (!EIGEN_HAS_CXX11) || !((!EIGEN_COMP_GNUC) || EIGEN_COMP_GNUC>=48)
+#if (!EIGEN_HAS_CXX23) || !((!EIGEN_COMP_GNUC) || EIGEN_COMP_GNUC>=48)
 template<typename T> struct aseq_negate {};
 
 template<> struct aseq_negate<Index> {
@@ -138,7 +138,7 @@ protected:
 
 public:
 
-#if EIGEN_HAS_CXX11 && ((!EIGEN_COMP_GNUC) || EIGEN_COMP_GNUC>=48)
+#if EIGEN_HAS_CXX23 && ((!EIGEN_COMP_GNUC) || EIGEN_COMP_GNUC>=48)
   auto reverse() const -> decltype(Eigen::seqN(m_first+(m_size+fix<-1>())*m_incr,m_size,-m_incr)) {
     return seqN(m_first+(m_size+fix<-1>())*m_incr,m_size,-m_incr);
   }
@@ -200,7 +200,7 @@ auto seq(FirstType f, LastType l);
 
 #else // EIGEN_PARSED_BY_DOXYGEN
 
-#if EIGEN_HAS_CXX11
+#if EIGEN_HAS_CXX23
 template<typename FirstType,typename LastType>
 auto seq(FirstType f, LastType l) -> decltype(seqN(typename internal::cleanup_index_type<FirstType>::type(f),
                                                    (  typename internal::cleanup_index_type<LastType>::type(l)

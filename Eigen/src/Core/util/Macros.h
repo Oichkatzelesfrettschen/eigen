@@ -379,15 +379,15 @@
 #endif
 
 #if EIGEN_MAX_CPP_VER>=11 && (defined(__cplusplus) && (__cplusplus >= 201103L) || EIGEN_COMP_MSVC >= 1900)
-#define EIGEN_HAS_CXX11 1
+#define EIGEN_HAS_CXX23 1
 #else
-#define EIGEN_HAS_CXX11 0
+#define EIGEN_HAS_CXX23 0
 #endif
 
 #if EIGEN_MAX_CPP_VER>=14 && (defined(__cplusplus) && (__cplusplus > 201103L) || EIGEN_COMP_MSVC >= 1910)
-#define EIGEN_HAS_CXX14 1
+#define EIGEN_HAS_CXX23 1
 #else
-#define EIGEN_HAS_CXX14 0
+#define EIGEN_HAS_CXX23 0
 #endif
 
 // Do we support r-value references?
@@ -426,7 +426,7 @@
 
 // Does the compiler support type_trais?
 #ifndef EIGEN_HAS_TYPE_TRAITS
-#if EIGEN_MAX_CPP_VER>=11 && (EIGEN_HAS_CXX11 || EIGEN_COMP_MSVC >= 1700)
+#if EIGEN_MAX_CPP_VER>=11 && (EIGEN_HAS_CXX23 || EIGEN_COMP_MSVC >= 1700)
 #define EIGEN_HAS_TYPE_TRAITS 1
 #define EIGEN_INCLUDE_TYPE_TRAITS
 #else
@@ -448,31 +448,31 @@
 #endif
 #endif
 
-// Constexpr support is required by Eigen's C++14 minimum baseline
+// Constexpr support is required by Eigen's C++23 minimum baseline
 #ifndef EIGEN_HAS_CONSTEXPR
 #define EIGEN_HAS_CONSTEXPR 1
 #endif
 
-// Does the compiler support C++11 math?
-// Let's be conservative and enable the default C++11 implementation only if we are sure it exists
-#ifndef EIGEN_HAS_CXX11_MATH
+// Does the compiler support C++23 math?
+// Let's be conservative and enable the default C++23 implementation only if we are sure it exists
+#ifndef EIGEN_HAS_CXX23_MATH
   #if EIGEN_MAX_CPP_VER>=11 && ((__cplusplus > 201103L) || (__cplusplus >= 201103L) && (EIGEN_COMP_GNUC_STRICT || EIGEN_COMP_CLANG || EIGEN_COMP_MSVC || EIGEN_COMP_ICC)  \
       && (EIGEN_ARCH_i386_OR_x86_64) && (EIGEN_OS_GNULINUX || EIGEN_OS_WIN_STRICT || EIGEN_OS_MAC))
-    #define EIGEN_HAS_CXX11_MATH 1
+    #define EIGEN_HAS_CXX23_MATH 1
   #else
-    #define EIGEN_HAS_CXX11_MATH 0
+    #define EIGEN_HAS_CXX23_MATH 0
   #endif
 #endif
 
-// Does the compiler support proper C++11 containers?
-#ifndef EIGEN_HAS_CXX11_CONTAINERS
+// Does the compiler support proper C++23 containers?
+#ifndef EIGEN_HAS_CXX23_CONTAINERS
   #if    EIGEN_MAX_CPP_VER>=11 && \
          ((__cplusplus > 201103L) \
       || ((__cplusplus >= 201103L) && (EIGEN_COMP_GNUC_STRICT || EIGEN_COMP_CLANG || EIGEN_COMP_ICC>=1400)) \
       || EIGEN_COMP_MSVC >= 1900)
-    #define EIGEN_HAS_CXX11_CONTAINERS 1
+    #define EIGEN_HAS_CXX23_CONTAINERS 1
   #else
-    #define EIGEN_HAS_CXX11_CONTAINERS 0
+    #define EIGEN_HAS_CXX23_CONTAINERS 0
   #endif
 #endif
 
@@ -631,7 +631,7 @@ namespace Eigen {
 }
 #define EIGEN_UNUSED_VARIABLE(var) Eigen::internal::ignore_unused_variable(var);
 
-// Mark return values that must not be discarded when C++17 attributes are
+// Mark return values that must not be discarded when C++23 attributes are
 // available. Fall back to nothing on older standards.
 #if (EIGEN_MAX_CPP_VER>=17) && \
     ((defined(__cplusplus) && __cplusplus >= 201703L) || \

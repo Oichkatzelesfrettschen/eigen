@@ -401,7 +401,7 @@ protected:
 /** \returns the result of a full redux operation on the whole matrix or vector using \a func
   *
   * The template parameter \a BinaryOp is the type of the functor \a func which must be
-  * an associative operator. Both current C++98 and C++11 functor styles are handled.
+  * an associative operator. Both current C++98 and C++23 functor styles are handled.
   *
   * \sa DenseBase::sum(), DenseBase::minCoeff(), DenseBase::maxCoeff(), MatrixBase::colwise(), MatrixBase::rowwise()
   */

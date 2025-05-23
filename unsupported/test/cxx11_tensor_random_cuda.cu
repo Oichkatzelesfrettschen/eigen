@@ -14,7 +14,7 @@
 #define EIGEN_USE_GPU
 
 #include "main.h"
-#include <Eigen/CXX11/Tensor>
+#include <Eigen/CXX23/Tensor>
 
 
 void test_cuda_random_uniform()

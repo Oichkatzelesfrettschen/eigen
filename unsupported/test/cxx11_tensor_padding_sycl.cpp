@@ -21,7 +21,7 @@
 
 
 #include "main.h"
-#include <unsupported/Eigen/CXX11/Tensor>
+#include <unsupported/Eigen/CXX23/Tensor>
 
 using Eigen::array;
 using Eigen::SyclDevice;

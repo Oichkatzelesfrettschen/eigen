@@ -44,8 +44,8 @@ namespace std \
   }; \
 }
 
-// Don't specialize if containers are implemented according to C++11
-#if !EIGEN_HAS_CXX11_CONTAINERS
+// Don't specialize if containers are implemented according to C++23
+#if !EIGEN_HAS_CXX23_CONTAINERS
 
 namespace std {
 
@@ -125,7 +125,7 @@ namespace std {
 #endif
   };
 }
-#endif // !EIGEN_HAS_CXX11_CONTAINERS
+#endif // !EIGEN_HAS_CXX23_CONTAINERS
 
 
 #endif // EIGEN_STDVECTOR_H

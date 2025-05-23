@@ -81,7 +81,7 @@ void check_limits_specialization()
   typedef std::numeric_limits<AD> A;
   typedef std::numeric_limits<Scalar> B;
 
-#if EIGEN_HAS_CXX11
+#if EIGEN_HAS_CXX23
   VERIFY(bool(std::is_base_of<B, A>::value));
 #endif
 }

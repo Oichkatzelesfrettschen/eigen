@@ -12,7 +12,7 @@
 #include <map>
 
 #include <Eigen/Dense>
-#include <Eigen/CXX11/Tensor>
+#include <Eigen/CXX23/Tensor>
 
 using Eigen::Tensor;
 

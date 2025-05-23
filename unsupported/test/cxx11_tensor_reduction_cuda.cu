@@ -13,7 +13,7 @@
 #define EIGEN_USE_GPU
 
 #include "main.h"
-#include <unsupported/Eigen/CXX11/Tensor>
+#include <unsupported/Eigen/CXX23/Tensor>
 
 
 template<typename Type, int DataLayout>
