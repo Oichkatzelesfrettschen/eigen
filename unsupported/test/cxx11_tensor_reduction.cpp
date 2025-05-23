@@ -368,13 +368,7 @@ static void test_static_dims() {
   Tensor<float, 2, DataLayout> out(72, 97);
   in.setRandom();
 
-#if !EIGEN_HAS_CONSTEXPR 
-  array<int, 2> reduction_axis;
-  reduction_axis[0] = 1;
-  reduction_axis[1] = 3;
-#else
   Eigen::IndexList<Eigen::type2index<1>, Eigen::type2index<3> > reduction_axis;
-#endif
 
   out = in.maximum(reduction_axis);
 
@@ -398,14 +392,8 @@ static void test_innermost_last_dims() {
   in.setRandom();
 
 // Reduce on the innermost dimensions.
-#if !EIGEN_HAS_CONSTEXPR
-  array<int, 2> reduction_axis;
-  reduction_axis[0] = 0;
-  reduction_axis[1] = 1;
-#else
   // This triggers the use of packets for ColMajor.
   Eigen::IndexList<Eigen::type2index<0>, Eigen::type2index<1> > reduction_axis;
-#endif
 
   out = in.maximum(reduction_axis);
 
@@ -429,14 +417,8 @@ static void test_innermost_first_dims() {
   in.setRandom();
 
 // Reduce on the innermost dimensions.
-#if !EIGEN_HAS_CONSTEXPR
-  array<int, 2> reduction_axis;
-  reduction_axis[0] = 2;
-  reduction_axis[1] = 3;
-#else
   // This triggers the use of packets for RowMajor.
   Eigen::IndexList<Eigen::type2index<2>, Eigen::type2index<3>> reduction_axis;
-#endif
 
   out = in.maximum(reduction_axis);
 
@@ -460,14 +442,8 @@ static void test_reduce_middle_dims() {
   in.setRandom();
 
 // Reduce on the innermost dimensions.
-#if !EIGEN_HAS_CONSTEXPR
-  array<int, 2> reduction_axis;
-  reduction_axis[0] = 1;
-  reduction_axis[1] = 2;
-#else
   // This triggers the use of packets for RowMajor.
   Eigen::IndexList<Eigen::type2index<1>, Eigen::type2index<2>> reduction_axis;
-#endif
 
   out = in.maximum(reduction_axis);
 

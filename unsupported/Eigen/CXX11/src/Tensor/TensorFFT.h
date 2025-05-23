@@ -658,7 +658,6 @@ struct TensorEvaluator<const TensorFFTOp<FFT, ArgType, FFTResultType, FFTDir>, D
 
 }  // end namespace Eigen
 
-#endif  // EIGEN_HAS_CONSTEXPR
 
 
 #endif  // EIGEN_CXX11_TENSOR_TENSOR_FFT_H
