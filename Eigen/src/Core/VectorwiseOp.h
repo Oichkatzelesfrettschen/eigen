@@ -325,7 +325,7 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
       * Output: \verbinclude PartialRedux_squaredNorm.out
       *
       * \sa DenseBase::squaredNorm() */
-    EIGEN_DEVICE_FUNC
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     const SquaredNormReturnType squaredNorm() const
     { return SquaredNormReturnType(_expression()); }
 
@@ -337,7 +337,7 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
       * Output: \verbinclude PartialRedux_norm.out
       *
       * \sa DenseBase::norm() */
-    EIGEN_DEVICE_FUNC
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     const NormReturnType norm() const
     { return NormReturnType(_expression()); }
 
@@ -350,7 +350,7 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
       *
       * \sa DenseBase::norm() */
     template<int p>
-    EIGEN_DEVICE_FUNC
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     const typename LpNormReturnType<p>::Type lpNorm() const
     { return typename LpNormReturnType<p>::Type(_expression()); }
 
@@ -361,7 +361,7 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
       * This is a vector with real entries, even if the original matrix has complex entries.
       *
       * \sa DenseBase::blueNorm() */
-    EIGEN_DEVICE_FUNC
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     const BlueNormReturnType blueNorm() const
     { return BlueNormReturnType(_expression()); }
 
@@ -372,7 +372,7 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
       * This is a vector with real entries, even if the original matrix has complex entries.
       *
       * \sa DenseBase::stableNorm() */
-    EIGEN_DEVICE_FUNC
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     const StableNormReturnType stableNorm() const
     { return StableNormReturnType(_expression()); }
 
@@ -383,7 +383,7 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
       * This is a vector with real entries, even if the original matrix has complex entries.
       *
       * \sa DenseBase::hypotNorm() */
-    EIGEN_DEVICE_FUNC
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     const HypotNormReturnType hypotNorm() const
     { return HypotNormReturnType(_expression()); }
 
@@ -394,7 +394,7 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
       * Output: \verbinclude PartialRedux_sum.out
       *
       * \sa DenseBase::sum() */
-    EIGEN_DEVICE_FUNC
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     const SumReturnType sum() const
     { return SumReturnType(_expression()); }
 
@@ -402,7 +402,7 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
     * of each column (or row) of the referenced expression.
     *
     * \sa DenseBase::mean() */
-    EIGEN_DEVICE_FUNC
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     const MeanReturnType mean() const
     { return MeanReturnType(_expression()); }
 
@@ -411,7 +411,7 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
       * This expression can be assigned to a vector with entries of type \c bool.
       *
       * \sa DenseBase::all() */
-    EIGEN_DEVICE_FUNC
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     const AllReturnType all() const
     { return AllReturnType(_expression()); }
 
@@ -420,7 +420,7 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
       * This expression can be assigned to a vector with entries of type \c bool.
       *
       * \sa DenseBase::any() */
-    EIGEN_DEVICE_FUNC
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     const AnyReturnType any() const
     { return AnyReturnType(_expression()); }
 
@@ -433,7 +433,7 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
       * Output: \verbinclude PartialRedux_count.out
       *
       * \sa DenseBase::count() */
-    EIGEN_DEVICE_FUNC
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     const CountReturnType count() const
     { return CountReturnType(_expression()); }
 
@@ -444,7 +444,7 @@ template<typename ExpressionType, int Direction> class VectorwiseOp
       * Output: \verbinclude PartialRedux_prod.out
       *
       * \sa DenseBase::prod() */
-    EIGEN_DEVICE_FUNC
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     const ProdReturnType prod() const
     { return ProdReturnType(_expression()); }
 

@@ -185,15 +185,15 @@ template<typename Derived> class MatrixBase
     operator*(const DiagonalBase<DiagonalDerived> &diagonal) const;
 
     template<typename OtherDerived>
-    EIGEN_DEVICE_FUNC
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     typename ScalarBinaryOpTraits<typename internal::traits<Derived>::Scalar,typename internal::traits<OtherDerived>::Scalar>::ReturnType
     dot(const MatrixBase<OtherDerived>& other) const;
 
-    EIGEN_DEVICE_FUNC RealScalar squaredNorm() const;
-    EIGEN_DEVICE_FUNC RealScalar norm() const;
-    RealScalar stableNorm() const;
-    RealScalar blueNorm() const;
-    RealScalar hypotNorm() const;
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC RealScalar squaredNorm() const;
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC RealScalar norm() const;
+    EIGEN_NODISCARD RealScalar stableNorm() const;
+    EIGEN_NODISCARD RealScalar blueNorm() const;
+    EIGEN_NODISCARD RealScalar hypotNorm() const;
     EIGEN_NODISCARD EIGEN_DEVICE_FUNC const PlainObject normalized() const;
     EIGEN_NODISCARD EIGEN_DEVICE_FUNC const PlainObject stableNormalized() const;
     EIGEN_DEVICE_FUNC void normalize();
@@ -307,9 +307,9 @@ template<typename Derived> class MatrixBase
     template<bool Enable> inline const Derived& forceAlignedAccessIf() const { return derived(); }
     template<bool Enable> inline Derived& forceAlignedAccessIf() { return derived(); }
 
-    EIGEN_DEVICE_FUNC Scalar trace() const;
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC Scalar trace() const;
 
-    template<int p> EIGEN_DEVICE_FUNC RealScalar lpNorm() const;
+    template<int p> EIGEN_NODISCARD EIGEN_DEVICE_FUNC RealScalar lpNorm() const;
 
     EIGEN_DEVICE_FUNC MatrixBase<Derived>& matrix() { return *this; }
     EIGEN_DEVICE_FUNC const MatrixBase<Derived>& matrix() const { return *this; }

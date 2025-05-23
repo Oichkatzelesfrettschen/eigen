@@ -437,26 +437,26 @@ template<typename Derived> class DenseBase
     template<bool Enable> EIGEN_DEVICE_FUNC
     inline typename internal::conditional<Enable,ForceAlignedAccess<Derived>,Derived&>::type forceAlignedAccessIf();
 
-    EIGEN_DEVICE_FUNC Scalar sum() const;
-    EIGEN_DEVICE_FUNC Scalar mean() const;
-    EIGEN_DEVICE_FUNC Scalar trace() const;
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC Scalar sum() const;
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC Scalar mean() const;
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC Scalar trace() const;
 
-    EIGEN_DEVICE_FUNC Scalar prod() const;
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC Scalar prod() const;
 
-    EIGEN_DEVICE_FUNC typename internal::traits<Derived>::Scalar minCoeff() const;
-    EIGEN_DEVICE_FUNC typename internal::traits<Derived>::Scalar maxCoeff() const;
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC typename internal::traits<Derived>::Scalar minCoeff() const;
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC typename internal::traits<Derived>::Scalar maxCoeff() const;
 
-    template<typename IndexType> EIGEN_DEVICE_FUNC
+    template<typename IndexType> EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     typename internal::traits<Derived>::Scalar minCoeff(IndexType* row, IndexType* col) const;
-    template<typename IndexType> EIGEN_DEVICE_FUNC
+    template<typename IndexType> EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     typename internal::traits<Derived>::Scalar maxCoeff(IndexType* row, IndexType* col) const;
-    template<typename IndexType> EIGEN_DEVICE_FUNC
+    template<typename IndexType> EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     typename internal::traits<Derived>::Scalar minCoeff(IndexType* index) const;
-    template<typename IndexType> EIGEN_DEVICE_FUNC
+    template<typename IndexType> EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     typename internal::traits<Derived>::Scalar maxCoeff(IndexType* index) const;
 
     template<typename BinaryOp>
-    EIGEN_DEVICE_FUNC
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC
     Scalar redux(const BinaryOp& func) const;
 
     template<typename Visitor>
@@ -484,9 +484,9 @@ template<typename Derived> class DenseBase
       return derived().coeff(0,0);
     }
 
-    EIGEN_DEVICE_FUNC bool all() const;
-    EIGEN_DEVICE_FUNC bool any() const;
-    EIGEN_DEVICE_FUNC Index count() const;
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC bool all() const;
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC bool any() const;
+    EIGEN_NODISCARD EIGEN_DEVICE_FUNC Index count() const;
 
     typedef VectorwiseOp<Derived, Horizontal> RowwiseReturnType;
     typedef const VectorwiseOp<const Derived, Horizontal> ConstRowwiseReturnType;
