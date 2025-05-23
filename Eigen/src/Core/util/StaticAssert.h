@@ -21,8 +21,19 @@
  */
 
 #ifndef EIGEN_STATIC_ASSERT
-#define EIGEN_STATIC_ASSERT(cond, msg) static_assert(cond, #msg)
-#endif
+
+#ifndef EIGEN_NO_STATIC_ASSERT
+
+// Use native static_assert with C++23
+    #define EIGEN_STATIC_ASSERT(X,MSG) static_assert(X,#MSG);
+
+#else // EIGEN_NO_STATIC_ASSERT
+
+  #define EIGEN_STATIC_ASSERT(CONDITION,MSG) eigen_assert((CONDITION) && #MSG);
+
+#endif // EIGEN_NO_STATIC_ASSERT
+#endif // EIGEN_STATIC_ASSERT
+
 
 // static assertion failing if the type \a TYPE is not a vector type
 #define EIGEN_STATIC_ASSERT_VECTOR_ONLY(TYPE) \
