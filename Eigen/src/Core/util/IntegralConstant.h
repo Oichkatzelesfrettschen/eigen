@@ -162,7 +162,7 @@ template<int N> EIGEN_DEVICE_FUNC Index get_runtime_value(FixedInt<N> (*)()) { r
 template<typename T, int DynamicKey=Dynamic, typename EnableIf=void> struct cleanup_index_type { typedef T type; };
 
 // Convert any integral type (e.g., short, int, unsigned int, etc.) to Eigen::Index
-template<typename T, int DynamicKey> struct cleanup_index_type<T,DynamicKey,typename internal::enable_if<internal::is_integral<T>::value>::type> { typedef Index type; };
+template<typename T, int DynamicKey> struct cleanup_index_type<T,DynamicKey,std::enable_if_t<internal::is_integral<T>::value>> { typedef Index type; };
 
 #if !EIGEN_HAS_CXX14
 // In c++98/c++11, fix<N> is a pointer to function that we better cleanup to a true FixedInt<N>:

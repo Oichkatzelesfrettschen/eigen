@@ -10,6 +10,8 @@
 #ifndef EIGEN_CXX11_TENSOR_TENSOR_INTDIV_H
 #define EIGEN_CXX11_TENSOR_TENSOR_INTDIV_H
 
+#include <type_traits>
+
 
 namespace Eigen {
 
@@ -33,7 +35,7 @@ namespace {
   // Note: result is undefined if val == 0
   template <typename T>
   EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE
-  typename internal::enable_if<sizeof(T)==4,int>::type count_leading_zeros(const T val)
+  std::enable_if_t<sizeof(T)==4,int> count_leading_zeros(const T val)
   {
 #ifdef EIGEN_CUDA_ARCH
     return __clz(val);
@@ -51,7 +53,7 @@ namespace {
 
   template <typename T>
   EIGEN_DEVICE_FUNC EIGEN_ALWAYS_INLINE
-  typename internal::enable_if<sizeof(T)==8,int>::type count_leading_zeros(const T val)
+  std::enable_if_t<sizeof(T)==8,int> count_leading_zeros(const T val)
   {
 #ifdef EIGEN_CUDA_ARCH
     return __clzll(val);
