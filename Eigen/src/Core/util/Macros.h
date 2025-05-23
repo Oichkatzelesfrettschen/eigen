@@ -375,7 +375,7 @@
 // Expected values are 03, 11, 14, 17, etc.
 // By default, let's use an arbitrarily large C++ version.
 #ifndef EIGEN_MAX_CPP_VER
-#define EIGEN_MAX_CPP_VER 99
+#define EIGEN_MAX_CPP_VER 23
 #endif
 
 #if EIGEN_MAX_CPP_VER>=23 && (defined(__cplusplus) && (__cplusplus >= 202002L) || EIGEN_COMP_MSVC >= 1930)
