@@ -80,6 +80,25 @@ def _placeholder_name(spec: str) -> str:
     return f"EC_Matrix{rows}{base}"
 
 
+_USED_NAMES = set()
+
+
+def _sanitize_identifier(name: str) -> str:
+    """Return a unique C identifier for ``name`` prefixed with ``EC_``."""
+    base = re.sub(r"[^0-9a-zA-Z_]", "_", name)
+    base = re.sub(r"_+", "_", base).strip("_") or "id"
+    if base[0].isdigit():
+        base = "_" + base
+    prefix = f"EC_{base}"
+    candidate = prefix
+    idx = 1
+    while candidate in _USED_NAMES:
+        candidate = f"{prefix}_{idx}"
+        idx += 1
+    _USED_NAMES.add(candidate)
+    return candidate
+
+
 def cursor_to_dict(cursor):
     """Recursively convert a clang cursor to a serialisable dictionary."""
     return {
@@ -89,7 +108,7 @@ def cursor_to_dict(cursor):
     }
 
 
-def process_header(path: str, tu=None):
+def process_header(path: str, tu=None, existing=None):
     """Extract template info from a header."""
     mapping = {}
     instantiations = set()
@@ -99,7 +118,8 @@ def process_header(path: str, tu=None):
                 CursorKind.CLASS_TEMPLATE,
                 CursorKind.FUNCTION_TEMPLATE,
             ):
-                mapping[cursor.spelling] = "TODO"
+                if existing is None or cursor.spelling not in existing:
+                    mapping[cursor.spelling] = _sanitize_identifier(cursor.spelling)
             _collect_matrix_instantiations(cursor, instantiations)
     else:  # text based fallback
         with open(path, "r", encoding="utf-8", errors="ignore") as f:
@@ -129,6 +149,7 @@ def main():
                         mapping[k.strip()] = v.strip()
     else:
         mapping = {}
+    _USED_NAMES.update(mapping.values())
     for root, _, files in os.walk(EIGEN_DIR):
         for name in files:
             if not name.endswith((".h", ".hpp")):
@@ -155,7 +176,7 @@ def main():
                     yaml.dump(data, f)
                 else:
                     json.dump(data, f, indent=2)
-            mapping.update(process_header(path, tu))
+            mapping.update(process_header(path, tu, mapping))
             # Persist after each file so the mapping grows incrementally
             with open(MAPPING_PATH, "w", encoding="utf-8") as mf:
                 if HAVE_YAML:
