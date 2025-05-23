@@ -171,7 +171,7 @@ template<typename _MatrixType> class ColPivHouseholderQR
       * Output: \verbinclude ColPivHouseholderQR_solve.out
       */
     template<typename Rhs>
-    inline const Solve<ColPivHouseholderQR, Rhs>
+    EIGEN_NODISCARD inline const Solve<ColPivHouseholderQR, Rhs>
     solve(const MatrixBase<Rhs>& b) const
     {
       eigen_assert(m_isInitialized && "ColPivHouseholderQR is not initialized.");
@@ -208,7 +208,7 @@ template<typename _MatrixType> class ColPivHouseholderQR
     }
 
     template<typename InputType>
-    ColPivHouseholderQR& compute(const EigenBase<InputType>& matrix);
+    EIGEN_NODISCARD ColPivHouseholderQR& compute(const EigenBase<InputType>& matrix);
 
     /** \returns a const reference to the column permutation matrix */
     const PermutationType& colsPermutation() const

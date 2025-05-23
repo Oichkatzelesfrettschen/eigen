@@ -157,7 +157,7 @@ namespace Eigen {
        * \param[in]  computeQZ  If false, A and Z are not computed.
        * \returns    Reference to \c *this
        */
-      RealQZ& compute(const MatrixType& A, const MatrixType& B, bool computeQZ = true);
+      EIGEN_NODISCARD RealQZ& compute(const MatrixType& A, const MatrixType& B, bool computeQZ = true);
 
       /** \brief Reports whether previous computation was successful.
        *

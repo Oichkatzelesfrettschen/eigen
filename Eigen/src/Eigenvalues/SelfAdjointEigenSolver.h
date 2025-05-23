@@ -200,7 +200,7 @@ template<typename _MatrixType> class SelfAdjointEigenSolver
       */
     template<typename InputType>
     EIGEN_DEVICE_FUNC
-    SelfAdjointEigenSolver& compute(const EigenBase<InputType>& matrix, int options = ComputeEigenvectors);
+    EIGEN_NODISCARD SelfAdjointEigenSolver& compute(const EigenBase<InputType>& matrix, int options = ComputeEigenvectors);
     
     /** \brief Computes eigendecomposition of given matrix using a closed-form algorithm
       *
@@ -221,7 +221,7 @@ template<typename _MatrixType> class SelfAdjointEigenSolver
       * \sa compute(const MatrixType&, int options)
       */
     EIGEN_DEVICE_FUNC
-    SelfAdjointEigenSolver& computeDirect(const MatrixType& matrix, int options = ComputeEigenvectors);
+    EIGEN_NODISCARD SelfAdjointEigenSolver& computeDirect(const MatrixType& matrix, int options = ComputeEigenvectors);
 
     /**
       *\brief Computes the eigen decomposition from a tridiagonal symmetric matrix
@@ -235,7 +235,7 @@ template<typename _MatrixType> class SelfAdjointEigenSolver
       *
       * \sa compute(const MatrixType&, int) for more information
       */
-    SelfAdjointEigenSolver& computeFromTridiagonal(const RealVectorType& diag, const SubDiagonalType& subdiag , int options=ComputeEigenvectors);
+    EIGEN_NODISCARD SelfAdjointEigenSolver& computeFromTridiagonal(const RealVectorType& diag, const SubDiagonalType& subdiag , int options=ComputeEigenvectors);
 
     /** \brief Returns the eigenvectors of given matrix.
       *

@@ -69,9 +69,10 @@ class SolverBase : public EigenBase<Derived>
     using Base::derived;
 
     /** \returns an expression of the solution x of \f$ A x = b \f$ using the current decomposition of A.
+      * \warning Discarding the returned expression has no effect.
       */
     template<typename Rhs>
-    inline const Solve<Derived, Rhs>
+    EIGEN_NODISCARD inline const Solve<Derived, Rhs>
     solve(const MatrixBase<Rhs>& b) const
     {
       eigen_assert(derived().rows()==b.rows() && "solve(): invalid number of rows of the right hand side matrix b");

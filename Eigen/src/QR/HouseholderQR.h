@@ -136,7 +136,7 @@ template<typename _MatrixType> class HouseholderQR
       * Output: \verbinclude HouseholderQR_solve.out
       */
     template<typename Rhs>
-    inline const Solve<HouseholderQR, Rhs>
+    EIGEN_NODISCARD inline const Solve<HouseholderQR, Rhs>
     solve(const MatrixBase<Rhs>& b) const
     {
       eigen_assert(m_isInitialized && "HouseholderQR is not initialized.");
@@ -167,7 +167,7 @@ template<typename _MatrixType> class HouseholderQR
     }
 
     template<typename InputType>
-    HouseholderQR& compute(const EigenBase<InputType>& matrix) {
+    EIGEN_NODISCARD HouseholderQR& compute(const EigenBase<InputType>& matrix) {
       m_qr = matrix.derived();
       computeInPlace();
       return *this;

@@ -167,7 +167,7 @@ template<typename _MatrixType> class RealSchur
       * \sa compute(const MatrixType&, bool, Index)
       */
     template<typename InputType>
-    RealSchur& compute(const EigenBase<InputType>& matrix, bool computeU = true);
+    EIGEN_NODISCARD RealSchur& compute(const EigenBase<InputType>& matrix, bool computeU = true);
 
     /** \brief Computes Schur decomposition of a Hessenberg matrix H = Z T Z^T
      *  \param[in] matrixH Matrix in Hessenberg form H
@@ -187,7 +187,7 @@ template<typename _MatrixType> class RealSchur
      * \sa compute(const MatrixType&, bool)
      */
     template<typename HessMatrixType, typename OrthMatrixType>
-    RealSchur& computeFromHessenberg(const HessMatrixType& matrixH, const OrthMatrixType& matrixQ,  bool computeU);
+    EIGEN_NODISCARD RealSchur& computeFromHessenberg(const HessMatrixType& matrixH, const OrthMatrixType& matrixQ,  bool computeU);
     /** \brief Reports whether previous computation was successful.
       *
       * \returns \c Success if computation was succesful, \c NoConvergence otherwise.

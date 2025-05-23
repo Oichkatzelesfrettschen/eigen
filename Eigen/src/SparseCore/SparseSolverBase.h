@@ -80,11 +80,11 @@ class SparseSolverBase : internal::noncopyable
     const Derived& derived() const { return *static_cast<const Derived*>(this); }
     
     /** \returns an expression of the solution x of \f$ A x = b \f$ using the current decomposition of A.
-      *
+      * \warning Discarding the returned expression has no effect.
       * \sa compute()
       */
     template<typename Rhs>
-    inline const Solve<Derived, Rhs>
+    EIGEN_NODISCARD inline const Solve<Derived, Rhs>
     solve(const MatrixBase<Rhs>& b) const
     {
       eigen_assert(m_isInitialized && "Solver is not initialized.");
@@ -93,11 +93,11 @@ class SparseSolverBase : internal::noncopyable
     }
     
     /** \returns an expression of the solution x of \f$ A x = b \f$ using the current decomposition of A.
-      *
+      * \warning Discarding the returned expression has no effect.
       * \sa compute()
       */
     template<typename Rhs>
-    inline const Solve<Derived, Rhs>
+    EIGEN_NODISCARD inline const Solve<Derived, Rhs>
     solve(const SparseMatrixBase<Rhs>& b) const
     {
       eigen_assert(m_isInitialized && "Solver is not initialized.");

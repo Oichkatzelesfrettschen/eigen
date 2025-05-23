@@ -268,7 +268,7 @@ template<typename _MatrixType, unsigned int _Mode> class TriangularView
 
     template<typename Other>
     EIGEN_DEVICE_FUNC
-    inline const Solve<TriangularView, Other> 
+    EIGEN_NODISCARD inline const Solve<TriangularView, Other>
     solve(const MatrixBase<Other>& other) const
     { return Solve<TriangularView, Other>(*this, other.derived()); }
     
