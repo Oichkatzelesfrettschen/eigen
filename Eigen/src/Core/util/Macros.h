@@ -949,7 +949,7 @@ namespace Eigen {
 
 // Workaround for MSVC 2010 (see ML thread "patch with compile for for MSVC 2010")
 #if EIGEN_COMP_MSVC_STRICT && (EIGEN_COMP_MSVC_STRICT<=1600)
-#define EIGEN_MSVC10_WORKAROUND_BINARYOP_RETURN_TYPE(X) typename internal::enable_if<true,X>::type
+#define EIGEN_MSVC10_WORKAROUND_BINARYOP_RETURN_TYPE(X) std::enable_if_t<true, X>
 #else
 #define EIGEN_MSVC10_WORKAROUND_BINARYOP_RETURN_TYPE(X) X
 #endif

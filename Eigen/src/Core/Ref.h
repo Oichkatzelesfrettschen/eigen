@@ -198,7 +198,7 @@ template<typename PlainObjectType, int Options, typename StrideType> class Ref
     typedef internal::traits<Ref> Traits;
     template<typename Derived>
     EIGEN_DEVICE_FUNC inline Ref(const PlainObjectBase<Derived>& expr,
-                                 typename internal::enable_if<bool(Traits::template match<Derived>::MatchAtCompileTime),Derived>::type* = 0);
+                                 std::enable_if_t<bool(Traits::template match<Derived>::MatchAtCompileTime),Derived>* = 0);
   public:
 
     typedef RefBase<Ref> Base;
@@ -208,14 +208,14 @@ template<typename PlainObjectType, int Options, typename StrideType> class Ref
     #ifndef EIGEN_PARSED_BY_DOXYGEN
     template<typename Derived>
     EIGEN_DEVICE_FUNC inline Ref(PlainObjectBase<Derived>& expr,
-                                 typename internal::enable_if<bool(Traits::template match<Derived>::MatchAtCompileTime),Derived>::type* = 0)
+                                 std::enable_if_t<bool(Traits::template match<Derived>::MatchAtCompileTime),Derived>* = 0)
     {
       EIGEN_STATIC_ASSERT(bool(Traits::template match<Derived>::MatchAtCompileTime), STORAGE_LAYOUT_DOES_NOT_MATCH);
       Base::construct(expr.derived());
     }
     template<typename Derived>
     EIGEN_DEVICE_FUNC inline Ref(const DenseBase<Derived>& expr,
-                                 typename internal::enable_if<bool(Traits::template match<Derived>::MatchAtCompileTime),Derived>::type* = 0)
+                                 std::enable_if_t<bool(Traits::template match<Derived>::MatchAtCompileTime),Derived>* = 0)
     #else
     /** Implicit constructor from any dense expression */
     template<typename Derived>
@@ -244,7 +244,7 @@ template<typename TPlainObjectType, int Options, typename StrideType> class Ref<
 
     template<typename Derived>
     EIGEN_DEVICE_FUNC inline Ref(const DenseBase<Derived>& expr,
-                                 typename internal::enable_if<bool(Traits::template match<Derived>::ScalarTypeMatch),Derived>::type* = 0)
+                                 std::enable_if_t<bool(Traits::template match<Derived>::ScalarTypeMatch),Derived>* = 0)
     {
 //      std::cout << match_helper<Derived>::HasDirectAccess << "," << match_helper<Derived>::OuterStrideMatch << "," << match_helper<Derived>::InnerStrideMatch << "\n";
 //      std::cout << int(StrideType::OuterStrideAtCompileTime) << " - " << int(Derived::OuterStrideAtCompileTime) << "\n";

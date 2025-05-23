@@ -10,6 +10,8 @@
 #ifndef EIGEN_AUTODIFF_SCALAR_H
 #define EIGEN_AUTODIFF_SCALAR_H
 
+#include <type_traits>
+
 namespace Eigen {
 
 namespace internal {
@@ -111,9 +113,9 @@ class AutoDiffScalar
         const AutoDiffScalar<OtherDerType> &other
 #ifndef EIGEN_PARSED_BY_DOXYGEN
         ,
-        typename internal::enable_if<
+        std::enable_if_t<
             internal::is_same<Scalar, typename internal::traits<typename internal::remove_all<
-                                          OtherDerType>::type>::Scalar>::value &&
+                                          OtherDerType>>::Scalar>::value &&
                 internal::is_convertible<OtherDerType, DerType>::value,
             void *>::type = 0
 #endif

@@ -11,6 +11,8 @@
 #ifndef EIGEN_MAPBASE_H
 #define EIGEN_MAPBASE_H
 
+#include <type_traits>
+
 #define EIGEN_STATIC_ASSERT_INDEX_BASED_ACCESS(Derived) \
       EIGEN_STATIC_ASSERT((int(internal::evaluator<Derived>::Flags) & LinearAccessBit) || Derived::IsVectorAtCompileTime, \
                           YOU_ARE_TRYING_TO_USE_AN_INDEX_BASED_ACCESSOR_ON_AN_EXPRESSION_THAT_DOES_NOT_SUPPORT_THAT)
@@ -184,7 +186,7 @@ template<typename Derived> class MapBase<Derived, ReadOnlyAccessors>
 
     template<typename T>
     EIGEN_DEVICE_FUNC
-    void checkSanity(typename internal::enable_if<(internal::traits<T>::Alignment>0),void*>::type = 0) const
+    void checkSanity(std::enable_if_t<(internal::traits<T>::Alignment>0),void*> = 0) const
     {
 #if EIGEN_MAX_ALIGN_BYTES>0
       eigen_assert((   ((internal::UIntPtr(m_data) % internal::traits<Derived>::Alignment) == 0)
@@ -194,7 +196,7 @@ template<typename Derived> class MapBase<Derived, ReadOnlyAccessors>
 
     template<typename T>
     EIGEN_DEVICE_FUNC
-    void checkSanity(typename internal::enable_if<internal::traits<T>::Alignment==0,void*>::type = 0) const
+    void checkSanity(std::enable_if_t<internal::traits<T>::Alignment==0,void*> = 0) const
     {}
 
     PointerType m_data;
