@@ -85,8 +85,8 @@ class CwiseUnaryOp : public CwiseUnaryOpImpl<UnaryOp, XprType, typename internal
     nestedExpression() { return m_xpr; }
 
   protected:
-    XprTypeNested m_xpr;
-    const UnaryOp m_functor;
+    [[no_unique_address]] XprTypeNested m_xpr;
+    [[no_unique_address]] const UnaryOp m_functor;
 };
 
 // Generic API dispatcher

@@ -84,9 +84,9 @@ class CwiseNullaryOp : public internal::dense_xpr_base< CwiseNullaryOp<NullaryOp
     const NullaryOp& functor() const { return m_functor; }
 
   protected:
-    const internal::variable_if_dynamic<Index, RowsAtCompileTime> m_rows;
-    const internal::variable_if_dynamic<Index, ColsAtCompileTime> m_cols;
-    const NullaryOp m_functor;
+    [[no_unique_address]] const internal::variable_if_dynamic<Index, RowsAtCompileTime> m_rows;
+    [[no_unique_address]] const internal::variable_if_dynamic<Index, ColsAtCompileTime> m_cols;
+    [[no_unique_address]] const NullaryOp m_functor;
 };
 
 

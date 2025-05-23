@@ -84,8 +84,8 @@ class CwiseUnaryView : public CwiseUnaryViewImpl<ViewOp, MatrixType, typename in
     nestedExpression() { return m_matrix.const_cast_derived(); }
 
   protected:
-    MatrixTypeNested m_matrix;
-    ViewOp m_functor;
+    [[no_unique_address]] MatrixTypeNested m_matrix;
+    [[no_unique_address]] ViewOp m_functor;
 };
 
 // Generic API dispatcher

@@ -138,9 +138,9 @@ class CwiseBinaryOp :
     const BinaryOp& functor() const { return m_functor; }
 
   protected:
-    LhsNested m_lhs;
-    RhsNested m_rhs;
-    const BinaryOp m_functor;
+    [[no_unique_address]] LhsNested m_lhs;
+    [[no_unique_address]] RhsNested m_rhs;
+    [[no_unique_address]] const BinaryOp m_functor;
 };
 
 // Generic API dispatcher
