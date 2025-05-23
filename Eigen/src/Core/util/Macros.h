@@ -1019,10 +1019,4 @@ namespace Eigen {
 #endif
 
 
-#define EIGEN_INCLUDE_TYPE_TRAITS
-#define EIGEN_NOEXCEPT noexcept
-#define EIGEN_NOEXCEPT_IF(x) noexcept(x)
-#define EIGEN_NO_THROW noexcept(true)
-#define EIGEN_EXCEPTION_SPEC(X) noexcept(false)
-
 #endif // EIGEN_MACROS_H
