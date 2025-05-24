@@ -18,7 +18,7 @@ jobs:
       - name: Run tests
         run: |
           set -euo pipefail
-          ./tests/run_all.sh 2>&1 | tee run_all.log
+          ./porter/build_all.sh 2>&1 | tee run_all.log
 
       - name: Upload test logs
         if: always()
@@ -27,6 +27,7 @@ jobs:
           name: test-logs
           path: |
             run_all.log
+            /tmp/porter_build_failures.log
             /tmp/c_out_host.txt
             /tmp/c_out_ppc.txt
             /tmp/cpp_out.txt
