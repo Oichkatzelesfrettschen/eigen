@@ -12,6 +12,10 @@ g++ -std=c++23 -I"${ROOT_DIR}" -I"${ROOT_DIR}/eigenc/include" "${ROOT_DIR}/tests
 /tmp/ec_test
 /tmp/eigen_test23
 
+# SpinLock test (C++23 only)
+g++ -std=c++23 -pthread -I"${ROOT_DIR}" "${ROOT_DIR}/tests/spinlock/test_spinlock.cpp" -o /tmp/spinlock_test
+/tmp/spinlock_test
+
 python3 "${ROOT_DIR}/tests/compare_eigen_cpp_vs_c.py"
 cp /tmp/c_out.txt /tmp/c_out_host.txt
 
