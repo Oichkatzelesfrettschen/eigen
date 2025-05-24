@@ -11,9 +11,8 @@ int main() {
     for(int i = 0; i < 4; ++i) {
         threads.emplace_back([&]() {
             for(int j = 0; j < loops; ++j) {
-                lock.lock();
+                Eigen::cxx23::SpinLockGuard g(lock);
                 ++counter;
-                lock.unlock();
             }
         });
     }
