@@ -1,0 +1,21 @@
+#ifndef EIGEN_CXX23_SPINLOCK_MODULE
+#define EIGEN_CXX23_SPINLOCK_MODULE
+
+// This file is part of Eigen, a lightweight C++ template library
+// for linear algebra.
+//
+// This Source Code Form is subject to the terms of the Mozilla
+// Public License v. 2.0. If a copy of the MPL was not distributed
+// with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+/** \defgroup CXX23_SpinLock_Module C++23 SpinLock Module
+  * \code
+  * #include <unsupported/Eigen/CXX23/SpinLock>
+  * \endcode
+  */
+
+#if __cplusplus >= 202002L
+#include "src/SpinLock.h"
+#endif
+
+#endif // EIGEN_CXX23_SPINLOCK_MODULE
