@@ -85,7 +85,7 @@ done
 pip_install clang==17.*
 
 # Ensure key Python tooling is installed via pip
-pip_install pre-commit configuredb pytest PyYAML pylint pyfuzz
+pip_install pre-commit configuredb pytest PyYAML pylint pyfuzz black
 
 # Install pre-commit hooks while network is available
 if ! pre-commit install --install-hooks; then
@@ -192,7 +192,7 @@ command -v clang-tidy >/dev/null 2>&1 || ln -s "$(command -v clang-tidy-17)" /us
 command -v clang-format >/dev/null 2>&1 || ln -s "$(command -v clang-format-17)" /usr/local/bin/clang-format
 
 # Verify key Python tooling availability
-for tool in pre-commit configuredb pytest pyyaml pylint pyfuzz; do
+for tool in pre-commit configuredb pytest pyyaml pylint pyfuzz black; do
   if ! "$tool" --version >/dev/null 2>&1; then
     echo "$tool --version failed" >> "$FAIL_LOG"
   fi
