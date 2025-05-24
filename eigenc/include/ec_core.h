@@ -2,6 +2,7 @@
 #define EC_CORE_H
 #include <stddef.h>
 #include <assert.h>
+#include <stdlib.h>
 #include "ec_generated.h"
 #if defined(__AVX__) || defined(__SSE__)
 #  include <immintrin.h>
@@ -21,6 +22,46 @@ typedef struct {
     size_t cols;
     double *data;
 } ec_Matrixf64;
+
+typedef struct {
+    size_t rows;
+    size_t cols;
+    float *data;
+} ec_DMatrixf32;
+
+typedef struct {
+    size_t rows;
+    size_t cols;
+    double *data;
+} ec_DMatrixf64;
+
+static inline ec_DMatrixf32 ec_dmatrixf32_alloc(size_t rows, size_t cols) {
+    ec_DMatrixf32 m;
+    m.rows = rows;
+    m.cols = cols;
+    m.data = (float*)malloc(rows * cols * sizeof(float));
+    return m;
+}
+
+static inline void ec_dmatrixf32_free(ec_DMatrixf32 *m) {
+    free(m->data);
+    m->data = NULL;
+    m->rows = m->cols = 0;
+}
+
+static inline ec_DMatrixf64 ec_dmatrixf64_alloc(size_t rows, size_t cols) {
+    ec_DMatrixf64 m;
+    m.rows = rows;
+    m.cols = cols;
+    m.data = (double*)malloc(rows * cols * sizeof(double));
+    return m;
+}
+
+static inline void ec_dmatrixf64_free(ec_DMatrixf64 *m) {
+    free(m->data);
+    m->data = NULL;
+    m->rows = m->cols = 0;
+}
 
 #ifndef EC_RESTRICT
 #  ifdef __cplusplus

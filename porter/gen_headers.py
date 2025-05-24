@@ -74,6 +74,7 @@ def gen_header(mappings):
     lines.append("#define EC_GENERATED_H")
     lines.append("#include <stddef.h>")
     lines.append("#include <assert.h>")
+    lines.append("#include <stdlib.h>")
     lines.append("")
 
     fn_add = {}
@@ -91,6 +92,25 @@ def gen_header(mappings):
         lines.append(f"    {ctype} *data;")
         lines.append(f"}} {cname};")
         lines.append("")
+
+        dynamic = not rows.isdigit() or not cols.isdigit()
+        if dynamic:
+            alloc_fn = _fn_name(cname, "alloc")
+            free_fn = _fn_name(cname, "free")
+            lines.append(f"static inline {cname} {alloc_fn}(size_t rows, size_t cols) {{")
+            lines.append(f"    {cname} m;")
+            lines.append("    m.rows = rows;")
+            lines.append("    m.cols = cols;")
+            lines.append(f"    m.data = ({ctype}*)malloc(rows * cols * sizeof({ctype}));")
+            lines.append("    return m;")
+            lines.append("}")
+            lines.append("")
+            lines.append(f"static inline void {free_fn}({cname} *m) {{")
+            lines.append("    free(m->data);")
+            lines.append("    m->data = NULL;")
+            lines.append("    m->rows = m->cols = 0;")
+            lines.append("}")
+            lines.append("")
 
         add_fn = _fn_name(cname, "add")
         lines.append(f"static inline void {add_fn}(const {cname} *a, const {cname} *b, {cname} *out) {{")

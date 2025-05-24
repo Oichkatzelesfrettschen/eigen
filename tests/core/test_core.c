@@ -18,6 +18,20 @@ int main(void) {
     EC_Matrix2f C_mul = {2,2,mul_data};
     EC_Matrix2f_mul(&Ag, &Bg, &C_mul);
 
+    ec_DMatrixf32 Da = ec_dmatrixf32_alloc(2,2);
+    ec_DMatrixf32 Db = ec_dmatrixf32_alloc(2,2);
+    ec_DMatrixf32 Dc = ec_dmatrixf32_alloc(2,2);
+    for (size_t i=0;i<4;++i){
+        Da.data[i]=a_data[i];
+        Db.data[i]=b_data[i];
+    }
+    ec_addf32((const ec_Matrixf32*)&Da, (const ec_Matrixf32*)&Db, (ec_Matrixf32*)&Dc);
+    for (size_t i=0;i<4;++i)
+        add_data[i] = Dc.data[i];
+    ec_dmatrixf32_free(&Da);
+    ec_dmatrixf32_free(&Db);
+    ec_dmatrixf32_free(&Dc);
+
     FILE *f = fopen("/tmp/c_out.txt", "w");
     for (size_t i=0; i<4; ++i) fprintf(f, "%f\n", add_data[i]);
     for (size_t i=0; i<4; ++i) fprintf(f, "%f\n", mul_data[i]);
