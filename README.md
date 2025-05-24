@@ -1,9 +1,11 @@
-# EigenC: Bridging Eigen to C23
+# Eigen Modernisation and Experimental C/Go Frontends
 
-This fork tracks an effort to translate the Eigen C++ library into a set of
-headers that can be consumed from pure C23.  The goal is to retain the familiar
-API while generating self contained C code that does not depend on C++
-features.
+This fork modernises the Eigen codebase to **C++23** while also providing
+experimental frontends for **C23** and **Go**. The traditional C++ headers are
+kept in `Eigen/` and gradually updated to the new standard.  In parallel the
+C23 interface ("EigenC") is generated under `eigenc/` and a Go module lives in
+`go/`. Makefiles and CMake scripts are being updated to accommodate all three
+variants.
 
 The translation process lives in `porter/` and outputs headers under
 `eigenc/include`.  These C headers implement basic matrix operations with

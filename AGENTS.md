@@ -1,6 +1,9 @@
-# Eigen \u2192 EigenC Port
+# Eigen Modernisation Plan
 
-Below is a cook-book\u2013style "run-sheet" you can hand to Codex (or adapt in a GUI session) that will drive a fully offline, reproducible translation of this Eigen fork into **EigenC** \u2013 a pure C23, header-only linear-algebra layer mimicking Eigen's public API.
+This repository is being refactored to **C++23** while simultaneously providing
+experimental C23 and Go frontends. The notes below outline how Codex can assist
+with generating the C23 interface ("EigenC") and the Go bindings. All build
+scripts and makefiles are gradually updated to support these variants.
 
 Codex is brilliant at static reasoning over the tree of files it can see. Install every external tool it might invoke during the setup window; afterwards it is hermetically sealed. Eigen itself is already header-only, but its C++ machinery (expression templates, meta-programming) must be reified into C23's `_Generic`, `static inline`, and macro metaprogramming.
 
@@ -23,10 +26,11 @@ Make sure `setup.sh` is executable (`chmod +x`). Commit nothing that you expect 
 ## 1  AGENTS.md \u2014 tell Codex what to do
 
 ### Goal
-Produce `eigenc/` \u2013 a header-only C23 linear-algebra library that:
-* Preserves Eigen's user-facing API where C syntax allows
-* Passes a subset of Eigen's test-suite compiled as pure C (see tests/)
-* Achieves within 3 % numerical parity for float32/float64
+Modernise Eigen to C++23 and provide experimental `eigenc/` and `eigengo/`
+frontends:
+* Keep the C++ API compatible while adopting modern language features.
+* Generate a header-only C23 layer mirroring Eigen's API where C allows.
+* Offer Go bindings that call into the generated C layer.
 
 ### Road-map
 1. Build a **template-to-C23 translation pipeline** using Clang libTooling

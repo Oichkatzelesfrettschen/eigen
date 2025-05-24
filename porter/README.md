@@ -1,7 +1,7 @@
 # Porter Tools
 
-The `porter/` directory contains helper scripts for translating Eigen's C++
-templates into a small C23 and Go interface.
+The `porter/` directory contains helper scripts for generating the experimental
+C23 and Go frontends from Eigen's modernised C++23 headers.
 
 * `scan_templates.py` – walk the `Eigen/` headers and collect template
   instantiations. ASTs are written to `porter/asts/` and the discovered
