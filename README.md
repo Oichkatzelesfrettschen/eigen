@@ -23,6 +23,19 @@ python3 porter/gen_headers.py
 The script produces `eigenc/include/ec_generated.h` which is included from
 `ec_core.h`.
 
+## Porter Workflow
+
+To regenerate the experimental headers and run the full test suite:
+
+```bash
+python3 porter/scan_templates.py
+python3 porter/gen_headers.py
+bash porter/build_all.sh
+```
+
+If Clang is installed in a non-standard location, set the `LIBCLANG_PATH`
+environment variable so `scan_templates.py` can find `libclang.so`.
+
 ## Running Tests
 
 The test suite can be executed via `tests/run_all.sh`.  It builds a small example
