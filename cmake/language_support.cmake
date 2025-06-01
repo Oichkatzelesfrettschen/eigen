@@ -6,7 +6,7 @@
 # This additional function definition is needed to provide a workaround for
 # CMake bug 9220.
 
-# On debian testing (cmake 2.6.2), I get return code zero when calling 
+# On debian testing (cmake 3.20), I get return code zero when calling
 # cmake the first time, but cmake crashes when running a second time
 # as follows:
 #
@@ -23,7 +23,7 @@ function(workaround_9220 language language_works)
   #message("DEBUG: language = ${language}")
   set(text
     "project(test NONE)
-    cmake_minimum_required(VERSION 2.8.0)
+    cmake_minimum_required(VERSION 3.20)
     set (CMAKE_Fortran_FLAGS \"${CMAKE_Fortran_FLAGS}\")
     set (CMAKE_EXE_LINKER_FLAGS \"${CMAKE_EXE_LINKER_FLAGS}\")
     enable_language(${language} OPTIONAL)

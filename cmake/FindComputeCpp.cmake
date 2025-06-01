@@ -29,8 +29,8 @@
 #  Latest version of this file can be found at:
 #    https://github.com/codeplaysoftware/computecpp-sdk
 
-# Require CMake version 3.2.2 or higher
-cmake_minimum_required(VERSION 3.2.2)
+# Require CMake version 3.20 or higher
+cmake_minimum_required(VERSION 3.20)
 
 # Check that a supported host compiler can be found
 if(CMAKE_COMPILER_IS_GNUCXX)

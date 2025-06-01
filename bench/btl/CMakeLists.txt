@@ -1,6 +1,7 @@
-PROJECT(BTL)
+project(BTL)
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6.2)
+# Require modern CMake for the benchmark suite
+cmake_minimum_required(VERSION 3.20)
 
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake ${Eigen_SOURCE_DIR}/cmake)
 include(MacroOptionalAddSubdirectory)
