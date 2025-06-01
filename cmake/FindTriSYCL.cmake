@@ -16,8 +16,8 @@
 #  Latest version of this file can be found at:
 #    https://github.com/triSYCL/triSYCL
 
-# Requite CMake version 3.5 or higher
-cmake_minimum_required (VERSION 3.5)
+# Require CMake version 3.20 or higher
+cmake_minimum_required(VERSION 3.20)
 
 # Check that a supported host compiler can be found
 if(CMAKE_COMPILER_IS_GNUCXX)

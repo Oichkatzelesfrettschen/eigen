@@ -35,34 +35,35 @@ set(EigenLapack_SRCS  ${EigenLapack_SRCS}
   second_NONE.f dsecnd_NONE.f
 )
 
-option(EIGEN_ENABLE_LAPACK_TESTS OFF "Enbale the Lapack unit tests")
+option(EIGEN_ENABLE_LAPACK_TESTS OFF "Enable the Lapack unit tests")
+option(EIGEN_DOWNLOAD_LAPACK_ADDONS OFF "Download lapack_addons_3.4.1.tgz if missing (requires network)")
 
 if(EIGEN_ENABLE_LAPACK_TESTS)
+  # The reference LAPACK sources come from lapack_addons_3.4.1.tgz.
+  # Place this archive in the lapack/ directory or enable
+  # EIGEN_DOWNLOAD_LAPACK_ADDONS to fetch it automatically.
 
   get_filename_component(eigen_full_path_to_reference_lapack "./reference/" ABSOLUTE)
   if(NOT EXISTS ${eigen_full_path_to_reference_lapack})
-    # Download lapack and install sources and testing at the right place
-    message(STATUS "Download lapack_addons_3.4.1.tgz...")
-    
-    file(DOWNLOAD "http://downloads.tuxfamily.org/eigen/lapack_addons_3.4.1.tgz"
-                  "${CMAKE_CURRENT_SOURCE_DIR}/lapack_addons_3.4.1.tgz"
-                  INACTIVITY_TIMEOUT 15
-                  TIMEOUT 240
-                  STATUS download_status
-                  EXPECTED_MD5 5758ce55afcf79da98de8b9de1615ad5
-                  SHOW_PROGRESS)
-                  
-    message(STATUS ${download_status})
-    list(GET download_status 0 download_status_num)
-    set(download_status_num 0)
-    if(download_status_num EQUAL 0)
-      message(STATUS "Setup lapack reference and lapack unit tests")
-      execute_process(COMMAND tar xzf  "lapack_addons_3.4.1.tgz" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-    else()
-      message(STATUS "Download of lapack_addons_3.4.1.tgz failed, LAPACK unit tests wont be enabled")
-      set(EIGEN_ENABLE_LAPACK_TESTS false)
+    if(EIGEN_DOWNLOAD_LAPACK_ADDONS)
+      message(STATUS "Download lapack_addons_3.4.1.tgz...")
+      file(DOWNLOAD "http://downloads.tuxfamily.org/eigen/lapack_addons_3.4.1.tgz"
+                    "${CMAKE_CURRENT_SOURCE_DIR}/lapack_addons_3.4.1.tgz"
+                    INACTIVITY_TIMEOUT 15
+                    TIMEOUT 240
+                    STATUS download_status
+                    EXPECTED_MD5 5758ce55afcf79da98de8b9de1615ad5
+                    SHOW_PROGRESS)
+      message(STATUS ${download_status})
+      list(GET download_status 0 download_status_num)
+      if(download_status_num EQUAL 0)
+        message(STATUS "Setup lapack reference and lapack unit tests")
+        execute_process(COMMAND tar xzf "lapack_addons_3.4.1.tgz" WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+      else()
+        message(STATUS "Download of lapack_addons_3.4.1.tgz failed, LAPACK unit tests wont be enabled")
+        set(EIGEN_ENABLE_LAPACK_TESTS false)
+      endif()
     endif()
-                  
   endif()
   
   get_filename_component(eigen_full_path_to_reference_lapack "./reference/" ABSOLUTE)

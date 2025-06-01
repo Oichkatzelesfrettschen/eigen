@@ -14,18 +14,30 @@ endif()
 
 add_custom_target(blas)
 
-set(EigenBlas_SRCS  single.cpp double.cpp complex_single.cpp complex_double.cpp xerbla.cpp
-                    f2c/srotm.c   f2c/srotmg.c  f2c/drotm.c f2c/drotmg.c
-                    f2c/lsame.c   f2c/dspmv.c   f2c/ssbmv.c f2c/chbmv.c
-                    f2c/sspmv.c   f2c/zhbmv.c   f2c/chpmv.c f2c/dsbmv.c
-                    f2c/zhpmv.c   f2c/dtbmv.c   f2c/stbmv.c f2c/ctbmv.c
-                    f2c/ztbmv.c   f2c/d_cnjg.c  f2c/r_cnjg.c
-   )
+# F2C generated source files built as C++
+set(F2C_SOURCES
+  f2c/srotm.c   f2c/srotmg.c  f2c/drotm.c  f2c/drotmg.c
+  f2c/lsame.c   f2c/dspmv.c   f2c/ssbmv.c  f2c/chbmv.c
+  f2c/sspmv.c   f2c/zhbmv.c   f2c/chpmv.c  f2c/dsbmv.c
+  f2c/zhpmv.c   f2c/dtbmv.c   f2c/stbmv.c  f2c/ctbmv.c
+  f2c/ztbmv.c   f2c/d_cnjg.c  f2c/r_cnjg.c
+)
+
+set(EigenBlas_SRCS
+  single.cpp double.cpp complex_single.cpp complex_double.cpp xerbla.cpp
+  ${F2C_SOURCES}
+)
+
+set_source_files_properties(
+  ${F2C_SOURCES}
+  PROPERTIES LANGUAGE CXX
+)
 
 if (EIGEN_Fortran_COMPILER_WORKS)
   set(EigenBlas_SRCS ${EigenBlas_SRCS} fortran/complexdots.f)
 else()
   set(EigenBlas_SRCS ${EigenBlas_SRCS} f2c/complexdots.c)
+  set_source_files_properties(f2c/complexdots.c PROPERTIES LANGUAGE CXX)
 endif()
 
 add_library(eigen_blas_static ${EigenBlas_SRCS})

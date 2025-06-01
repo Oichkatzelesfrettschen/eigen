@@ -7,13 +7,13 @@ namespace Eigen {
 %Eigen provides native CMake support which allows the library to be easily
 used in CMake projects.
 
-\note %CMake 3.0 (or later) is required to enable this functionality.
+\note %CMake 3.20 (or later) is required to enable this functionality.
 
 %Eigen exports a CMake target called `Eigen3::Eigen` which can be imported
 using the `find_package` CMake command and used by calling
 `target_link_libraries` as in the following example:
 \code{.cmake}
-cmake_minimum_required (VERSION 3.0)
+cmake_minimum_required (VERSION 3.20)
 project (myproject)
 
 find_package (Eigen3 3.3 REQUIRED NO_MODULE)

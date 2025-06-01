@@ -134,7 +134,7 @@ def process_header(path: str, tu=None, existing=None):
 
 
 def main():
-    # Parse headers using C++17 to support older compilers.
+    # Parse headers using a C++17-compatible clang invocation
     compile_args = ["-std=c++17", f"-I{EIGEN_DIR}"]
     if os.path.exists(MAPPING_PATH):
         with open(MAPPING_PATH, "r", encoding="utf-8") as f:
