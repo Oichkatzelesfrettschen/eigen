@@ -25,6 +25,7 @@ except Exception:  # pragma: no cover - optional dependency
 
 try:
     from clang.cindex import Index, Config, CursorKind
+
     HAVE_CLANG = True
 except Exception:  # pragma: no cover - optional fallback
     Index = None
@@ -133,7 +134,8 @@ def process_header(path: str, tu=None, existing=None):
 
 
 def main():
-    compile_args = ["-std=c++23", f"-I{EIGEN_DIR}"]
+    # Parse headers using C++17 to support older compilers.
+    compile_args = ["-std=c++17", f"-I{EIGEN_DIR}"]
     if os.path.exists(MAPPING_PATH):
         with open(MAPPING_PATH, "r", encoding="utf-8") as f:
             if HAVE_YAML:
