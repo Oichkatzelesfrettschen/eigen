@@ -118,5 +118,14 @@ Then execute the helper script which runs clang-tidy across the tree:
 ../scripts/run-clang-tidy.sh
 ```
 
+### LAPACK Addons for Unit Tests
+
+To run the optional LAPACK unit tests enable the CMake option
+`EIGEN_ENABLE_LAPACK_TESTS`. The build expects the archive
+`lapack_addons_3.4.1.tgz` to be available in the `lapack/` directory.
+Place the file manually or have your environment setup fetch it during
+`setup.sh` execution. When network access is unavailable you must copy
+the archive to that location before configuring the build.
+
 
 
