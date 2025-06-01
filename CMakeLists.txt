@@ -1,11 +1,12 @@
+# Require modern CMake before defining the project
+cmake_minimum_required(VERSION 3.20)
+
 project(Eigen3)
 # Use C++17 for this build
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-cmake_minimum_required(VERSION 2.8.5)
 
 # guard against in-source builds
 
