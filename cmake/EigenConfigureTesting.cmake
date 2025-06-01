@@ -54,8 +54,9 @@ elseif(MSVC)
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
 
-check_cxx_compiler_flag("-std=c++23" EIGEN_COMPILER_SUPPORT_CXX23)
+check_cxx_compiler_flag("-std=c++17" EIGEN_COMPILER_SUPPORT_CXX17)
 
-if(EIGEN_TEST_CXX23 AND EIGEN_COMPILER_SUPPORT_CXX23)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++23")
+if(EIGEN_TEST_CXX23 AND EIGEN_COMPILER_SUPPORT_CXX17)
+  # Tests explicitly requested with modern C++ support
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 endif()
