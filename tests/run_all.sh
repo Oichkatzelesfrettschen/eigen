@@ -13,6 +13,7 @@ g++ -std=c++17 -I"${ROOT_DIR}" -I"${ROOT_DIR}/eigenc/include" "${ROOT_DIR}/tests
 /tmp/eigen_test17
 
 # SpinLock test (requires C++17 or newer)
+
 g++ -std=c++17 -pthread -I"${ROOT_DIR}" "${ROOT_DIR}/tests/spinlock/test_spinlock.cpp" -o /tmp/spinlock_test
 /tmp/spinlock_test
 

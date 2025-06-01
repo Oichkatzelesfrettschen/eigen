@@ -1,10 +1,12 @@
+# Require modern CMake before defining the project
+cmake_minimum_required(VERSION 3.20)
+
 project(Eigen3)
-set(CMAKE_CXX_STANDARD 23)
+# Use C++17 for this build
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-cmake_minimum_required(VERSION 2.8.5)
 
 # guard against in-source builds
 
@@ -153,7 +155,8 @@ if(NOT MSVC)
   ei_add_cxx_compiler_flag("-Wshorten-64-to-32")
   ei_add_cxx_compiler_flag("-Wlogical-op")
   ei_add_cxx_compiler_flag("-Wenum-conversion")
-  ei_add_cxx_compiler_flag("-Wc++23-extensions")
+  # Warn about usage of non-C++17 standard extensions
+  ei_add_cxx_compiler_flag("-Wc++17-extensions")
   ei_add_cxx_compiler_flag("-Wdouble-promotion")
 #  ei_add_cxx_compiler_flag("-Wconversion")
   
