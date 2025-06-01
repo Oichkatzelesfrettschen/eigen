@@ -63,6 +63,7 @@ for pkg in \
   autoconf automake libtool m4 gawk flex bison byacc \
   pkg-config file ca-certificates curl git unzip \
   libopenblas-dev liblapack-dev libeigen3-dev \
+  # lapack_addons_3.4.1.tgz must be placed in lapack/ when enabling LAPACK tests
   strace ltrace linux-perf systemtap systemtap-sdt-dev crash \
   valgrind kcachegrind trace-cmd kernelshark \
   libasan6 libubsan1 likwid hwloc; do
