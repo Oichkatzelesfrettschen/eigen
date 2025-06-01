@@ -53,7 +53,8 @@ done
 
 apt-get update -y || echo "apt-get update failed" >> "$FAIL_LOG"
 
-export CXXFLAGS="-std=c++23"
+# Default to C++17 for portability
+export CXXFLAGS="-std=c++17"
 
 for pkg in \
   build-essential gcc g++ clang lld llvm \

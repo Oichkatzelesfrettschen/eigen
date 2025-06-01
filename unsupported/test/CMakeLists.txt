@@ -74,11 +74,11 @@ ei_add_test(EulerAngles)
 
 find_package(MPFR 2.3.0)
 find_package(GMP)
-if(MPFR_FOUND AND EIGEN_COMPILER_SUPPORT_CXX23)
+if(MPFR_FOUND AND EIGEN_COMPILER_SUPPORT_CXX17)
   include_directories(${MPFR_INCLUDES} ./mpreal)
   ei_add_property(EIGEN_TESTED_BACKENDS "MPFR C++, ")
   set(EIGEN_MPFR_TEST_LIBRARIES ${MPFR_LIBRARIES} ${GMP_LIBRARIES})
- ei_add_test(mpreal_support "-std=c++23" "${EIGEN_MPFR_TEST_LIBRARIES}" )
+  ei_add_test(mpreal_support "-std=c++17" "${EIGEN_MPFR_TEST_LIBRARIES}" )
 else()
   ei_add_property(EIGEN_MISSING_BACKENDS "MPFR C++, ")
 endif()
@@ -153,13 +153,14 @@ endif()
 if(EIGEN_TEST_CXX23)
   if(EIGEN_TEST_SYCL)
     if(EIGEN_SYCL_TRISYCL)
-      set(CMAKE_CXX_STANDARD 23)
-      set(STD_CXX_FLAG "-std=c++23")
+      # Use C++17 mode for the SYCL tests
+      set(CMAKE_CXX_STANDARD 17)
+      set(STD_CXX_FLAG "-std=c++17")
     else(EIGEN_SYCL_TRISYCL)
       # It should be safe to always run these tests as there is some fallback code for
       # older compiler that don't support cxx11.
-      set(CMAKE_CXX_STANDARD 23)
-      set(STD_CXX_FLAG "-std=c++23")
+      set(CMAKE_CXX_STANDARD 17)
+      set(STD_CXX_FLAG "-std=c++17")
     endif(EIGEN_SYCL_TRISYCL)
 
     ei_add_test_sycl(cxx11_tensor_sycl ${STD_CXX_FLAG})
@@ -237,7 +238,7 @@ if(CUDA_FOUND AND EIGEN_TEST_CUDA)
   # Make sure to compile without the -pedantic, -Wundef, -Wnon-virtual-dtor
   # and -fno-check-new flags since they trigger thousands of compilation warnings
   # in the CUDA runtime
-  # Also remove -ansi that is incompatible with std=c++23.
+  # Also remove -ansi that is incompatible with modern C++ standards.
   string(REPLACE "-pedantic" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
   string(REPLACE "-Wundef" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
   string(REPLACE "-Wnon-virtual-dtor" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
@@ -250,7 +251,8 @@ if(CUDA_FOUND AND EIGEN_TEST_CUDA)
     set(CUDA_NVCC_FLAGS "-ccbin ${CMAKE_C_COMPILER}" CACHE STRING "nvcc flags" FORCE)
   endif()
   if(EIGEN_TEST_CUDA_CLANG)
-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++23 --cuda-gpu-arch=sm_${EIGEN_CUDA_COMPUTE_ARCH}")
+    # Compile CUDA code in C++17 mode when using clang
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 --cuda-gpu-arch=sm_${EIGEN_CUDA_COMPUTE_ARCH}")
   endif()
 
   set(EIGEN_CUDA_RELAXED_CONSTEXPR "--expt-relaxed-constexpr")
@@ -259,13 +261,13 @@ if(CUDA_FOUND AND EIGEN_TEST_CUDA)
   endif()
 
   if( (NOT EIGEN_TEST_CXX23) OR (CMAKE_VERSION VERSION_LESS 3.3))
-    set(EIGEN_CUDA_CXX23_FLAG "-std=c++23")
+    set(EIGEN_CUDA_CXX17_FLAG "-std=c++17")
   else()
-    # otherwise the flag has already been added because of the above set(CMAKE_CXX_STANDARD 23)
-    set(EIGEN_CUDA_CXX23_FLAG "")
+    # otherwise the flag has already been added because of the above set(CMAKE_CXX_STANDARD 17)
+    set(EIGEN_CUDA_CXX17_FLAG "")
   endif()
 
-  set(CUDA_NVCC_FLAGS  "${EIGEN_CUDA_CXX23_FLAG} ${EIGEN_CUDA_RELAXED_CONSTEXPR} -arch compute_${EIGEN_CUDA_COMPUTE_ARCH} -Xcudafe \"--display_error_number\" ${CUDA_NVCC_FLAGS}")
+  set(CUDA_NVCC_FLAGS  "${EIGEN_CUDA_CXX17_FLAG} ${EIGEN_CUDA_RELAXED_CONSTEXPR} -arch compute_${EIGEN_CUDA_COMPUTE_ARCH} -Xcudafe \"--display_error_number\" ${CUDA_NVCC_FLAGS}")
   cuda_include_directories("${CMAKE_CURRENT_BINARY_DIR}" "${CUDA_TOOLKIT_ROOT_DIR}/include")
   set(EIGEN_ADD_TEST_FILENAME_EXTENSION "cu")
 
