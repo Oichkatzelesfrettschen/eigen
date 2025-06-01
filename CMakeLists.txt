@@ -1,10 +1,11 @@
+# Require modern CMake before defining the project
+cmake_minimum_required(VERSION 3.20)
+
 project(Eigen3)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-cmake_minimum_required(VERSION 2.8.5)
 
 # guard against in-source builds
 
